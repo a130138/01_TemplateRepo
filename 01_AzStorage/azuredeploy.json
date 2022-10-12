@@ -14,7 +14,7 @@
     "functions": [],
     "variables": {"storageAccountName": "[concat(toLower(parameters('storageAccountName')), uniqueString(resourceGroup().id))]"},
     "resources": [{
-        "name": "[variables('storageAccountName')]",
+        "name": "[parameters('storageAccountName')]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags": {
