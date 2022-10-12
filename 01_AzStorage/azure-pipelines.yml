@@ -4,11 +4,6 @@
 variables:
   MyRunNumber: '1.0.0-CI+$(Build.BuildNumber)'
 
-
-steps:
-- script: echo $(MyRunNumber) # display MyRunNumber
-- script: echo $(Build.BuildNumber) #display Run Number
-
 trigger:
 - main
 
@@ -16,6 +11,8 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- script: echo $(MyRunNumber) # display MyRunNumber
+- script: echo $(Build.BuildNumber) #display Run Number
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
