@@ -6,15 +6,20 @@
             "type": "string",
             "metadata": {
                 "description": "description"
-            },
+                        },
+        "storagePrefix": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 11
+                         },
             "minLength":3,
             "maxLength":24
-        }
+                  }
     },
     "functions": [],
-    "variables": {"storageAccountName": "[concat(toLower(parameters('storageAccountName')), uniqueString(resourceGroup().id))]"},
+    "variables": {"uniqueStorageName": "[concat(parameters('storagePrefix'), uniqueString(resourceGroup().id))]"},
     "resources": [{
-        "name": "[variables('storageAccountName')]",
+        "name": "[variables('uniqueStorageName')]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags": {
