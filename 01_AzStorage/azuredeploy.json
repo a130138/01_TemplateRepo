@@ -12,7 +12,7 @@
         }
     },
     "functions": [],
-    "variables": {"storageName": "[concat(toLower(parameters('storageNamePrefix')), uniqueString(resourceGroup().id))]"
+    "variables": {"storageAccountName": "[concat(toLower(parameters('storageNamePrefix')), uniqueString(resourceGroup().id))]"
 },
     "resources": [{
         "name": "[parameters('storageAccountName')]",
