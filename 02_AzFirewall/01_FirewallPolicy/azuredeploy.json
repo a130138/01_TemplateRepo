@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "firewallPolicies_joePOC1_fw_policy_2_name": {
+            "defaultValue": "joePOC1-fw-policy-2",
+            "type": "String"
+        },
+        "firewallPolicies_Default_Rule_Standard_FW_externalid": {
+            "defaultValue": "/subscriptions/90fe8063-2a74-45a7-a42d-61de8da81c23/resourceGroups/nonprod_50000_firewall_rg/providers/Microsoft.Network/firewallPolicies/Default_Rule_Standard_FW",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/firewallPolicies",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('firewallPolicies_joePOC1_fw_policy_2_name')]",
+            "location": "eastus2",
+            "tags": {
+                "Owner": "Joe Cropper",
+                "Environment": "non-prod"
+            },
+            "properties": {
+                "sku": {
+                    "tier": "Premium"
+                },
+                "threatIntelMode": "Alert",
+                "basePolicy": {
+                    "id": "[parameters('firewallPolicies_Default_Rule_Standard_FW_externalid')]"
+                },
+                "intrusionDetection": {
+                    "mode": "Off"
+                }
+            }
+        }
+    ]
+}
