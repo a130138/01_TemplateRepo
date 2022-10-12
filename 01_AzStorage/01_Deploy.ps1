@@ -14,4 +14,5 @@
         #-TemplateParameterUri "https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/azuredeploy.parameters.json?token=GHSAT0AAAAAABZYXNIQEWKLKFCEJWNTAW76Y2GZACQ" `
 # Clean Up
 #   Get-AzStorageAccount -ResourceGroupName JoePOC1
+#   Get-AzStorageAccount -ResourceGroupName JoePOC1 -StorageAccountName joe12oct2022
 #   Remove-AzStorageAccount -ResourceGroupName "JoePOC1" -Name "joestor1"
