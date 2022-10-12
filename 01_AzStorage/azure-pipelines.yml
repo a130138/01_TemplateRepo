@@ -1,7 +1,7 @@
 # Azure Storage Creation
 
 # Set MyRunNumber
-variables: 
+variables:
   MyRunNumber: '1.0.0-CI+$(Build.BuildNumber)'
 
 
