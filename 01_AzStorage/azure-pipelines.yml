@@ -6,9 +6,6 @@ name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd
 variables:
   MyRunNumber: '1.0.0-CI+$(Build.BuildNumber)'
 
-steps:
-  - script: echo '$(Build.BuildNumber)' # outputs customized build number like project_def_master_20200828.1
-
 trigger:
 - main
 
