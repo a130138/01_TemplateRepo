@@ -18,7 +18,7 @@
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags": {
-            "displayName": "joestorageacct_12oct2022"
+            "displayName": "[variables('storageAccountName')]"
         },
         "location": "[resourceGroup().location]",
         "kind": "StorageV2",
