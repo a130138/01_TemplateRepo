@@ -9,7 +9,9 @@
         "firewallPolicies_Default_Rule_Standard_FW_externalid": {
             "defaultValue": "/subscriptions/90fe8063-2a74-45a7-a42d-61de8da81c23/resourceGroups/nonprod_50000_firewall_rg/providers/Microsoft.Network/firewallPolicies/Default_Rule_Standard_FW",
             "type": "String"
-        }
+        },
+            "minLength":3,
+            "maxLength":24
     },
     "variables": {},
     "resources": [
