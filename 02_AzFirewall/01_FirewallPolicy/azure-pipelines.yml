@@ -8,7 +8,7 @@ variables:
 
 trigger:
 #- main
-  none
+  - none
 
 pool:
   vmImage: ubuntu-latest
