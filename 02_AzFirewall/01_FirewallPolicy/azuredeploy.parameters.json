@@ -3,10 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "firewallPolicies_joePOC1_fw_policy_2_name": {
-            "value": "tbd"
+            "value": "joefwpolicyname1"
         },
         "firewallPolicies_Default_Rule_Standard_FW_externalid": {
-            "value": "tbd"
+            "value": "joefwpolicyrule1"
         }
     }
 }
