@@ -1,48 +1,46 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {
-<<<<<<< Updated upstream
-        "firewallPolicies_joePOC1_fw_policy_2_name": {
-            "defaultValue": "FwPolicyName1",
-=======
-        "fwpolicyname":
+    "parameters":
+        {
+        "FwPolicyName1":
             {
->>>>>>> Stashed changes
             "type": "String",
             "minLength":3,
             "maxLength":24
             },
         "firewallPolicies_Default_Rule_Standard_FW_externalid": {
             "defaultValue": "/subscriptions/90fe8063-2a74-45a7-a42d-61de8da81c23/resourceGroups/nonprod_50000_firewall_rg/providers/Microsoft.Network/firewallPolicies/Default_Rule_Standard_FW",
-            "type": "String",
-            "minLength":3,
-            "maxLength":24
-        }
-    },
-    "variables": {},
-    "resources": [
-        {
-            "type": "Microsoft.Network/firewallPolicies",
+            "type": "String"
+                                                                }
+        },
+    "variables": {
+        "FwPolicyName1": "[concat(parameters('FwPolicyName1'), uniqueString(resourceGroup().id))]"
+                 },
+    "resources":
+        [
+            {
             "apiVersion": "2020-11-01",
-            "name": "[parameters('fwpolicyname')]",
+            "name": "[variables('FwPolicyName1')]",
+            "type": "Microsoft.Network/firewallPolicies",
             "location": "eastus2",
             "tags": {
                 "Owner": "Joe Cropper",
                 "Environment": "non-prod"
-            },
+                    },
             "properties": {
-                "sku": {
+                "sku":  {
                     "tier": "Premium"
-                },
+                        },
                 "threatIntelMode": "Alert",
-                "basePolicy": {
+                "basePolicy":   {
                     "id": "[parameters('firewallPolicies_Default_Rule_Standard_FW_externalid')]"
-                },
-                "intrusionDetection": {
+                                },
+                "intrusionDetection":   {
                     "mode": "Off"
-                }
+                                        }
+                            }
             }
-        }
-    ]
+        ]
 }
+
