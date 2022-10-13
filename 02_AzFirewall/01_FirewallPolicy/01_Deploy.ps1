@@ -1,4 +1,4 @@
-# AZ Firewall Creation
+# AZ Firewall Policy Creation
 # Clear Host
     Clear-Host
 # Connect to AZ account
