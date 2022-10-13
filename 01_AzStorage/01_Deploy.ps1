@@ -15,4 +15,4 @@
 # Clean Up
 #   Get-AzStorageAccount -ResourceGroupName JoePOC1
 #   Get-AzStorageAccount -ResourceGroupName JoePOC1 -StorageAccountName joe12oct2022
-#   Remove-AzStorageAccount -ResourceGroupName "JoePOC1" -Name "joestor1"
+#   Remove-AzStorageAccount -ResourceGroupName "JoePOC1" -Name "storagevqqxiy7ee6xlg"

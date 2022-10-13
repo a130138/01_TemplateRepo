@@ -10,9 +10,9 @@
 # Execute
     New-AzResourceGroupDeployment `
         -ResourceGroupName $ResourceGroupName `
-        -TemplateUri "" `
-        -TemplateParameterUri "" `
+        -TemplateUri "https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/02_AzFirewall/01_FirewallPolicy/azuredeploy.json" `
+        -TemplateParameterUri "https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/02_AzFirewall/01_FirewallPolicy/azuredeploy.parameters.json" `
 
 # Clean Up
-#   Get-AzF -ResourceGroupName JoePOC1
-#   Remove-AzF -ResourceGroupName JoePOC1
+#   Get-AzFirewallPolicy -Name "FwPolicyName1vqqxiy7ee6xlg" -ResourceGroupName JoePOC1
+#   Remove-AzFirewallPolicy -ResourceGroupName JoePOC1 -Name "FwPolicyName1vqqxiy7ee6xlg"
