@@ -7,7 +7,7 @@ variables:
   MyRunNumber: '1.0.0-CI+$(Build.BuildNumber)'
 
 trigger:
-#- main
+# - main
   - none
 
 pool:
@@ -15,7 +15,7 @@ pool:
 
 steps:
 - script: echo $(MyRunNumber) # display MyRunNumber
-- script: echo $(Build.BuildNumber) #display Run Number
+- script: echo $(Build.BuildNumber) # display Run Number
 - script: echo '$(Build.BuildNumber)' # outputs customized build number like project_def_master_20200828.1
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
@@ -28,5 +28,9 @@ steps:
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/azuredeploy.json?token=GHSAT0AAAAAABZYXNIQQGMHZR5SHSMFPHFKY2GZJZA'
     csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/azuredeploy.parameters.json?token=GHSAT0AAAAAABZYXNIQUY3OZVCX7C5KLS24Y2GZJMA'
-    deploymentMode: 'Incremental'
+    deploymentMode:
+      'Validation'
+      ##  Incremental
+      ##  Validation
+      ##  Complete
     deploymentName: 'AzStorageCreate'
