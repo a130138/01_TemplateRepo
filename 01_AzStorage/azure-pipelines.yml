@@ -27,6 +27,6 @@ steps:
     location: 'East US 2'
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/azuredeploy.json?token=GHSAT0AAAAAABZYXNIQQGMHZR5SHSMFPHFKY2GZJZA'
-    #csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/azuredeploy.parameters.json?token=GHSAT0AAAAAABZYXNIQUY3OZVCX7C5KLS24Y2GZJMA'
+    csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/azuredeploy.parameters.json?token=GHSAT0AAAAAABZYXNIQUY3OZVCX7C5KLS24Y2GZJMA'
     deploymentMode: 'Incremental'
     deploymentName: 'AzStorageCreate'
