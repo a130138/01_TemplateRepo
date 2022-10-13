@@ -14,20 +14,25 @@
             }
 					},
     "functions": [],
-    "variables": {"storageAccountName": "[concat(parameters('storageAccountName'), uniqueString(resourceGroup().id))]"},
-    "resources": 	[{
+    "variables":    {
+		"storageAccountName": "[concat(parameters('storageAccountName'), uniqueString(resourceGroup().id))]"
+					},
+    "resources": 	
+	[
+		{
         "name": "[variables('storageAccountName')]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags": {
             "displayName": "AzStorageCreateDisplayName"
-        },
+				},
         "location": "[resourceGroup().location]",
         "kind": "StorageV2",
-        "sku": {
+        "sku":	{
             "name": "Premium_LRS",
             "tier": "Premium"
-        }
-						}],
+				}
+		}
+	],
     "outputs": {}
 }
