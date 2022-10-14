@@ -1,4 +1,4 @@
-# Azure Firewall Creation
+# Azure Firewall Policy Deploy
 
 name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 
@@ -28,5 +28,10 @@ steps:
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/02_AzFirewall/01_FirewallPolicy/azuredeploy.json'
     csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/02_AzFirewall/01_FirewallPolicy/azuredeploy.parameters.json'
-    deploymentMode: 'Incremental'
-    deploymentName: 'AzFirewallPolicyCreate'
+
+    deploymentMode:
+      Incremental
+      ## Validation
+      ## Complete
+
+    deploymentName: 'AzFirewallPolicyDeploy'

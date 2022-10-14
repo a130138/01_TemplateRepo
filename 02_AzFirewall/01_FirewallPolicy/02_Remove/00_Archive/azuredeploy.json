@@ -1,0 +1,52 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters":
+        {
+        "FwPolicyName1":
+            {
+            "type": "String",
+            "minLength":3,
+            "maxLength":24
+            },
+        "firewallPolicies_Default_Rule_Standard_FW_externalid":
+            {
+            "defaultValue": "/subscriptions/90fe8063-2a74-45a7-a42d-61de8da81c23/resourceGroups/nonprod_50000_firewall_rg/providers/Microsoft.Network/firewallPolicies/Default_Rule_Standard_FW",
+            "type": "String"
+            }
+        },
+    "variables": {
+        "FwPolicyName1": "[concat(parameters('FwPolicyName1'), uniqueString(resourceGroup().id))]"
+                 },
+    "resources":
+        [
+            {
+            "apiVersion": "2020-11-01",
+            "name": "[variables('FwPolicyName1')]",
+            "type": "Microsoft.Network/firewallPolicies",
+            "location": "eastus2",
+            "tags":
+                    {
+                "Owner": "OwnerTag",
+                "Environment": "EnvTag",
+                "CostCenter":  "CostCtrTag",
+                "Classification": "InternalOnly",
+                "Compliance": "N/A"
+                    },
+            "properties":
+                {
+                "sku":  {
+                    "tier": "Premium"
+                        },
+                "threatIntelMode": "Alert",
+                "basePolicy":   {
+                    "id": "[parameters('firewallPolicies_Default_Rule_Standard_FW_externalid')]"
+                                },
+                "intrusionDetection":   {
+                    "mode": "Off"
+                                        }
+                }
+            }
+        ]
+}
+

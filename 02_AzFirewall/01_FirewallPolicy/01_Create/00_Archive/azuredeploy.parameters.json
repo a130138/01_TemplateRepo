@@ -4,7 +4,7 @@
     "parameters":
         {
         "FwPolicyName1":    {
-            "value": "FwPolicyName1"
+            "value": "FwPolicyName"
                             }
         }
 }

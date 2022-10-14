@@ -1,4 +1,5 @@
-# AZ Storage Creation
+# Utility
+
 # Clear Host
     Clear-Host
 # Connect to AZ account
