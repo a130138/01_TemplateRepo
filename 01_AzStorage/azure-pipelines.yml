@@ -30,8 +30,7 @@ steps:
     csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/azuredeploy.parameters.json?token=GHSAT0AAAAAABZYXNIQUY3OZVCX7C5KLS24Y2GZJMA'
 
     deploymentMode:
-      'Validation'
-      ##  Incremental
+        Incremental
       ##  Validation
       ##  Complete
 
