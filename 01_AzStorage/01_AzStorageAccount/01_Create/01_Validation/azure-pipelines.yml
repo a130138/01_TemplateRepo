@@ -1,7 +1,6 @@
 # Azure Storage Create Validation
 
 # Variables
-#   ${env:AZSTORAGEACCTNAME}
 #   ${env:AZRESOURCEGROUP}
 #   ${env:AZLOCATION}
 
