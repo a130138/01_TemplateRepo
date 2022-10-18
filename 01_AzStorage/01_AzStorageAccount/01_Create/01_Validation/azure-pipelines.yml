@@ -1,7 +1,12 @@
-# Azure Storage Validation
+# Azure Storage Create Validation
+
+# Variables
+#   ${env:AZSTORAGEACCTNAME}
+#   ${env:AZRESOURCEGROUP}
+#   ${env:AZLOCATION}
+
 
 name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
-
 # Set MyRunNumber
 variables:
   MyRunNumber: '1.0.0-CI+$(Build.BuildNumber)'
@@ -23,8 +28,8 @@ steps:
     azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
     subscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
     action: 'Create Or Update Resource Group'
-    resourceGroupName: 'JoePOC1'
-    location: 'East US 2'
+    resourceGroupName: '${env:AZRESOURCEGROUP}'
+    location: '${env:AZLOCATION}'
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/01_Create/01_Validation/azuredeploy.json'
     csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/01_Create/01_Validation/azuredeploy.parameters.json'
@@ -34,4 +39,3 @@ steps:
         Validation
       ##  Complete
 
-    # deploymentName: 'AzStorageValidation'
