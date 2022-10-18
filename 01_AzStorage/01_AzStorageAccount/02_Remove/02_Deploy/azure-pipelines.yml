@@ -1,4 +1,4 @@
-# Azure Storage Creation
+# Azure Storage Removal
 
 name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 
@@ -26,12 +26,12 @@ steps:
     resourceGroupName: 'JoePOC1'
     location: 'East US 2'
     templateLocation: 'URL of the file'
-    csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/azuredeploy.json?token=GHSAT0AAAAAABZYXNIQQGMHZR5SHSMFPHFKY2GZJZA'
-    csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/azuredeploy.parameters.json?token=GHSAT0AAAAAABZYXNIQUY3OZVCX7C5KLS24Y2GZJMA'
+    csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/02_Remove/02_Deploy/azuredeploy.json'
+    csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/02_Remove/02_Deploy/azuredeploy.parameters.json'
 
     deploymentMode:
         Incremental
       ##  Validation
       ##  Complete
 
-    # deploymentName: 'AzStorageCreate'
+    # deploymentName: 'AzStorageRemoval'
