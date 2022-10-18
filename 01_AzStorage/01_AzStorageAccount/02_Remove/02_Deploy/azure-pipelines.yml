@@ -1,5 +1,9 @@
 # AZ Storage Removal
 
+# Variables
+#   ${env:AZSTORAGEACCTNAME}
+#   ${env:AZRESOURCEGROUP}
+
 trigger:
 - none
 pool:
@@ -12,7 +16,3 @@ steps:
     Inline: 'Remove-AzStorageAccount -ResourceGroupName "${env:AZRESOURCEGROUP}" -Name "${env:AZSTORAGEACCTNAME}" -Force'
     FailOnStandardError: true
     azurePowerShellVersion: 'LatestVersion'
-
-# Variables
-# ${env:AZSTORAGEACCTNAME}
-# ${env:AZRESOURCEGROUP}
