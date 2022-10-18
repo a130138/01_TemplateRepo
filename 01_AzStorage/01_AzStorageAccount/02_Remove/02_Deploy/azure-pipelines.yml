@@ -5,9 +5,10 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 steps:
-- task: PowerShell@2
+- task: AzurePowerShell@5
   inputs:
-    targetType: 'inline'
-    script: |
-      # PowerShell command:
-      Remove-AzStorageAccount -ResourceGroupName "JoePOC1" -Name "storagevqqxiy7ee6xlg"
+    azureSubscription: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    ScriptType: 'InlineScript'
+    Inline: 'Remove-AzStorageAccount -ResourceGroupName "JoePOC1" -Name "storagevqqxiy7ee6xlg"'
+    FailOnStandardError: true
+    azurePowerShellVersion: 'LatestVersion'
