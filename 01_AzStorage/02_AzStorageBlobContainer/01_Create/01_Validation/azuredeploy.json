@@ -18,7 +18,7 @@
       "metadata":
         {
         "description": "Specifies the name of the Azure Storage account."
-        },
+        },  
       "minLength":3,
       "maxLength":24
     },
