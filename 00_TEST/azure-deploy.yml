@@ -1,7 +1,8 @@
-# Az storage pipeline
+# Az Storage Create - Test
 
 trigger:
-- main
+- none
+# - main
 
 pool:
   vmImage: ubuntu-latest
@@ -16,7 +17,10 @@ steps:
     resourceGroupName: 'JoePOC1'
     location: 'East US 2'
     templateLocation: 'URL of the file'
-    csmFileLink: 'https://raw.githubusercontent.com/a130138/AzStorage/main/azuredeploy2.json?token=GHSAT0AAAAAABZYXNIQT6WM2ODAO7Z3IGMSY2FYBMQ'
-    csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/AzStorage/main/azuredeploy2.parameters.json'
-    deploymentMode: 'Incremental'
+    csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
+    csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.parameters.json'
+    deploymentMode:
+     'Incremental'
+     # Complete
+     # Validation
     deploymentName: 'DeployPipelineTemplate1'
