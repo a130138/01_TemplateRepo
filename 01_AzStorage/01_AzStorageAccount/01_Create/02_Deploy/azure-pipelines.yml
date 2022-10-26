@@ -1,5 +1,8 @@
 # Azure Storage Deploy
 
+# Variables
+#   ${env:AZLOCATION}
+
 name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 
 # Set MyRunNumber
