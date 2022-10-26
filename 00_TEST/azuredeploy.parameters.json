@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "storageAccountName": {
-            "value": "jctest"
+            "value": "26oct2022test"
         }
     }
 }
