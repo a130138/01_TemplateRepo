@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "storagePrefix": {
-            "value": "26oct2022test"
+            "value": "26oct2022"
         }
     }
 }
