@@ -10,8 +10,7 @@
             "description": "Storage Account Name"
             },
             "minLength": 3,
-            "maxLength": 24,
-            "defaultValue": []
+            "maxLength": 24
         }
     },
     "functions": [],
