@@ -18,7 +18,7 @@ steps:
     location: 'East US 2'
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
-    csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.parameters.json'
+    # csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.parameters.json'
     deploymentMode:
      'Incremental'
      # Complete
