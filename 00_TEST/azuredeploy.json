@@ -17,7 +17,7 @@
   "resources":
     [
       {
-        "name": "27oct2022",
+        "name": "$(name)",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags":
