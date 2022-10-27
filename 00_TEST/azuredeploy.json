@@ -4,15 +4,7 @@
   "contentVersion": "1.0.0.0",
   "parameters":
     {
-      "storageAccountName":
-        {
-          "type": "string",
-          "metadata":
-            {
-              "description": "storage acct test"
-            },
-          "defaultValue": "27oct2022"
-        }
+
     },
   "functions":
     [
@@ -25,7 +17,7 @@
   "resources":
     [
       {
-        "name": "[parameters('storageAccountName')]",
+        "name": "27oct2022",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags":
