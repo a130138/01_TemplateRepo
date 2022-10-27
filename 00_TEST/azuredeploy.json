@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters":
     {
-    "storagePrefix":
+    "uniqueStorageName":
       {
         "type": "string",
         "defaultValue": "jc3",
@@ -38,7 +38,8 @@
     },
   "variables":
     {
-      "uniqueStorageName": "[concat(parameters('storagePrefix'), uniqueString(resourceGroup().id))]"
+      "uniqueStorageName":
+        "[concat(toLower(parameters('uniqueStorageName')), uniqueString(resourceGroup().id))]"
     },
   "resources":
     [
