@@ -6,8 +6,9 @@
     "storagePrefix":
       {
         "type": "string",
+        "defaultValue": "jc3",
         "minLength": 3,
-        "maxLength": 11
+        "maxLength": 24
       },
     "storageSKU":
       {
@@ -24,6 +25,15 @@
             "Standard_GZRS",
             "Standard_RAGZRS"
           ]
+      },
+    "location":
+      {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata":
+        {
+        "description": "location based on resource group"
+        }
       }
     },
   "variables":
@@ -35,14 +45,18 @@
       {
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-09-01",
-        "name": "[variables('uniqueStorageName')]",
-        "sku": {
+        "name":
+          "[variables('uniqueStorageName')]",
+        "sku":
+          {
           "name": "[parameters('storageSKU')]"
-        },
+          },
         "kind": "StorageV2",
-        "properties": {
+        "location": "[parameters('location')]",
+        "properties":
+          {
           "supportsHttpsTrafficOnly": true
-        }
+          }
       }
     ]
 }
