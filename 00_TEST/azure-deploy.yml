@@ -23,4 +23,4 @@ steps:
      'Incremental'
      # Complete
      # Validation
-    deploymentName: 'DeployPipelineTemplate1'
+    deploymentName: 'DeployPipelineTest'

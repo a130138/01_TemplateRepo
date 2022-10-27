@@ -1,63 +1,47 @@
+// Azure Deploy Storage Acct
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters":
     {
-    "uniqueStorageName":
-      {
-        "type": "string",
-        "defaultValue": "jc3",
-        "minLength": 3,
-        "maxLength": 24
-      },
-    "storageSKU":
-      {
-        "type": "string",
-        "defaultValue": "Standard_LRS",
-        "allowedValues":
-          [
-            "Standard_LRS",
-            "Standard_GRS",
-            "Standard_RAGRS",
-            "Standard_ZRS",
-            "Premium_LRS",
-            "Premium_ZRS",
-            "Standard_GZRS",
-            "Standard_RAGZRS"
-          ]
-      },
-    "location":
-      {
-      "type": "string",
-      "defaultValue": "[resourceGroup().location]",
-      "metadata":
+      "storageAccountName":
         {
-        "description": "resource group location"
+          "type": "string",
+          "metadata":
+            {
+              "description": "storage acct test"
+            }
         }
-      }
     },
+  "functions":
+    [
+
+    ],
   "variables":
     {
-      "uniqueStorageName":
-        "[concat(toLower(parameters('uniqueStorageName')), uniqueString(resourceGroup().id))]"
+
     },
   "resources":
     [
       {
+        "name": "[parameters('storageAccountName')]",
         "type": "Microsoft.Storage/storageAccounts",
-        "apiVersion": "2021-09-01",
-        "name":
-          "[variables('uniqueStorageName')]",
+        "apiVersion": "2021-04-01",
+        "tags":
+          {
+              "displayName": "storageaccounttest"
+          },
+        "location": "[resourceGroup().location]",
+        "kind": "StorageV2",
         "sku":
           {
-          "name": "[parameters('storageSKU')]"
-          },
-        "kind": "StorageV2",
-        "location": "[parameters('location')]",
-        "properties":
-          {
-          "supportsHttpsTrafficOnly": true
+            "name": "Premium_LRS",
+            "tier": "Premium"
           }
       }
-    ]
+    ],
+  "outputs":
+    {
+
+    }
 }
