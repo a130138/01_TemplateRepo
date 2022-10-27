@@ -13,7 +13,7 @@
             },
             "minLength":3,
             "maxLength":24,
-            "defaultValue": "[resourceGroup().location]"
+            "defaultValue": "joetest1"
         }
     },
   "functions":
