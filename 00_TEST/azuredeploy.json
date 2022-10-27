@@ -4,7 +4,10 @@
   "contentVersion": "1.0.0.0",
   "parameters":
     {
-
+      "storageName":
+        {
+          "type": "string"
+        }
     },
   "functions":
     [
@@ -17,7 +20,7 @@
   "resources":
     [
       {
-        "name": "$(name)",
+        "name": "[parameters('storageName')]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags":
@@ -28,8 +31,7 @@
         "kind": "StorageV2",
         "sku":
           {
-            "name": "Premium_LRS",
-            "tier": "Premium"
+            "name": "Standard_LRS"
           }
       }
     ],
