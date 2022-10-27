@@ -32,7 +32,7 @@
       "defaultValue": "[resourceGroup().location]",
       "metadata":
         {
-        "description": "location based on resource group"
+        "description": "resource group location"
         }
       }
     },
