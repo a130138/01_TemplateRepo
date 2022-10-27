@@ -10,7 +10,10 @@
           "metadata":
             {
               "description": "storage acct test"
-            }
+            },
+            "minLength":3,
+            "maxLength":24,
+            "defaultValue": "[resourceGroup().location]"
         }
     },
   "functions":
