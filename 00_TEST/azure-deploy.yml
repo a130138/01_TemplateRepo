@@ -31,4 +31,4 @@ steps:
      'Incremental'
      # Complete
      # Validation
-    deploymentName: 'DeployPipelineTest'
+    deploymentName: 'DeployPipelineTest_$(date:yyyyMMdd)$(rev:.r)'
