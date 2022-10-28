@@ -9,7 +9,8 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  - rgn:  JoePOC1
+  - name:  rgn   
+    value:  JoePOC1
 
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
