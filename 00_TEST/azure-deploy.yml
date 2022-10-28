@@ -5,14 +5,14 @@ name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 trigger:
   - none
 
-pool:
-  vmImage: ubuntu-latest
-
 variables:
   - name:  resourceGroupName
     value:  'JoePOC1'
   - name: location
     value: 'East US 2'
+
+pool:
+  vmImage: ubuntu-latest
 
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
