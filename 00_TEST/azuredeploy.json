@@ -6,7 +6,8 @@
     {
       "storageName":
         {
-          "type": "string"
+          "type": "string",
+          "defaultValue": "28oct2022"
         }
     },
   "functions":
