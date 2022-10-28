@@ -8,8 +8,8 @@ trigger:
 variables:
   - name:  AzResourceGroupName
     value:  'JoePOC1'
-  - name: AzLocation
-    value: '$(AzLocation)'
+  # - name: AzLocation
+  #   value: '$(AzLocation)'
 
 pool:
   vmImage: ubuntu-latest
@@ -22,7 +22,7 @@ steps:
     subscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
     action: 'Create Or Update Resource Group'
     resourceGroupName: '${{ variables.AzResourceGroupName }}'
-    location: '${{ variables.AzLocation }}'
+    location: '${{ variables.location }}'
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
     # csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.parameters.json'
