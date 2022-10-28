@@ -1,8 +1,9 @@
 # Az Storage Create - Test
 
+name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
+
 trigger:
 - none
-# - main
 
 pool:
   vmImage: ubuntu-latest
