@@ -5,9 +5,9 @@ name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 trigger:
   - none
 
-#variables:
-  #- name:  AzResourceGroupName
-  #  value:  '$(AzRgName)'
+variables:
+  - name:  AzResourceGroupName
+    value:  '$(AzRgName)'
   #- name: AzLocation
   #  value: '$(AzLocation)'
 
@@ -21,7 +21,7 @@ steps:
     azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
     subscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
     action: 'Create Or Update Resource Group'
-    resourceGroupName: '${{ variables.$(AzRgName) }}'
+    resourceGroupName: '${{ variables.AzResourceGroupName }}'
     # location: '${{ variables.AzLocation }}'
     location: 'East US 2'
     templateLocation: 'URL of the file'
