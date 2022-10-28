@@ -9,7 +9,7 @@ variables:
   - name:  resourceGroupName
     value:  'JoePOC1'
   - name: location
-    value: 'East US 2'
+    value: '$(location)'
 
 pool:
   vmImage: ubuntu-latest
