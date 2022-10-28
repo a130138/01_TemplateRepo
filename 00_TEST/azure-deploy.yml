@@ -6,8 +6,8 @@ trigger:
   - none
 
 variables:
-  - name:  AzResourceGroupName
-    value:  '$(AzRgName)'
+  #- name:  AzResourceGroupName
+  #  value:  '$(AzRgName)'
   #- name: AzLocation
   #  value: '$(AzLocation)'
 
