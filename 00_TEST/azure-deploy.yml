@@ -9,7 +9,7 @@ variables:
   - name:  AzResourceGroupName
     value:  'JoePOC1'
   - name: AzLocation
-    value: '$(location)'
+    value: '$(AzLocation)'
 
 pool:
   vmImage: ubuntu-latest
