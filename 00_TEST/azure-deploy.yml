@@ -19,8 +19,10 @@ steps:
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
     # csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.parameters.json'
+    overrideParameters: ''
     deploymentMode:
      'Incremental'
      # Complete
      # Validation
     deploymentName: 'DeployPipelineTest'
+    
