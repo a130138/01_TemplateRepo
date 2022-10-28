@@ -10,7 +10,7 @@ pool:
 
 variables:
   - name:  rgn
-    value:  JoePOC1
+    value:  'JoePOC1'
   - name: location
     value: 'East US 2'
 
