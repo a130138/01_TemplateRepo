@@ -4,11 +4,7 @@
   "contentVersion": "1.0.0.0",
   "parameters":
     {
-      "storageName":
-        {
-          "type": "string",
-          "defaultValue": "28oct2022"
-        }
+
     },
   "functions":
     [
@@ -21,14 +17,14 @@
   "resources":
     [
       {
-        "name": "[parameters('storageName')]",
+        "name": "testjc",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags":
           {
               "displayName": "storageaccounttest"
           },
-        "location": "$(AzLocation)",
+        "location": "[resourceGroup().location]",
         "kind": "StorageV2",
         "sku":
           {
