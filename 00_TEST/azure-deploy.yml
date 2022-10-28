@@ -15,7 +15,7 @@ steps:
     subscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
     action: 'Create Or Update Resource Group'
     resourceGroupName: '$(AzResourceGroupName)'
-    location: 'East US 2'
+    location: '$(AzLocation)'
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
     # csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.parameters.json'
