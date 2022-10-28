@@ -7,7 +7,7 @@ trigger:
 
 variables:
   - name:  AzResourceGroupName
-    value:  'JoePOC1'
+    value:  '$(AzRgName)'
   #- name: AzLocation
   #  value: '$(AzLocation)'
 
