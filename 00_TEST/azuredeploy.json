@@ -7,7 +7,7 @@
       "storageName":
         {
           "type": "string",
-          "defaultValue": "joec2"
+          "defaultValue": "28oct2022"
         }
     },
   "functions":
@@ -28,7 +28,7 @@
           {
               "displayName": "storageaccounttest"
           },
-        "location": "[resourceGroup().location]",
+        "location": "$(AzLocation)",
         "kind": "StorageV2",
         "sku":
           {
