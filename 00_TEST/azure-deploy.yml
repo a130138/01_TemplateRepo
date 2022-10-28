@@ -9,7 +9,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  - name:  rgn   
+  - name:  rgn
     value:  JoePOC1
 
 steps:
