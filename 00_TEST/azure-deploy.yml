@@ -29,7 +29,7 @@ steps:
     # csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.parameters.json'
     # overrideParameters: '-storageName jsizzle'
     deploymentMode:
-     # Incremental
+      Incremental
      # Complete
-      Validation
+     # Validation
     deploymentName: 'DeployPipelineTest'
