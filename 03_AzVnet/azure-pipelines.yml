@@ -11,11 +11,11 @@ steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
-    action: 'Create Or Update Resource Group'
-    templateLocation: 'URL of the file'
-    deploymentMode: 'Incremental'
-    resourceGroupName: 'JoePOC1'
     azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-    csmParametersFile: "https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json"
-    csmParametersFileLink:  "https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/parameters.json"
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'JoePOC1'
     location: 'East US 2'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
+    csmParametersFileLink:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/parameters.json'
+    deploymentMode: 'Incremental'
