@@ -14,6 +14,7 @@ steps:
     action: 'Create Or Update Resource Group'
     templateLocation: 'URL of the file'
     deploymentMode: 'Incremental'
+    #resourceGroupName: $(resourceGroup)
     csmParametersFile: "https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json"
     csmParametersFileLink:  "https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/parameters.json"
     azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
