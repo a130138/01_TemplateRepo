@@ -1,5 +1,9 @@
 # Az Vnet Deploy 
 
+variables:
+  - name: resourceGroupName
+    value: JoePOC1
+
 trigger:
 - none
 
