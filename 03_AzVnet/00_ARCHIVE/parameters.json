@@ -1,0 +1,50 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westeurope"
+        },
+        "extendedLocation": {
+            "value": {}
+        },
+        "virtualNetworkName": {
+            "value": "eastus2_joe_poc1_vnet"
+        },
+        "resourceGroup": {
+            "value": "JoePOC1"
+        },
+        "addressSpaces": {
+            "value": [
+                "192.168.92.0/24"
+            ]
+        },
+        "ipv6Enabled": {
+            "value": false
+        },
+        "subnetCount": {
+            "value": 2
+        },
+        "subnet0_name": {
+            "value": "eastus2_joe_poc1_appgw_subnet"
+        },
+        "subnet0_addressRange": {
+            "value": "192.168.92.0/28"
+        },
+        "subnet1_name": {
+            "value": "eastus2_joe_poc1_workload_subnet"
+        },
+        "subnet1_addressRange": {
+            "value": "192.168.92.64/26"
+        },
+        "ddosProtectionPlanEnabled": {
+            "value": false
+        },
+        "firewallEnabled": {
+            "value": false
+        },
+        "bastionEnabled": {
+            "value": false
+        }
+    }
+}

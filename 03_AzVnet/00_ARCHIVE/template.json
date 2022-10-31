@@ -1,0 +1,85 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "String"
+        },
+        "extendedLocation": {
+            "type": "Object"
+        },
+        "virtualNetworkName": {
+            "type": "String"
+        },
+        "resourceGroup": {
+            "type": "String"
+        },
+        "addressSpaces": {
+            "type": "Array"
+        },
+        "ipv6Enabled": {
+            "type": "Bool"
+        },
+        "subnetCount": {
+            "type": "Int"
+        },
+        "subnet0_name": {
+            "type": "String"
+        },
+        "subnet0_addressRange": {
+            "type": "String"
+        },
+        "subnet1_name": {
+            "type": "String"
+        },
+        "subnet1_addressRange": {
+            "type": "String"
+        },
+        "ddosProtectionPlanEnabled": {
+            "type": "Bool"
+        },
+        "firewallEnabled": {
+            "type": "Bool"
+        },
+        "bastionEnabled": {
+            "type": "Bool"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/VirtualNetworks",
+            "apiVersion": "2021-01-01",
+            "name": "[parameters('virtualNetworkName')]",
+            "location": "[parameters('location')]",
+            "extendedLocation": "[if(empty(parameters('extendedLocation')), json('null'), parameters('extendedLocation'))]",
+            "dependsOn": [],
+            "tags": {
+                "Owner": "joe cropper",
+                "Env": "dev"
+            },
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "192.168.92.0/24"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "eastus2_joe_poc1_appgw_subnet",
+                        "properties": {
+                            "addressPrefix": "192.168.92.0/28"
+                        }
+                    },
+                    {
+                        "name": "eastus2_joe_poc1_workload_subnet",
+                        "properties": {
+                            "addressPrefix": "192.168.92.64/26"
+                        }
+                    }
+                ],
+                "enableDdosProtection": "[parameters('ddosProtectionPlanEnabled')]"
+            }
+        }
+    ]
+}
