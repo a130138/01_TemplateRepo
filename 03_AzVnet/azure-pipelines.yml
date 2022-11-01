@@ -10,13 +10,11 @@ parameters:
     default:  JoePOC1
     values:
       - JoePOC1
+      - StevePOC1
 
 pool:
   vmImage: ubuntu-latest
 
-#variables:
-#  - name: resourceGroupName
-#    value: JoePOC1
 
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
