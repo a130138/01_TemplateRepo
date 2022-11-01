@@ -18,11 +18,9 @@ parameters:
       - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
   - name: csmFileLink
     displayName: 'Template File Location'
-    type:  'string'
     default:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
   - name: csmParametersFileLink
     displayName: 'Parameters File Location'
-    type:  'string'
     default:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
 
 pool:
@@ -35,7 +33,7 @@ steps:
     azureResourceManagerConnection: '${{ parameters.azureResourceManagerConnection }}'
     action: 'Create Or Update Resource Group'
     resourceGroupName: '${{ parameters.resourceGroupName }}'
-    location: 'East US 2'
+    location: $(location)
     templateLocation: 'URL of the file'
     csmFileLink: '${{ parameters.csmFileLink }}'
     csmParametersFileLink:  '${{ parameters.csmParametersFileLink }}'
