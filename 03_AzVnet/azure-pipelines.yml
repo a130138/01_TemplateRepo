@@ -5,7 +5,7 @@ trigger:
 
 parameters:
   - name:  resourceGroupName
-    displayName:  ResourceGroupName
+    displayName:  Resource Group Name
     type: string
     default:  'JoePOC1'
     values:
