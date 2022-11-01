@@ -3,10 +3,6 @@
 trigger:
 - none
 
-variables:
-  - name: location
-    value:  $(location)
-
 parameters:
   - name:  resourceGroupName
     displayName:  resourceGroupName
@@ -15,13 +11,13 @@ parameters:
     values:
       - 'JoePOC1'
       - 'StevePOC1'
-#  - name: location
-#    displayName: location
-#    type:  string
-#    default:  'East US 2'
-#    values:
-#      - 'East US 2'
-#      - 'East US'
+  - name: location
+    displayName: location
+    type:  string
+    default:  'East US 2'
+    values:
+      - 'East US 2'
+      - 'East US'
 
 pool:
   vmImage: ubuntu-latest
