@@ -3,12 +3,20 @@
 trigger:
 - none
 
+parameters:
+  - name:  resourceGroupName
+    displayName:  resourceGroupName
+    type: string
+    default:  JoePOC1
+    values:
+      - JoePOC1
+
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  - name: resourceGroupName
-    value: JoePOC1
+#variables:
+#  - name: resourceGroupName
+#    value: JoePOC1
 
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
@@ -16,7 +24,7 @@ steps:
     deploymentScope: 'Resource Group'
     azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
     action: 'Create Or Update Resource Group'
-    resourceGroupName: '${{ variables.resourceGroupName }}'
+    resourceGroupName: '${{ parameters.resourceGroupName }}'
     location: '$(location)'
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
