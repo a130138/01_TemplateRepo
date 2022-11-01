@@ -7,14 +7,20 @@ parameters:
   - name:  resourceGroupName
     displayName:  resourceGroupName
     type: string
-    default:  JoePOC1
+    default:  'JoePOC1'
     values:
-      - JoePOC1
-      - StevePOC1
+      - 'JoePOC1'
+      - 'StevePOC1'
+  - name: location
+    displayName: location
+    type:  string
+    default:  'East US 2'
+    values:
+      - 'East US 2'
+      - 'East US'
 
 pool:
   vmImage: ubuntu-latest
-
 
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
