@@ -23,6 +23,14 @@ parameters:
     default:  'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
     values:
       - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+  - name: csmFileLink
+    displayName: 'Template File Location'
+    type:  'string'
+    default:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
+  - name: csmParametersFileLink
+    displayName: 'Parameters File Location'
+    type:  'string'
+    default:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
 
 pool:
   vmImage: ubuntu-latest
@@ -36,6 +44,6 @@ steps:
     resourceGroupName: '${{ parameters.resourceGroupName }}'
     location: '${{ parameters.location }}'
     templateLocation: 'URL of the file'
-    csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
-    csmParametersFileLink:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/parameters.json'
+    csmFileLink: '${{ parameters.csmFileLink }}'
+    csmParametersFileLink:  '${{ parameters.csmParametersFileLink }}'
     deploymentMode: 'Incremental'
