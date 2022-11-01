@@ -5,20 +5,21 @@ trigger:
 
 parameters:
   - name:  resourceGroupName
-    displayName:  resourceGroupName
+    displayName:  ResourceGroupName
     type: string
     default:  'JoePOC1'
     values:
       - 'JoePOC1'
       - 'StevePOC1'
   - name: location
-    displayName: location
+    displayName: Location
     type:  string
     default:  'East US 2'
     values:
       - 'East US 2'
       - 'East US'
   - name: azureResourceManagerConnection
+    displayName: Resource Manager Connection
     values:
       - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
 
