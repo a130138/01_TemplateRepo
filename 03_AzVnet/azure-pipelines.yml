@@ -3,6 +3,10 @@
 trigger:
 - none
 
+variables:
+  - name: location
+    value:  'East US 2'
+
 parameters:
   - name:  resourceGroupName
     displayName:  resourceGroupName
@@ -11,13 +15,13 @@ parameters:
     values:
       - 'JoePOC1'
       - 'StevePOC1'
-  - name: location
-    displayName: location
-    type:  string
-    default:  'East US 2'
-    values:
-      - 'East US 2'
-      - 'East US'
+#  - name: location
+#    displayName: location
+#    type:  string
+#    default:  'East US 2'
+#    values:
+#      - 'East US 2'
+#      - 'East US'
 
 pool:
   vmImage: ubuntu-latest
@@ -29,7 +33,7 @@ steps:
     azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
     action: 'Create Or Update Resource Group'
     resourceGroupName: '${{ parameters.resourceGroupName }}'
-    location: '${{ parameters.location }}'
+    location: '${{ variables.location }}'
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
     csmParametersFileLink:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/parameters.json'
