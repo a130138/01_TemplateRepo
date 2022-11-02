@@ -21,7 +21,7 @@ parameters:
     default:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
   - name: csmParametersFileLink
     displayName: 'Parameters File Location'
-    default:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
+    default:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/parameters.json'
 
 pool:
   vmImage: ubuntu-latest
