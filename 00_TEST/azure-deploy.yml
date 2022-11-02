@@ -13,7 +13,6 @@ steps:
   inputs:
     deploymentScope: 'Resource Group'
     azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-    #subscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
     action: 'Create Or Update Resource Group'
     resourceGroupName: $(resourceGroupName)
     location: $(location)
