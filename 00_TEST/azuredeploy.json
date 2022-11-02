@@ -2,37 +2,15 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
-  "parameters":
-    {
-      "storageAccountName":
-        {
-          "type": "string",
-          "metadata":
-            {
-              "description": "az test storage acct"
-            },
-          "defaultValue": "joec",
-          "minLength":3,
-          "maxLength":24
-         }
-    },
-  "functions":
-    [
-
-    ],
-  "variables":
-    {
-
-    },
   "resources":
     [
       {
-        "name": "[parameters('storageAccountName')]",
+        "name": "[resourceGroup().location]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags":
           {
-              "displayName": "storageaccounttest"
+              "displayName": "[resourceGroup().location]"
           },
         "location": "[resourceGroup().location]",
         "kind": "StorageV2",
