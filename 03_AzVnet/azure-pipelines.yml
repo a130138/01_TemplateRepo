@@ -22,13 +22,13 @@ parameters:
     default:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
     values:
       - 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
-      - ''
+      - 'TBD'
   - name: csmParametersFileLink
     displayName: 'Parameters File Location'
     default:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/parameters.json'
     values:
       - 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/parameters.json'
-      - ''
+      - 'TBD'
 
 pool:
   vmImage: ubuntu-latest
