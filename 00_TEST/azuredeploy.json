@@ -11,7 +11,7 @@
             {
               "description": "az test storage acct"
             },
-          "defaultValue": "02Nov2022test",
+          "defaultValue": "joec",
           "minLength":3,
           "maxLength":24
          }
