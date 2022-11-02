@@ -1,4 +1,4 @@
-# Az Storage Create - Test
+# Az Storage Deploy - Test
 
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
@@ -19,4 +19,4 @@ steps:
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
     deploymentMode: 'Incremental' # Options: Incremental, Complete, Validation
-    deploymentName: 'DeployPipelineTest'
+    deploymentName: 'Storage Acct Deploy - Test'
