@@ -11,24 +11,22 @@ parameters:
     values:
       - 'JoePOC1'
       - 'StevePOC1'
+
   - name: azureResourceManagerConnection
     displayName: Resource Manager Connection
     default:  'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
     values:
       - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
       - 'TBD'
+      
   - name: csmFileLink
     displayName: 'Template File Location'
     default:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
-    values:
-      - 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/template.json'
-      - 'TBD'
+
   - name: csmParametersFileLink
     displayName: 'Parameters File Location'
     default:  'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/parameters.json'
-    values:
-      - 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/03_AzVnet/parameters.json'
-      - 'TBD'
+
 
 pool:
   vmImage: ubuntu-latest
