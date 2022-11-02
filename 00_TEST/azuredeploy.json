@@ -5,7 +5,7 @@
   "resources":
     [
       {
-        "name": "[resourceGroup().location]",
+        "name": "jctest2",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags":
