@@ -19,4 +19,4 @@ steps:
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
     deploymentMode: 'Incremental' # Options: Incremental, Complete, Validation
-    deploymentName: '$(date:yyyyMMdd)$(rev:.r)'
+    deploymentName: 'deploytest'
