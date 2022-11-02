@@ -5,12 +5,11 @@
   "resources":
     [
       {
-        "name": "jctest2",
+        "name": "joectester",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags":
           {
-              "displayName": "[resourceGroup().location]"
           },
         "location": "[resourceGroup().location]",
         "kind": "StorageV2",
