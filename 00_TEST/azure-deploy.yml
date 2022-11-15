@@ -1,4 +1,4 @@
-# Az Storage Deploy - Test
+# Az Deploy (POC)
 
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
