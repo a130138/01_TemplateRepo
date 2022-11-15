@@ -2,10 +2,14 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
+  "variables":
+    {
+      "storageName": "[concat('storage', uniqueString(resourceGroup().id))]"
+    },
   "resources":
     [
       {
-        "name": "joectester",
+        "name": "[variables('storageName')]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags":
@@ -19,9 +23,6 @@
           }
       }
     ],
-  "variables":
-    {
-    },
   "outputs":
     {
     }
