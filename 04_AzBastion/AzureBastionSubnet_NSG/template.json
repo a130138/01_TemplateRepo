@@ -13,9 +13,6 @@
             "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "apiVersion": "2022-01-01",
             "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowAzureCloudOutBound')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
-            ],
             "properties": {
                 "protocol": "TCP",
                 "sourcePortRange": "*",
@@ -35,9 +32,6 @@
             "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "apiVersion": "2022-01-01",
             "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowBastionCommunication')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
-            ],
             "properties": {
                 "protocol": "*",
                 "sourcePortRange": "*",
@@ -59,9 +53,6 @@
             "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "apiVersion": "2022-01-01",
             "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowBastionHostCommunication')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
-            ],
             "properties": {
                 "protocol": "*",
                 "sourcePortRange": "*",
@@ -83,9 +74,6 @@
             "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "apiVersion": "2022-01-01",
             "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowGatewayManagerInBound')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
-            ],
             "properties": {
                 "protocol": "TCP",
                 "sourcePortRange": "*",
@@ -105,9 +93,6 @@
             "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "apiVersion": "2022-01-01",
             "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowGetSessionInformation')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
-            ],
             "properties": {
                 "protocol": "*",
                 "sourcePortRange": "*",
@@ -127,9 +112,6 @@
             "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "apiVersion": "2022-01-01",
             "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowHttpsInBound')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
-            ],
             "properties": {
                 "protocol": "TCP",
                 "sourcePortRange": "*",
@@ -149,9 +131,6 @@
             "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "apiVersion": "2022-01-01",
             "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowSshRdpOutbound')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
-            ],
             "properties": {
                 "protocol": "*",
                 "sourcePortRange": "*",
@@ -174,15 +153,6 @@
             "apiVersion": "2022-01-01",
             "name": "[parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name')]",
             "location": "westeurope",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowHttpsInBound')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowGatewayManagerInBound')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowBastionHostCommunication')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowSshRdpOutbound')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowAzureCloudOutBound')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowBastionCommunication')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowGetSessionInformation')]"
-            ],
             "tags": {
                 "Owner": "Joseph Cropper    ",
                 "Environment": "POC"
