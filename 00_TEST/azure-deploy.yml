@@ -25,6 +25,7 @@ steps:
       #Options:"URL of the file","Linked Artifacts"
     csmFileLink: $(csmFileLink)
       #Example:'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
+    csmParametersFileLink: $(csmParametersFileLink)
     deploymentMode: 'Incremental'
       #Options:Incremental,Complete,Validation
     deploymentName: $(deploymentName)
