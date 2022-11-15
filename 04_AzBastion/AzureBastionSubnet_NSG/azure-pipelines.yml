@@ -1,0 +1,24 @@
+# Az Bastion NSG Deploy (POC)
+
+name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
+
+trigger:
+  - none
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: $(azureResourceManagerConnection)
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: $(resourceGroupName)
+    location: $(location)
+    templateLocation: 'URL of the file'
+    csmFileLink: $(csmFileLink)
+    csmParametersFileLink: $(csmParametersFileLink)
+    deploymentMode: 'Incremental'
+      # Options: Incremental, Complete, Validation
+    deploymentName: 'DeployPipelineTest'
