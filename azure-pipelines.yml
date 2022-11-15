@@ -19,5 +19,6 @@ steps:
     templateLocation: 'URL of the file'
     csmFileLink: $(csmFileLink)
     csmParametersFileLink: $(csmParametersFileLink)
-    deploymentMode: 'Incremental' # Options: Incremental, Complete, Validation
+    deploymentMode: 'Incremental'
+      # Options: Incremental, Complete, Validation
     deploymentName: 'DeployPipelineTest'
