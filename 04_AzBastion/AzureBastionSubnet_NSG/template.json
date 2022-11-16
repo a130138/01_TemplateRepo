@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "networkSecurityGroups_AzureBastionSubnet_nsg_name": {
-            "defaultValue": "test",
+            "defaultValue": "AzureBastionSubnet_nsg",
             "type": "String"
         }
     },
