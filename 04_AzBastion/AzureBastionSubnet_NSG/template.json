@@ -4,7 +4,7 @@
     "parameters": {
         "networkSecurityGroups_AzureBastionSubnet_nsg_name": {
             "defaultValue": "AzureBastionSubnet_nsg",
-            "type": "String"
+            "type": "string"
         }
     },
     "variables": {},
