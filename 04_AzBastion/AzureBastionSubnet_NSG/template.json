@@ -152,7 +152,7 @@
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2022-01-01",
             "name": "[parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name')]",
-            "location": "westeurope",
+            "location": "east us 2",
             "tags": {
                 "Owner": "Joseph Cropper    ",
                 "Environment": "POC"
