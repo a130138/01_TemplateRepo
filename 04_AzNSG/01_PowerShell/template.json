@@ -21,10 +21,11 @@
             "securityRules":
               [
                 {
-                  "id": "AllowHttpsInBound",
                   "name": "AllowHttpsInBound",
+                  "id": "AllowHttpsInBound",
+                  "type": "Microsoft.Network/networkSecurityGroups/securityRules",
                   "properties":
-                    { 
+                    {
                       "access": "Allow",
                       "destinationAddressPrefix": "*",
                       "destinationAddressPrefixes": [],
@@ -37,8 +38,27 @@
                       "sourceAddressPrefixes": [],
                       "sourcePortRange": "*",
                       "sourcePortRanges": [ ]
-                    },
-                  "type": "Microsoft.Network/networkSecurityGroups/securityRules"
+                    }
+                },
+                {
+                  "name": "AllowGatewayManagerInBound",
+                  "id": "AllowGatewayManagerInBound",
+                  "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                  "properties":
+                    {
+                        "protocol": "Tcp",
+                        "sourcePortRange": "*",
+                        "destinationPortRange": "443",
+                        "sourceAddressPrefix": "GatewayManager",
+                        "destinationAddressPrefix": "*",
+                        "access": "Allow",
+                        "priority": 130,
+                        "direction": "Inbound",
+                        "sourcePortRanges": [],
+                        "destinationPortRanges": [],
+                        "sourceAddressPrefixes": [],
+                        "destinationAddressPrefixes": []
+                    }
                 }
               ]
           }
