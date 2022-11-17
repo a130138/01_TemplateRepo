@@ -5,10 +5,6 @@ trigger:
 pool:
   vmImage: windows-latest
 steps:
-- task: PowerShell@2
-  inputs:
-    filePath: '$(System.DefaultWorkingDirectory)\04_AzNSG\01_PowerShell\script.ps1'
-
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
@@ -16,8 +12,8 @@ steps:
     subscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
     action: 'Create Or Update Resource Group'
     resourceGroupName: 'JoePOC1'
-    location: 'east'
+    location: 'east us 2'
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/04_AzNSG/01_PowerShell/template.json'
     deploymentMode: 'Incremental'
-    deploymentName: 'Az_NSG_Poc_PS'
+    deploymentName: 'Az_NSG_Poc'
