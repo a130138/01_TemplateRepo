@@ -7,10 +7,10 @@
       {
           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
           "apiVersion": "2019-04-01",
-          "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowAzureCloudOutBound')]",
+          "name": "[concat(('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowAzureCloudOutBound')]",
           "dependsOn":
             [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
             ],
           "properties":
             {
@@ -31,10 +31,10 @@
       {
           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
           "apiVersion": "2019-04-01",
-          "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowBastionCommunication')]",
+          "name": "[concat(('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowBastionCommunication')]",
           "dependsOn":
             [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
             ],
           "properties":
             {
@@ -58,10 +58,10 @@
       {
           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
           "apiVersion": "2019-04-01",
-          "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowBastionHostCommunication')]",
+          "name": "[concat(('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowBastionHostCommunication')]",
           "dependsOn":
             [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
             ],
           "properties":
             {
@@ -85,10 +85,10 @@
       {
           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
           "apiVersion": "2019-04-01",
-          "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowGatewayManagerInBound')]",
+          "name": "[concat(('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowGatewayManagerInBound')]",
           "dependsOn":
             [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
             ],
           "properties":
             {
@@ -109,10 +109,10 @@
       {
           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
           "apiVersion": "2019-04-01",
-          "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowGetSessionInformation')]",
+          "name": "[concat(('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowGetSessionInformation')]",
           "dependsOn":
             [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
             ],
           "properties":
             {
@@ -133,10 +133,10 @@
       {
           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
           "apiVersion": "2019-04-01",
-          "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowHttpsInBound')]",
+          "name": "[concat(('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowHttpsInBound')]",
           "dependsOn":
             [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
             ],
           "properties":
             {
@@ -157,10 +157,10 @@
       {
           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
           "apiVersion": "2019-04-01",
-          "name": "[concat(parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowSshRdpOutbound')]",
+          "name": "[concat(('networkSecurityGroups_AzureBastionSubnet_nsg_name'), '/AllowSshRdpOutbound')]",
           "dependsOn":
             [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'))]"
             ],
           "properties":
             {
@@ -184,17 +184,17 @@
       {
           "type": "Microsoft.Network/networkSecurityGroups",
           "apiVersion": "2019-04-01",
-          "name": "[parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name')]",
+          "name": "[('networkSecurityGroups_AzureBastionSubnet_nsg_name')]",
           "location": "westeurope",
           "dependsOn":
             [
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowHttpsInBound')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowGatewayManagerInBound')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowBastionHostCommunication')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowSshRdpOutbound')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowAzureCloudOutBound')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowBastionCommunication')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowGetSessionInformation')]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowHttpsInBound')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowGatewayManagerInBound')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowBastionHostCommunication')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowSshRdpOutbound')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowAzureCloudOutBound')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowBastionCommunication')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowGetSessionInformation')]"
             ],
           "tags":
             {
@@ -207,7 +207,7 @@
                   [
                       {
                           "name": "AllowHttpsInBound",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowHttpsInBound')]",
+                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowHttpsInBound')]",
                           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
                           "properties":
                             {
@@ -227,7 +227,7 @@
                       },
                       {
                           "name": "AllowGatewayManagerInBound",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowGatewayManagerInBound')]",
+                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowGatewayManagerInBound')]",
                           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
                           "properties":
                             {
@@ -247,7 +247,7 @@
                       },
                       {
                           "name": "AllowBastionHostCommunication",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowBastionHostCommunication')]",
+                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowBastionHostCommunication')]",
                           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
                           "properties":
                             {
@@ -270,7 +270,7 @@
                       },
                       {
                           "name": "AllowSshRdpOutbound",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowSshRdpOutbound')]",
+                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowSshRdpOutbound')]",
                           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
                           "properties":
                             {
@@ -293,7 +293,7 @@
                       },
                       {
                           "name": "AllowAzureCloudOutBound",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowAzureCloudOutBound')]",
+                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowAzureCloudOutBound')]",
                           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
                           "properties":
                             {
@@ -313,7 +313,7 @@
                       },
                       {
                           "name": "AllowBastionCommunication",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowBastionCommunication')]",
+                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowBastionCommunication')]",
                           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
                           "properties":
                             {
@@ -336,7 +336,7 @@
                       },
                       {
                           "name": "AllowGetSessionInformation",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowGetSessionInformation')]",
+                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowGetSessionInformation')]",
                           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
                           "properties":
                             {
