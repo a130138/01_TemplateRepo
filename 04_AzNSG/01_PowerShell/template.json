@@ -1,323 +1,48 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
-  "variables": {},
+  "parameters": {  },
+  "variables": {  },
+  "functions": [  ],
   "resources":
-  [
+    [
       {
-          "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-          "apiVersion": "2019-04-01",
-          "name": "AllowAzCloudOut",
-          "properties":
-            {
-                "protocol": "Tcp",
-                "sourcePortRange": "*",
-                "destinationPortRange": "443",
-                "sourceAddressPrefix": "*",
-                "destinationAddressPrefix": "AzureCloud",
-                "access": "Allow",
-                "priority": 110,
-                "direction": "Outbound",
-                "sourcePortRanges": [],
-                "destinationPortRanges": [],
-                "sourceAddressPrefixes": [],
-                "destinationAddressPrefixes": []
-            }
-      },
-      {
-          "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-          "apiVersion": "2019-04-01",
-          "name": "AllowBastionCommunication",
-          "properties":
-            {
-                "protocol": "*",
-                "sourcePortRange": "*",
-                "sourceAddressPrefix": "VirtualNetwork",
-                "destinationAddressPrefix": "VirtualNetwork",
-                "access": "Allow",
-                "priority": 120,
-                "direction": "Outbound",
-                "sourcePortRanges": [],
-                "destinationPortRanges":
-                  [
-                      "8080",
-                      "5701"
-                  ],
-                "sourceAddressPrefixes": [],
-                "destinationAddressPrefixes": []
-            }
-      },
-      {
-          "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-          "apiVersion": "2019-04-01",
-          "name": "AllowBastionHostCommunication",
-          "properties":
-            {
-                "protocol": "*",
-                "sourcePortRange": "*",
-                "sourceAddressPrefix": "VirtualNetwork",
-                "destinationAddressPrefix": "VirtualNetwork",
-                "access": "Allow",
-                "priority": 150,
-                "direction": "Inbound",
-                "sourcePortRanges": [],
-                "destinationPortRanges":
-                  [
-                      "8080",
-                      "5701"
-                  ],
-                "sourceAddressPrefixes": [],
-                "destinationAddressPrefixes": []
-            }
-      },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2019-04-01",
-            "name": "AllowGatewayManagerInBound",
-            "properties":
-              {
-                  "protocol": "Tcp",
-                  "sourcePortRange": "*",
-                  "destinationPortRange": "443",
-                  "sourceAddressPrefix": "GatewayManager",
-                  "destinationAddressPrefix": "*",
-                  "access": "Allow",
-                  "priority": 130,
-                  "direction": "Inbound",
-                  "sourcePortRanges": [],
-                  "destinationPortRanges": [],
-                  "sourceAddressPrefixes": [],
-                  "destinationAddressPrefixes": []
-              }
-        },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2019-04-01",
-            "name": "AllowGetSessionInformation",
-            "properties":
-              {
-                  "protocol": "*",
-                  "sourcePortRange": "*",
-                  "destinationPortRange": "80",
-                  "sourceAddressPrefix": "*",
-                  "destinationAddressPrefix": "Internet",
-                  "access": "Allow",
-                  "priority": 130,
-                  "direction": "Outbound",
-                  "sourcePortRanges": [],
-                  "destinationPortRanges": [],
-                  "sourceAddressPrefixes": [],
-                  "destinationAddressPrefixes": []
-              }
-        },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2019-04-01",
-            "name": "AllowHttpsInBound",
-            "properties":
-              {
-                  "protocol": "Tcp",
-                  "sourcePortRange": "*",
-                  "destinationPortRange": "443",
-                  "sourceAddressPrefix": "Internet",
-                  "destinationAddressPrefix": "*",
-                  "access": "Allow",
-                  "priority": 120,
-                  "direction": "Inbound",
-                  "sourcePortRanges": [],
-                  "destinationPortRanges": [],
-                  "sourceAddressPrefixes": [],
-                  "destinationAddressPrefixes": []
-              }
-        },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2019-04-01",
-            "name": "AllowSshRdpOutbound",
-            "properties":
-              {
-                  "protocol": "*",
-                  "sourcePortRange": "*",
-                  "sourceAddressPrefix": "*",
-                  "destinationAddressPrefix": "VirtualNetwork",
-                  "access": "Allow",
-                  "priority": 100,
-                  "direction": "Outbound",
-                  "sourcePortRanges": [],
-                  "destinationPortRanges":
-                    [
-                        "22",
-                        "3389"
-                    ],
-                  "sourceAddressPrefixes": [],
-                  "destinationAddressPrefixes": []
-              }
-        },
-      {
-          "type": "Microsoft.Network/networkSecurityGroups",
-          "apiVersion": "2019-04-01",
-          "name": "[('networkSecurityGroups_AzureBastionSubnet_nsg_name')]",
-          "location": "east us 2",
-          "tags":
-            {
-                "Owner": "Joseph Cropper    ",
-                "Environment": "POC"
-            },
-          "properties":
-              {
-                "securityRules":
-                  [
-                      {
-                          "name": "AllowHttpsInBound",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowHttpsInBound')]",
-                          "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-                          "properties":
-                            {
-                                "protocol": "Tcp",
-                                "sourcePortRange": "*",
-                                "destinationPortRange": "443",
-                                "sourceAddressPrefix": "Internet",
-                                "destinationAddressPrefix": "*",
-                                "access": "Allow",
-                                "priority": 120,
-                                "direction": "Inbound",
-                                "sourcePortRanges": [],
-                                "destinationPortRanges": [],
-                                "sourceAddressPrefixes": [],
-                                "destinationAddressPrefixes": []
-                            }
-                      },
-                      {
-                          "name": "AllowGatewayManagerInBound",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowGatewayManagerInBound')]",
-                          "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-                          "properties":
-                            {
-                                "protocol": "Tcp",
-                                "sourcePortRange": "*",
-                                "destinationPortRange": "443",
-                                "sourceAddressPrefix": "GatewayManager",
-                                "destinationAddressPrefix": "*",
-                                "access": "Allow",
-                                "priority": 130,
-                                "direction": "Inbound",
-                                "sourcePortRanges": [],
-                                "destinationPortRanges": [],
-                                "sourceAddressPrefixes": [],
-                                "destinationAddressPrefixes": []
-                            }
-                      },
-                        {
-                            "name": "AllowBastionHostCommunication",
-                            "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowBastionHostCommunication')]",
-                            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-                            "properties":
-                              {
-                                  "protocol": "*",
-                                  "sourcePortRange": "*",
-                                  "sourceAddressPrefix": "VirtualNetwork",
-                                  "destinationAddressPrefix": "VirtualNetwork",
-                                  "access": "Allow",
-                                  "priority": 150,
-                                  "direction": "Inbound",
-                                  "sourcePortRanges": [],
-                                  "destinationPortRanges":
-                                    [
-                                        "8080",
-                                        "5701"
-                                    ],
-                                  "sourceAddressPrefixes": [],
-                                  "destinationAddressPrefixes": []
-                              }
-                        },
-                      {
-                          "name": "AllowSshRdpOutbound",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowSshRdpOutbound')]",
-                          "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-                          "properties":
-                            {
-                                "protocol": "*",
-                                "sourcePortRange": "*",
-                                "sourceAddressPrefix": "*",
-                                "destinationAddressPrefix": "VirtualNetwork",
-                                "access": "Allow",
-                                "priority": 100,
-                                "direction": "Outbound",
-                                "sourcePortRanges": [],
-                                "destinationPortRanges":
-                                  [
-                                      "22",
-                                      "3389"
-                                  ],
-                                "sourceAddressPrefixes": [],
-                                "destinationAddressPrefixes": []
-                            }
-                      },
-                      {
-                          "name": "AllowAzCloudOut",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowAzCloudOut')]",
-                          "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-                          "properties":
-                            {
-                                "protocol": "Tcp",
-                                "sourcePortRange": "*",
-                                "destinationPortRange": "443",
-                                "sourceAddressPrefix": "*",
-                                "destinationAddressPrefix": "AzureCloud",
-                                "access": "Allow",
-                                "priority": 110,
-                                "direction": "Outbound",
-                                "sourcePortRanges": [],
-                                "destinationPortRanges": [],
-                                "sourceAddressPrefixes": [],
-                                "destinationAddressPrefixes": []
-                            }
-                      },
-                      {
-                          "name": "AllowBastionCommunication",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowBastionCommunication')]",
-                          "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-                          "properties":
-                            {
-                                "protocol": "*",
-                                "sourcePortRange": "*",
-                                "sourceAddressPrefix": "VirtualNetwork",
-                                "destinationAddressPrefix": "VirtualNetwork",
-                                "access": "Allow",
-                                "priority": 120,
-                                "direction": "Outbound",
-                                "sourcePortRanges": [],
-                                "destinationPortRanges":
-                                  [
-                                      "8080",
-                                      "5701"
-                                  ],
-                                "sourceAddressPrefixes": [],
-                                "destinationAddressPrefixes": []
-                            }
-                      },
-                      {
-                          "name": "AllowGetSessionInformation",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowGetSessionInformation')]",
-                          "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-                          "properties":
-                            {
-                                "protocol": "*",
-                                "sourcePortRange": "*",
-                                "destinationPortRange": "80",
-                                "sourceAddressPrefix": "*",
-                                "destinationAddressPrefix": "Internet",
-                                "access": "Allow",
-                                "priority": 130,
-                                "direction": "Outbound",
-                                "sourcePortRanges": [],
-                                "destinationPortRanges": [],
-                                "sourceAddressPrefixes": [],
-                                "destinationAddressPrefixes": []
-                            }
-                      }
-                    ]
-              }
+        "type": "Microsoft.Network/networkSecurityGroups",
+        "apiVersion": "2020-11-01",
+        "name": "AzureBastionSubnet_nsg",
+        "location": "East US 2",
+        "tags":
+          {
+            "Owner": "joseph cropper",
+            "Environment": "POC"
+          },
+        "properties":
+          {
+            "securityRules":
+              [
+                {
+                  "id": "AllowHttpsInBound",
+                  "name": "AllowHttpsInBound",
+                  "properties":
+                    { 
+                      "access": "Allow",
+                      "destinationAddressPrefix": "*",
+                      "destinationAddressPrefixes": [],
+                      "destinationPortRange": "443",
+                      "destinationPortRanges": [],
+                      "direction": "Inbound",
+                      "priority": 120,
+                      "protocol": "Tcp",
+                      "sourceAddressPrefix": "Internet",
+                      "sourceAddressPrefixes": [],
+                      "sourcePortRange": "*",
+                      "sourcePortRanges": [ ]
+                    },
+                  "type": "Microsoft.Network/networkSecurityGroups/securityRules"
+                }
+              ]
+          }
       }
-  ]
+    ],
+  "outputs": {  }
 }
