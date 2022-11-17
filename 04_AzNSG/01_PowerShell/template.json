@@ -7,7 +7,7 @@
       {
           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
           "apiVersion": "2019-04-01",
-          "name": "AllowAzureCloudOutBound",
+          "name": "AllowAzCloudOut",
           "properties":
             {
                 "protocol": "Tcp",
@@ -254,8 +254,8 @@
                             }
                       },
                       {
-                          "name": "AllowAzureCloudOutBound",
-                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowAzureCloudOutBound')]",
+                          "name": "AllowAzCloudOut",
+                          "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', ('networkSecurityGroups_AzureBastionSubnet_nsg_name'), 'AllowAzCloudOut')]",
                           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
                           "properties":
                             {
