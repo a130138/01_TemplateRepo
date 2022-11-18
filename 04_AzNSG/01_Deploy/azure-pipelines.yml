@@ -7,12 +7,14 @@ pool:
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
-    deploymentScope: 'Resource Group'
+    deploymentScope: Resource Group
+      # Options:  'Resource Group','Management Group', or 'Subscription'
     azureResourceManagerConnection: '$(azureResourceManagerConnection)'
     action: 'Create Or Update Resource Group'
     resourceGroupName: '$(resourceGroupName)'
     location: '$(location)'
     templateLocation: 'URL of the file'
     csmFileLink: '$(csmParametersFileLink)'
-    deploymentMode: 'Incremental'
+    deploymentMode: Incremental
+    # Options:  'Incremental', 'Validation' or 'Complete'
     deploymentName: '$(deploymentName)'
