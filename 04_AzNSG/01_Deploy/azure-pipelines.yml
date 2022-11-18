@@ -14,7 +14,7 @@ steps:
     resourceGroupName: '$(resourceGroupName)'
     location: '$(location)'
     templateLocation: 'URL of the file'
-    csmFileLink: '$(csmParametersFileLink)'
+    csmFileLink: '$(csmFileLink)'
     deploymentMode: Incremental
     # Options:  'Incremental', 'Validation' or 'Complete'
     deploymentName: '$(deploymentName)'
