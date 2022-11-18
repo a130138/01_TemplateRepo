@@ -25,7 +25,7 @@ steps:
     location: ${location}
     templateLocation: 'URL of the file'
     csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/01_Create/02_Deploy/azuredeploy.json'
-    # csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/01_Create/02_Deploy/azuredeploy.parameters.json'
+    csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/01_Create/02_Deploy/azuredeploy.parameters.json'
 
     deploymentMode:
         Incremental
