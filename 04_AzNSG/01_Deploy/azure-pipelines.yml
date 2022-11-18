@@ -14,6 +14,6 @@ steps:
     resourceGroupName: 'JoePOC1'
     location: 'east us 2'
     templateLocation: 'URL of the file'
-    csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/04_AzNSG/01_PowerShell/template.json'
+    csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/04_AzNSG/01_Deploy/template.json'
     deploymentMode: 'Incremental'
     deploymentName: 'Az_NSG_Poc'
