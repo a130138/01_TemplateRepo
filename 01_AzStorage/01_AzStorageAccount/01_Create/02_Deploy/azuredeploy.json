@@ -6,18 +6,16 @@
         "storageAccountName":
 			{
             "type": "string",
-            "metadata":
-				{
-                "description": "azure storage account"
-                },
             "minLength":3,
-            "maxLength":24
+            "maxLength":24,
+            "defaultValue": "jc"
             }
         },
     "functions": [],
     "variables":
         {
-		"storageAccountName": "[concat(parameters('storageAccountName'), uniqueString(resourceGroup().id))]"
+		"storageAccountName":
+            "[concat(parameters('storageAccountName'),uniqueString(resourceGroup().id))]"
 		},
     "resources":
         [
@@ -25,16 +23,18 @@
             "name": "[variables('storageAccountName')]",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-04-01",
-            "tags": {
-                "Owner": "jc",
-                "Env": "non-prod"
-                    },
+            "tags":
+                {
+                "Owner": "joseph cropper",
+                "Env": "POC"
+                },
             "location": "[resourceGroup().location]",
             "kind": "StorageV2",
-            "sku":	{
+            "sku":
+                {
                 "name": "Premium_LRS",
                 "tier": "Premium"
-                    }
+                }
             }
         ],
     "outputs": {}
