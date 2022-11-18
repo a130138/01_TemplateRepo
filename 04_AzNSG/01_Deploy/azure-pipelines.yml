@@ -8,12 +8,11 @@ steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-    subscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
+    azureResourceManagerConnection: '$(azureResourceManagerConnection)'
     action: 'Create Or Update Resource Group'
-    resourceGroupName: 'JoePOC1'
-    location: 'east us 2'
+    resourceGroupName: '$(resourceGroupName)'
+    location: '$(location)'
     templateLocation: 'URL of the file'
-    csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/04_AzNSG/01_Deploy/template.json'
+    csmFileLink: '$(csmParametersFileLink)'
     deploymentMode: 'Incremental'
-    deploymentName: 'Az_NSG_Poc'
+    deploymentName: '$(deploymentName)'
