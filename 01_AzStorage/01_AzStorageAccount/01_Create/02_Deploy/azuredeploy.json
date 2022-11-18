@@ -8,7 +8,7 @@
             "type": "string",
             "minLength":3,
             "maxLength":24,
-            "defaultValue": "jc"
+            "defaultValue": "default"
             }
         },
     "functions": [],
