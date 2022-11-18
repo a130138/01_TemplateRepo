@@ -13,7 +13,7 @@
     "functions": [],
     "variables":
         {
-		"storageAccountName":
+		"uniqueNam":
             "[concat(parameters('storageAccountName'),uniqueString(resourceGroup().id))]"
 		},
     "resources":
