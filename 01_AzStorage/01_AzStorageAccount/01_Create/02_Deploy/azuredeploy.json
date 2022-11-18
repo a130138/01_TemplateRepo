@@ -7,8 +7,7 @@
 			{
             "type": "string",
             "minLength":3,
-            "maxLength":24,
-            "defaultValue": "default"
+            "maxLength":24
             }
         },
     "functions": [],
