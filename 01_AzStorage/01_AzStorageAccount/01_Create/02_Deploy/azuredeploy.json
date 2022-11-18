@@ -15,26 +15,27 @@
             }
         },
     "functions": [],
-    "variables":    {
+    "variables":
+        {
 		"storageAccountName": "[concat(parameters('storageAccountName'), uniqueString(resourceGroup().id))]"
-					},
+		},
     "resources":
-	[
-		{
-        "name": "[variables('storageAccountName')]",
-        "type": "Microsoft.Storage/storageAccounts",
-        "apiVersion": "2021-04-01",
-        "tags": {
-            "Owner": "jc",
-            "Env": "non-prod"
-				},
-        "location": "[resourceGroup().location]",
-        "kind": "StorageV2",
-        "sku":	{
-            "name": "Premium_LRS",
-            "tier": "Premium"
-				}
-		}
-	],
+        [
+            {
+            "name": "[variables('storageAccountName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2021-04-01",
+            "tags": {
+                "Owner": "jc",
+                "Env": "non-prod"
+                    },
+            "location": "[resourceGroup().location]",
+            "kind": "StorageV2",
+            "sku":	{
+                "name": "Premium_LRS",
+                "tier": "Premium"
+                    }
+            }
+        ],
     "outputs": {}
 }
