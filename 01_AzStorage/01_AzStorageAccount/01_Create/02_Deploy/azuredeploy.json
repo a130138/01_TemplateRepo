@@ -19,7 +19,7 @@
     "resources":
         [
             {
-            "name": "[variables('storageAccountName')]",
+            "name": "[variables('uniqueNam')]",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-04-01",
             "tags":
