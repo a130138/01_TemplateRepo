@@ -59,6 +59,114 @@
                         "sourceAddressPrefixes": [],
                         "destinationAddressPrefixes": []
                     }
+                },
+                {
+                  "name": "AllowBastionHostCommunication",
+                  "id": "AllowBastionHostCommunication",
+                  "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                  "properties":
+                    {
+                      "protocol": "*",
+                      "sourcePortRange": "*",
+                      "sourceAddressPrefix": "VirtualNetwork",
+                      "destinationAddressPrefix": "VirtualNetwork",
+                      "access": "Allow",
+                      "priority": 150,
+                      "direction": "Inbound",
+                      "sourcePortRanges": [],
+                      "destinationPortRanges":
+                        [
+                          "8080",
+                          "5701"
+                        ],
+                      "sourceAddressPrefixes": [],
+                      "destinationAddressPrefixes": []
+                    }
+                },
+                {
+                  "name": "AllowSshRdpOutbound",
+                  "id": "AllowSshRdpOutbound",
+                  "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                  "properties":
+                    {
+                      "protocol": "*",
+                      "sourcePortRange": "*",
+                      "sourceAddressPrefix": "*",
+                      "destinationAddressPrefix": "VirtualNetwork",
+                      "access": "Allow",
+                      "priority": 100,
+                      "direction": "Outbound",
+                      "sourcePortRanges": [],
+                      "destinationPortRanges":
+                        [
+                          "22",
+                          "3389"
+                        ],
+                      "sourceAddressPrefixes": [],
+                      "destinationAddressPrefixes": []
+                    }
+                },
+                {
+                  "name": "AllowAzureCloudOutBound",
+                  "id": "AllowAzureCloudOutBound",
+                  "properties":
+                    {
+                      "protocol": "Tcp",
+                      "sourcePortRange": "*",
+                      "destinationPortRange": "443",
+                      "sourceAddressPrefix": "*",
+                      "destinationAddressPrefix": "AzureCloud",
+                      "access": "Allow",
+                      "priority": 110,
+                      "direction": "Outbound",
+                      "sourcePortRanges": [],
+                      "destinationPortRanges": [],
+                      "sourceAddressPrefixes": [],
+                      "destinationAddressPrefixes": []
+                    }
+                },
+                {
+                  "name": "AllowBastionCommunication",
+                  "id": "AllowBastionCommunication",
+                  "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                  "properties":
+                    {
+                      "protocol": "*",
+                      "sourcePortRange": "*",
+                      "sourceAddressPrefix": "VirtualNetwork",
+                      "destinationAddressPrefix": "VirtualNetwork",
+                      "access": "Allow",
+                      "priority": 120,
+                      "direction": "Outbound",
+                      "sourcePortRanges": [],
+                      "destinationPortRanges":
+                        [
+                          "8080",
+                          "5701"
+                        ],
+                      "sourceAddressPrefixes": [],
+                      "destinationAddressPrefixes": []
+                    }
+                },
+                {
+                  "name": "AllowGetSessionInformation",
+                        "id": "AllowGetSessionInformation",
+                        "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+                        "properties":
+                          {
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "80",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "Internet",
+                            "access": "Allow",
+                            "priority": 130,
+                            "direction": "Outbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                          }
                 }
               ]
           }
