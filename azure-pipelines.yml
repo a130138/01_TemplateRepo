@@ -16,6 +16,6 @@ steps:
 
 - task: FileTransform@1
   inputs:
-    folderPath: 'D:\a\1\s\azuredeploy.json'
+    folderPath: 'D:\a\1\s\'
     targetFiles: 'azuredeploy.json'
     fileType: json
