@@ -13,7 +13,6 @@ variables:
 
 steps:
 - task: FileTransform@1
-  displayName: 'File transformation:  azuredeploy.json'
   inputs:
     folderPath: '$(Build.ArtifactStagingDirectory)/'
     targetFiles: 'azuredeploy.json'
