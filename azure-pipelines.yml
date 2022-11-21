@@ -4,12 +4,10 @@ trigger:
 - none
 
 pool:
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
 
 variables:
-  resources.tags.Env.1:  'testtag'
-  resources.name:  'testname'
-  outputs:  'testoutput'
+  resources.location:  'East US 2'
 
 steps:
 # - script: dir /s
@@ -17,7 +15,7 @@ steps:
 - task: FileTransform@1
   inputs:
     # folderPath: 'D:\a\1\s\'
-    folderPath:  '$(System.DefaultWorkingDirectory)'
+    folderPath:  '$(System.DefaultWorkingDirectory)/00_TEST/'
     fileType: json
     targetFiles: 'azuredeploy.json'
 
