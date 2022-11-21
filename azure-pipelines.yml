@@ -7,11 +7,12 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  resources.location:  'East US 2'
-  contentVersion:  'testcontentvs'
+  - name: resources.location
+    value:  'East US 2'
+  - name:  contentVersion
+    value:  'testcontentvs'
 
 steps:
-
 - task: FileTransform@1
   inputs:
     # folderPath: 'D:\a\1\s\'
