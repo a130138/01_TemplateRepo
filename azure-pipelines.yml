@@ -7,12 +7,10 @@ pool:
   vmImage: windows-latest
 
 variables:
-  resources.tags.Owner:  'joecro'
-  parameters.storageAccountName.minLength:  '4'
-  functions:  'test'
+  resources.tags.Env:  'testing'
 
 steps:
-- script: dir /s
+# - script: dir /s
 
 - task: FileTransform@1
   inputs:
