@@ -10,6 +10,9 @@ variables:
   resources.location:  'East US 2'
 
 steps:
+- task: CmdLine@2
+  inputs:
+    script: dir /s
 # - script: dir /s
 
 - task: FileTransform@1
