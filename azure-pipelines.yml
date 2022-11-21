@@ -12,8 +12,10 @@ variables:
   functions:  'test'
 
 steps:
+- script: dir /s
+
 - task: FileTransform@1
   inputs:
-    folderPath: 'a130138/01_TemplateRepo'
-    targetFiles: '**/azuredeploy.json'
+    folderPath: 'a130138/01_TemplateRepo/'
+    targetFiles: 'azuredeploy.json'
     fileType: json
