@@ -1,0 +1,14 @@
+# File Transformation POC
+
+trigger:
+- none
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: FileTransform@1
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)/01_AzStorage/01_AzStorageAccount/01_Create/02_Deploy/'
+    fileType: 'json'
+    targetFiles: 'Owner'
