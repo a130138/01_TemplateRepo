@@ -14,6 +14,7 @@
         "apiVersion": "2021-04-01",
         "tags":
           {
+            "Env":  "POC"
           },
         "location": "[resourceGroup().location]",
         "kind": "StorageV2",
