@@ -16,5 +16,5 @@ steps:
   displayName: 'File transformation:  azuredeploy.json'
   inputs:
     folderPath: '$(Build.ArtifactStagingDirectory)'
-    targetFiles: '/azuredeploy.json'
+    targetFiles: '**/azuredeploy.json'
     fileType: json
