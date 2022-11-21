@@ -10,17 +10,13 @@ variables:
   resources.location:  'East US 2'
 
 steps:
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 'dir /s'
 
 - task: FileTransform@1
   inputs:
     # folderPath: 'D:\a\1\s\'
     folderPath:  '$(System.DefaultWorkingDirectory)/00_TEST/'
-    fileType: json
     targetFiles: 'azuredeploy.json'
+    fileType: json
 
 # File transform
 # Replace tokens with variable values in XML or JSON configuration files
