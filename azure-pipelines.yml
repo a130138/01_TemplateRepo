@@ -7,7 +7,9 @@ pool:
   vmImage: windows-latest
 
 variables:
-  resources.tags.Env.1:  'testing'
+  resources.tags.Env.1:  'testtag'
+  resources.name:  'testname'
+  outputs:  'testoutput'
 
 steps:
 # - script: dir /s
@@ -16,14 +18,13 @@ steps:
   inputs:
     # folderPath: 'D:\a\1\s\'
     folderPath:  '$(System.DefaultWorkingDirectory)'
-    targetFiles: 'azuredeploy.json'
     fileType: json
+    targetFiles: 'azuredeploy.json'
 
 # File transform
 # Replace tokens with variable values in XML or JSON configuration files
 #- task: FileTransform@1
 #  inputs:
     #folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip' 
-    #enableXmlTransform: # Optional
     #fileType: # Optional. Options: xml, json
     #targetFiles: # Optional
