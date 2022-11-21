@@ -15,6 +15,6 @@ steps:
 - task: FileTransform@1
   displayName: 'File transformation:  azuredeploy.json'
   inputs:
-    folderPath: '$(Build.ArtifactStagingDirectory)'
+    folderPath: '$(Build.ArtifactStagingDirectory)/**/*.json'
     targetFiles: '**/azuredeploy.json'
     fileType: json
