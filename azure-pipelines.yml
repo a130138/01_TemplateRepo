@@ -8,10 +8,13 @@ pool:
 
 variables:
   resources.tags.Owner:  'joecro'
+  parameters.storageAccountName.minLength:  '4'
+  functions:  'test'
 
 steps:
 - task: FileTransform@1
+  displayName: 'File transformation:  azuredeploy.json'
   inputs:
-    folderPath: '$(System.DefaultWorkingDirectory)'
-    targetFiles: 'azuredeploy.json'
+    folderPath: '$(System.DefaultWorkingDirectory)/azuredeploy.json'
+    targetFiles: '**/azuredeploy.json'
     fileType: json
