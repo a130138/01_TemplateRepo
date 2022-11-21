@@ -14,6 +14,6 @@ variables:
 steps:
 - task: FileTransform@1
   inputs:
-    folderPath: '$(Build.ArtifactStagingDirectory)/'
-    targetFiles: 'azuredeploy.json'
+    folderPath: 'a130138/01_TemplateRepo'
+    targetFiles: '**/azuredeploy.json'
     fileType: json
