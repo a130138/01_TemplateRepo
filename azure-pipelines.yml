@@ -6,9 +6,12 @@ trigger:
 pool:
   vmImage: windows-latest
 
+variables:
+  resources.tags.Owner:  'joe cro'
+
 steps:
 - task: FileTransform@1
   inputs:
     folderPath: '$(System.DefaultWorkingDirectory)/01_AzStorage/01_AzStorageAccount/01_Create/02_Deploy/'
+    targetFiles: '**/azuredeploy.json'
     fileType: 'json'
-    targetFiles: 'Owner'
