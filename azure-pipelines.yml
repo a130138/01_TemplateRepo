@@ -7,11 +7,11 @@ pool:
   vmImage: windows-latest
 
 variables:
-  resources.tags.Owner:  'joe cro'
+  resources.tags.Owner:  'joecro'
 
 steps:
 - task: FileTransform@1
   inputs:
-    folderPath: '$(System.DefaultWorkingDirectory)/01_AzStorage/01_AzStorageAccount/01_Create/02_Deploy/'
-    targetFiles: '**/azuredeploy.json'
-    fileType: 'json'
+    folderPath: '$(System.DefaultWorkingDirectory)'
+    targetFiles: '/azuredeploy.json'
+    fileType: json
