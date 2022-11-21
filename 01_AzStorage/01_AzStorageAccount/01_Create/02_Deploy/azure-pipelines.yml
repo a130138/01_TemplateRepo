@@ -29,7 +29,9 @@ steps:
       # ex - East US 2
     templateLocation: URL of the file
       # Options: URL of the file, Linked Artifact
-    csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/01_Create/02_Deploy/azuredeploy.json'
-    csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/01_Create/02_Deploy/azuredeploy.parameters.json'
+    csmFileLink: $(csmFileLink)
+      # note - ensure using 'raw' URL for github
+    csmParametersFileLink: $(csmParametersFileLink)
+      # note - ensure using 'raw' URL for github
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
