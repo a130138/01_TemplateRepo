@@ -7,7 +7,7 @@ pool:
   vmImage: windows-latest
 
 variables:
-  resources.tags.Env:  'testing'
+  resources.tags.Env.1:  'testing'
 
 steps:
 # - script: dir /s
