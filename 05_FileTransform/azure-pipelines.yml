@@ -24,7 +24,7 @@ steps:
       targetType: inline
       # filePath: $(System.DefaultDirectory\05_FileTransform)
       script: |
-        Get-Content -Path '$System.DefaultDirectory\05_FileTransform\azuredeploy.json'
+        Get-Content -Path '$(System.DefaultDirectory)\05_FileTransform\azuredeploy.json'
         
 
 
