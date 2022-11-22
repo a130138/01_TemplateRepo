@@ -24,11 +24,3 @@ steps:
     folderPath:  '$(System.DefaultWorkingDirectory)/05_FileTransform/'
     targetFiles: 'azuredeploy.json'
     fileType: 'json'
-
-# File transform
-# Replace tokens with variable values in XML or JSON configuration files
-#- task: FileTransform@1
-#  inputs:
-    #folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip' 
-    #fileType: # Optional. Options: xml, json
-    #targetFiles: # Optional
