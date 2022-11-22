@@ -8,8 +8,6 @@ pool:
 
 variables:
   #- group: JsonVariableGrp
-  - name: resources.location
-    value:  'East US 2'
   - name: resources.kind
     value:  'Storage'
 
@@ -19,7 +17,6 @@ steps:
     targetType: 'inline'
     script: |
       echo "Print variable values"
-      echo "Value: $(resources.location)"
       echo "Value: $(resources.kind)"
 - task: FileTransform@1
   displayName: "File Transform Task"
