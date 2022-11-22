@@ -12,6 +12,6 @@ steps:
     targetType: 'inline'
     script: |
       $ContentPath = "$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json"
-      $AzTagOwnerVar = "$AzTagOwner"
-      $AzTagOwnerVarUpdate = "jc"
+      $AzTagOwner = "$AzTagOwner"
+      $AzTagOwnerUpdate = "jc"
       (Get-Content -Path $ContentPath) | foreach($_.replace('$AzTagOwner',$AzTagOwnerUpdate)) | Set-Content -Path $ContentPath
