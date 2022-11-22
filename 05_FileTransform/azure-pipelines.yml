@@ -7,7 +7,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  - name: resources.location
+  - name: $(location)
     value:  'East US 2'
 
 steps:
