@@ -24,8 +24,8 @@
             "apiVersion": "2021-04-01",
             "tags":
                 {
-                "Owner": "$(owner)",
-                "Env": "$(env)"
+                "Owner": "$owner",
+                "Env": "$env"
                 },
             "location": "",
             "kind": "StorageV2",

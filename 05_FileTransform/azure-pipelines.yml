@@ -16,16 +16,9 @@ variables:
 steps:
 - task: PowerShell@2
   inputs:
-    targetType: 'inline'
-    script: |
-     echo "Print variable value"
-      echo "Value: $(System.DefaultWorkingDirectory)"
-
-- task: PowerShell@2
-  inputs:
       targetType: inline
       script: |
-        (Get-Content -Path "$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json") | foreach($_.replace($(owner),$(env)))
+        (Get-Content -Path "$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json") | foreach($_.replace($owner,$env))
 
 #- task: FileTransform@1
 #  displayName: "File Transform Task"
