@@ -7,9 +7,9 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  #- group: JsonVariableGrp
+  - group: JsonVariableGrp
   - name: resources.location
-    value:  'East US 2'
+    value:  '$(location)'
 
 steps:
 - task: FileTransform@1
