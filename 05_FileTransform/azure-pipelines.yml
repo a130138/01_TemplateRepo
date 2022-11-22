@@ -7,11 +7,17 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  #- group: JsonVariableGrp
+  - group: JsonVariableGrp
   - name: resources.location
     value:  '$(location)'
 
 steps:
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "Print location value"
+      echo "Value: $(location)"
 - task: FileTransform@1
   displayName: "File Transform Task"
   inputs:
