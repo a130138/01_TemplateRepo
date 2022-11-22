@@ -7,9 +7,9 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  #- group: JsonVariableGrp
+  - group: JsonVariableGrp
   - name: resources.kind
-    value:  'Storage'
+    value:  '$(kind)'
 
 steps:
 - task: PowerShell@2
