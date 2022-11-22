@@ -24,7 +24,7 @@
             "apiVersion": "2021-04-01",
             "tags":
                 {
-                "Owner": "AzTagOwner",
+                "Owner": "$AzTagOwner",
                 "Env": "$env"
                 },
             "location": "",
