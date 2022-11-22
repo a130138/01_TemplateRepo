@@ -16,4 +16,4 @@ steps:
         $Az1 = "$AzTagOwner"
         $Az2 = "jc"
       # Script
-      (Get-Content -Path '$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json') | foreach($_.replace('$Az1',$Az2)) | Set-Content -Path '$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json'
+      (Get-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json) | foreach($_.replace('$Az1',$Az2)) | Set-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json
