@@ -18,9 +18,19 @@ steps:
     script: |
       echo "Print variable values"
       echo "Value: $(resources.kind)"
-- task: FileTransform@1
-  displayName: "File Transform Task"
+- task: MagicChunks@2
   inputs:
-    folderPath:  '$(System.DefaultWorkingDirectory)/05_FileTransform/'
-    targetFiles: 'azuredeploy.json'
-    fileType: 'json'
+    sourcePath: '$(System.DefaultWorkingDirectory)/05_FileTransform/'
+    fileType: 'Auto'
+    targetPathType: 'source'
+    transformationType: 'json'
+    transformations: |
+      {
+        "resources.kind": "Storage",
+      }
+#- task: FileTransform@1
+#  displayName: "File Transform Task"
+#  inputs:
+#    folderPath:  '$(System.DefaultWorkingDirectory)/05_FileTransform/'
+#    targetFiles: 'azuredeploy.json'
+#    fileType: 'json'
