@@ -4,7 +4,7 @@ trigger:
 - none
 
 pool:
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
 
 variables:
   - group: JsonVariableGrp
