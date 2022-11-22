@@ -15,10 +15,9 @@ steps:
 - task: FileTransform@1
   displayName: "File Transform Task"
   inputs:
-    # folderPath: 'D:\a\1\s\'
     folderPath:  '$(System.DefaultWorkingDirectory)/05_FileTransform/'
     targetFiles: 'azuredeploy.json'
-    fileType: json
+    fileType: 'json'
 
 # File transform
 # Replace tokens with variable values in XML or JSON configuration files
