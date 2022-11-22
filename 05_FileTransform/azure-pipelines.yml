@@ -16,7 +16,7 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: (Get-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json) | foreach{($_.replace('$AzTagOwner','jc'))} | Set-Content -Path '$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json'
+    script: (Get-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json) | foreach{($_.replace('$env','POC'))} | Set-Content -Path '$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json'
 - task: PowerShell@2
   inputs:
     targetType: inline
