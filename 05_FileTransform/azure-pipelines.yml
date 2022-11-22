@@ -9,9 +9,9 @@ pool:
 steps:
 - task: PowerShell@2
   inputs:
-      targetType:  inline
-      script:
-          $ContentPath = "$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json"
-          $AzTagOwnerVar = "$AzTagOwner"
-          $AzTagOwnerUpdate = "jc"
-          (Get-Content -Path "$ContentPath") | foreach($_.replace('$AzTagOwnerVar',$AzTagOwnerUpdate)) | Set-Content -Path "$ContentPath"
+    targetType: 'inline'
+    script: |
+      $ContentPath = "$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json"
+      $AzTagOwnerVar = "$AzTagOwner"
+      $AzTagOwnerVarUpdate = "jc"
+      (Get-Content -Path $ContentPath) | foreach($_.replace('$AzTagOwner',$AzTagOwnerUpdate)) | Set-Content -Path $ContentPath
