@@ -11,8 +11,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      echo $(System.DefaultWorkingDirectory)
       (Get-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json)
-            |
-      foreach($_.replace('$AzTagOwner','jc')) 
-            | 
+      foreach($_.replace('$AzTagOwner','jc'))
       Set-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json
