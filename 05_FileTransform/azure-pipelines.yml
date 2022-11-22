@@ -6,14 +6,14 @@ trigger:
 pool:
   vmImage: windows-latest
 
-variables:
-- name: Az1
-  value: $AzTagOwner
-- name: Az2
-  value: jc
+#variables:
+#- name: Az1
+#  value: $AzTagOwner
+#- name: Az2
+#  value: jc
 
 steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: (Get-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json) | foreach{($_.replace('$Az1',$Az2))} | Set-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json
+    script: (Get-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json) | foreach{($_.replace('$AzTagOwner','jc'))} | Set-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json
