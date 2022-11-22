@@ -20,7 +20,7 @@ steps:
       echo "Value: $(resources.kind)"
 - task: MagicChunks@2
   inputs:
-    sourcePath: '$(System.DefaultWorkingDirectory)/05_FileTransform/'
+    sourcePath: '$(System.DefaultWorkingDirectory)/05_FileTransform/azuredeploy.json'
     fileType: 'Auto'
     targetPathType: 'source'
     transformationType: 'json'
