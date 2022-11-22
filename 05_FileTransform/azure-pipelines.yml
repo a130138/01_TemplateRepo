@@ -6,10 +6,12 @@ trigger:
 pool:
   vmImage: windows-latest
 
-#variables:
+variables:
 # - group: JsonVariableGrp
-#  - name: resources.kind
-#    value:  '$(kind)'
+  - name: owner
+    value:  'jc'
+  - name: env
+    value: 'POC'
 
 steps:
 - task: PowerShell@2
@@ -22,10 +24,8 @@ steps:
 - task: PowerShell@2
   inputs:
       targetType: inline
-      # filePath: $(System.DefaultDirectory\05_FileTransform)
       script: |
-        Get-Content -Path "$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json"
-
+        (Get-Content -Path "$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json") | foreach($_.replace($(owner),$(env)))
 
 #- task: FileTransform@1
 #  displayName: "File Transform Task"
