@@ -25,7 +25,6 @@ steps:
       # filePath: $(System.DefaultDirectory\05_FileTransform)
       script: |
         Get-Content -Path "$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json"
-        
 
 
 #- task: FileTransform@1
