@@ -27,7 +27,7 @@
                 "Owner": "joseph cropper",
                 "Env": "POC"
                 },
-            "location": "test",
+            "location": "",
             "kind": "StorageV2",
             "sku":
                 {
