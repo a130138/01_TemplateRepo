@@ -7,7 +7,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  - group: JasonVariableGrp
+  - group: JsonVariableGrp
   - name: resources.location
     value:  '$(location)'
 
