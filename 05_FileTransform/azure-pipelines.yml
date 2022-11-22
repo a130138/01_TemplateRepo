@@ -17,7 +17,7 @@ steps:
   inputs:
     # folderPath: 'D:\a\1\s\'
     folderPath:  '$(System.DefaultWorkingDirectory)/05_FileTransform/'
-    targetFiles: '*.json'
+    targetFiles: 'azuredeploy.json'
     fileType: json
 
 # File transform
