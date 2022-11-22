@@ -9,7 +9,7 @@ pool:
 variables:
   #- group: JsonVariableGrp
   - name: resources.location
-    value:  '$(location)'
+    value:  'East US 2'
 
 steps:
 - task: PowerShell@2
