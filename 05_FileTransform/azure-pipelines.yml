@@ -18,8 +18,9 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      echo "Print location value"
-      echo "Value: $(location)"
+      echo "Print variable values"
+      echo "Value: resources.location"
+      echo "Value:  resources.kind"
 - task: FileTransform@1
   displayName: "File Transform Task"
   inputs:
