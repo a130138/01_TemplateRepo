@@ -9,8 +9,6 @@ pool:
 variables:
   - name: resources.location
     value:  'East US 2'
-  - name:  contentVersion
-    value:  'testcontentvs'
 
 steps:
 - task: FileTransform@1
