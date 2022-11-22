@@ -10,6 +10,8 @@ variables:
   #- group: JsonVariableGrp
   - name: resources.location
     value:  'East US 2'
+  - name: resources.kind
+    value:  'Storage'
 
 steps:
 - task: PowerShell@2
