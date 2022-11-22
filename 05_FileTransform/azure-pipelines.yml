@@ -13,6 +13,7 @@ steps:
       script:
           $ContentPath = "$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json"
           echo $ContentPath
-          $AzTagOwner = "jc"
-          echo $AzTagOwner
-          (Get-Content -Path "$ContentPath") | foreach($_.replace('$AzTagOwner',jc)) | Set-Content -Path "$ContentPath"
+          $AzTagOwnerVar = "$AzTagOwner"
+          $AzTageOwnerUpdate = "jc"
+          echo $AzTagOwnerUpdate
+          (Get-Content -Path "$ContentPath") | foreach($_.replace('$AzTagOwnerVar',$AzTagOwnerUpdate)) | Set-Content -Path "$ContentPath"
