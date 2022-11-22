@@ -15,7 +15,7 @@ steps:
 - task: FileTransform@1
   displayName: "File Transform Task"
   inputs:
-    folderPath:  '$(System.DefaultWorkingDirectory)/05_FileTransform/azuredeploy.json'
+    folderPath:  '$(System.DefaultWorkingDirectory)/05_FileTransform/'
     targetFiles: 'azuredeploy.json'
     fileType: 'json'
 
