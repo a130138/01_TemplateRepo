@@ -6,28 +6,28 @@ trigger:
 pool:
   vmImage: windows-latest
 
-variables:
-  - group: JsonVariableGrp
-  - name: resources.kind
-    value:  '$(kind)'
+#variables:
+# - group: JsonVariableGrp
+#  - name: resources.kind
+#    value:  '$(kind)'
 
 steps:
+#- task: PowerShell@2
+#  inputs:
+#    targetType: 'inline'
+#    script: |
+#     echo "Print variable values"
+#      echo "Value: $(resources.kind)"
+
 - task: PowerShell@2
   inputs:
-    targetType: 'inline'
-    script: |
-      echo "Print variable values"
-      echo "Value: $(resources.kind)"
-- task: MagicChunks@2
-  inputs:
-    sourcePath: '$(System.DefaultWorkingDirectory)/05_FileTransform/azuredeploy.json'
-    fileType: 'Auto'
-    targetPathType: 'source'
-    transformationType: 'json'
-    transformations: |
-      {
-        "resources.kind": "Storage",
-      }
+      targetType: inline
+      # filePath: $(System.DefaultDirectory\05_FileTransform)
+      script: |
+        Get-Content $System.DefaultDirectory\05_FileTransform\azuredeploy.json
+        
+
+
 #- task: FileTransform@1
 #  displayName: "File Transform Task"
 #  inputs:
