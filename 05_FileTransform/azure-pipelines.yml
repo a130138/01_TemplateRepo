@@ -27,5 +27,5 @@ steps:
   inputs:
     targetType: inline
     script: |
-     (Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json)
+     (Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json) |
      Set-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json -Force 
