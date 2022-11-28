@@ -25,5 +25,5 @@ steps:
     failOnStderr: true
 - task: BatchScript@1
   inputs:
-    filename: $(System.DefaultWorkingDirectory)
+    filename: $(System.DefaultWorkingDirectory)\
     arguments: 'merge.bat'
