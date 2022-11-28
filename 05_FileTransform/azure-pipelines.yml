@@ -8,6 +8,9 @@ pool:
 
 
 steps:
+- task: PowerShell@2
+  inputs:
+    filePath: '$(System.DefaultWorkingDirectory)\05_FileTransform\test2.ps1'
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'GitHub2'
@@ -18,6 +21,3 @@ steps:
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
     tag: test
-- task: PowerShell@2
-  inputs:
-    filePath: '$(System.DefaultWorkingDirectory)\05_FileTransform\test2.ps1'
