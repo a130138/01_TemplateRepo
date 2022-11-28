@@ -25,7 +25,7 @@
             "tags":
                 {
                 "Owner": "$AzTagOwner",
-                "Env": "env"
+                "Env": "environment"
                 },
             "location": "",
             "kind": "StorageV2",
