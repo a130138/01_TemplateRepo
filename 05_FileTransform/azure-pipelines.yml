@@ -6,31 +6,17 @@ trigger:
 pool:
   vmImage: windows-latest
 
-#variables:
-#- name: Az1
-#  value: $AzTagOwner
-#- name: Az2
-#  value: jc
 
 steps:
-#- task: PowerShell@2
-#  inputs:
-#    targetType: 'inline'
-#    script: (Get-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json) | foreach{($_.replace('$env','POC'))} | Out-File -FilePath $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json
-    # | Set-Content -Path '$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json'
-
+- task: GitHubRelease@1
+  inputs:
+    gitHubConnection: 'GitHub2'
+    repositoryName: '$(Build.Repository.Name)'
+    action:  edit
+    target: '$(Build.SourceVersion)'
+    tagSource: 'gitTag'
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
 - task: PowerShell@2
   inputs:
-    targetType: filePath
     filePath: '$(System.DefaultWorkingDirectory)\05_FileTransform\test2.ps1'
-    arguments: > # Use this to avoid newline characters in multiline string
-      -input1 "Hello"
-      -input2 "World"
-  displayName: 'Print Hello World'
-
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      New-Item $(System.DefaultWorkingDirectory)\05_FileTransform\test3.txt
-      Set-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test3.txt '$(Build.BuildNumber)'
