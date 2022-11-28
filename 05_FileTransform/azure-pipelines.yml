@@ -17,7 +17,7 @@ steps:
     repositoryName: 'a130138/01_TemplateRepo'
     action: 'create'
     target: '$(Build.SourceVersion)'
-    tagSource: 'gitTag'
+    tagSource: userSpecifiedTag
     assets: '$(Build.SourcesDirectory)\05_FileTransform\*.*'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
