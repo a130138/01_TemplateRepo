@@ -1,2 +1,2 @@
-Get-Content $env:System_DefaultWorkingDirectory\05_FileTransform\test.txt -replace 'environment','POC' | Set-Content $env:System_DefaultWorkingDirectory\05_FileTransform\NewFile.txt
-Get-Content $env:System_DefaultWorkingDirectory\05_FileTransform\NewFile.txt
+(Get-Content $env:System_DefaultWorkingDirectory\05_FileTransform\test.txt) -replace 'environment','POC' | Set-Content $env:System_DefaultWorkingDirectory\05_FileTransform\NewFile.txt
+(Get-Content $env:System_DefaultWorkingDirectory\05_FileTransform\NewFile.txt)
