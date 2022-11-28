@@ -23,3 +23,7 @@ steps:
   inputs:
     filePath: '$(System.DefaultWorkingDirectory)\05_FileTransform\test2.ps1'
     failOnStderr: true
+- task: BatchScript@1
+  inputs:
+    filename: $(System.DefaultWorkingDirectory)
+    arguments: 'merge.bat'
