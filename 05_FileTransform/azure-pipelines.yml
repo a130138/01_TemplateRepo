@@ -32,5 +32,5 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-    New-Item $(System.DefaultWorkingDirectory)\05_FileTransform\test3.txt
-    Set-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test3.txt '$(Build.BuildNumber)'
+      New-Item $(System.DefaultWorkingDirectory)\05_FileTransform\test3.txt
+      Set-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test3.txt '$(Build.BuildNumber)'
