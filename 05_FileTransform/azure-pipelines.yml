@@ -28,6 +28,6 @@ steps:
     script: Get-Content $(Build.SourcesDirectory)\05_FileTransform\NewFile.txt
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.SourcesDirectory'
     ArtifactName: 'drop'
     publishLocation: 'Container'
