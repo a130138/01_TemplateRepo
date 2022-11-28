@@ -1,0 +1,2 @@
+(Get-Content $(Build.SourcesDirectory)\05_FileTransform\test.txt) -replace 'environment','POC' | Set-Content $(Build.SourcesDirectory)\05_FileTransform\test.txt
+(Get-Content $(Build.SourcesDirectory)\05_FileTransform\test.txt)
