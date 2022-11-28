@@ -18,16 +18,9 @@ steps:
 #    targetType: 'inline'
 #    script: (Get-Content -Path $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json) | foreach{($_.replace('$env','POC'))} | Out-File -FilePath $(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json
     # | Set-Content -Path '$(System.DefaultWorkingDirectory)\05_FileTransform\azuredeploy.json'
+
 - task: PowerShell@2
   inputs:
-    targetType: 'inline'
-    script: (Get-Content $(Build.SourcesDirectory)\05_FileTransform\test.txt) -replace 'environment','POC' | Out-File $(Build.SourcesDirectory)\05_FileTransform\NewFile.txt
-- task: PowerShell@2
-  inputs:
-    targetType: inline
-    script: Get-Content $(Build.SourcesDirectory)\05_FileTransform\NewFile.txt
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.SourcesDirectory'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    filePath: '$(Build.SourcesDirectory)\05_FileTransform\test2.ps1'
+    failOnStderr: true
+
