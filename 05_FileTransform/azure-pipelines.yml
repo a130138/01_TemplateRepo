@@ -26,3 +26,25 @@ steps:
   inputs:
     targetType: inline
     script: Get-Content $(Build.SourcesDirectory)\05_FileTransform\NewFile.txt
+- task: CmdLine@2
+  inputs:
+    script: |
+      ECHO "CHECK GIT STATUS..."
+      git status
+      
+      git checkout -b master
+      
+      ECHO "GIT ADD..."
+      git add -A
+      
+      ECHO "CHECK GIT STATUS..."
+      git status
+      
+      ECHO "Commiting the changes..."
+      git commit -m "Latest Customizations updated"
+      
+      ECHO "Pushing the changes..."
+      git push -u origin master
+      
+      ECHO "Customization Committed Successfully"
+    failOnStderr: true
