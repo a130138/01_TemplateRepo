@@ -11,13 +11,13 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: 'Out-File $(System.DefaultWorkingDirectory)\NewFile.txt'
-- task: GitHubRelease@1
+    script: |
+      'Out-File $(System.DefaultWorkingDirectory)\NewFile.txt'
+     
+- task: CmdLine@2
   inputs:
-    gitHubConnection: 'GitHub2'
-    repositoryName: 'a130138/01_TemplateRepo'
-    action: 'create'
-    target: '$(Build.SourceVersion)'
-    tagSource: 'gitTag'
-    changeLogCompareToRelease: 'lastFullRelease'
-    changeLogType: 'commitBased'
+    script: |
+      cd $(System.DefaultWorkingDirectory)
+      git add NewFile.txt
+      git commit -m "test comment"
+      git push
