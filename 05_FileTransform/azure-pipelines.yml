@@ -22,10 +22,10 @@ steps:
   inputs:
     targetType: 'inline'
     script: (Get-Content $(Build.SourcesDirectory)\05_FileTransform\test.txt) -replace 'environment','POC' | Set-Content $(Build.SourcesDirectory)\05_FileTransform\test.txt -Force
-#- task: PowerShell@2
-#  inputs:
-#    targetType: 'inline'
-#    script: (Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt) | Set-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt -Force
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: (Get-Content $(Build.SourcesDirectory)\05_FileTransform\test.txt) | Set-Content $(Build.SourcesDirectory)\05_FileTransform\test.txt -Force
 #- task: PowerShell@2
 #  inputs:
 #    targetType: inline
