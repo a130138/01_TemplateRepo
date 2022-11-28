@@ -24,3 +24,19 @@ steps:
     filePath: '$(System.DefaultWorkingDirectory)\05_FileTransform\test2.ps1'
     failOnStderr: true
 
+- task: GitHubRelease@1
+  inputs:
+    gitHubConnection: 'a130138'
+    repositoryName: '$(Build.Repository.Name)'
+    action: 'edit'
+    target: '$(Build.SourceVersion)'
+    tag: 'test'
+    assetUploadMode: 'replace'
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
+
+- task: GitHubComment@0
+  inputs:
+    gitHubConnection: 'a130138'
+    repositoryName: '$(Build.Repository.Name)'
+    comment: 'test comment'
