@@ -12,13 +12,13 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      'Out-File $(System.DefaultWorkingDirectory)\NewFile.txt'
+      Out-File $(System.DefaultWorkingDirectory)\NewFile.txt
      
 - task: CmdLine@2
   inputs:
     script: |
-      cd 'D:\a\1\s\'
+      cd '$(System.DefaultWorkingDirectory)\'
       git config --global user.name "a130138tr1"
-      git add NewFile.txt
+      git add $(System.DefaultWorkingDirectory)\NewFile.txt
       git commit -m "test comment"
       git push
