@@ -29,7 +29,7 @@ steps:
   displayName: 'Print Hello World'
 - task: GitHubRelease@1
   inputs:
-    gitHubConnection: a130138
+    gitHubConnection: a130138tr1
     repositoryName: '$(Build.Repository.Name)'
     action: 'create'
     target: '$(Build.SourceVersion)'
