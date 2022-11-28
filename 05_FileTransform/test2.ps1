@@ -1,2 +1,1 @@
-(Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt) -replace 'environment','POC' | Set-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt
-(Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt)
+Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt
