@@ -27,3 +27,7 @@ steps:
       -input1 "Hello"
       -input2 "World"
   displayName: 'Print Hello World'
+- task: CopyFiles@2
+  inputs:
+    Contents: 'merge.bat'
+    TargetFolder: '$(Build.SourcesDirectory)\05_FileTransform'
