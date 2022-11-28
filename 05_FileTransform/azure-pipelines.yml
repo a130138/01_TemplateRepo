@@ -17,7 +17,8 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      cd $(System.DefaultWorkingDirectory)
+      cd 'D:\a\1\s\'
+      git config --global user.name "a130138tr1"
       git add NewFile.txt
       git commit -m "test comment"
       git push
