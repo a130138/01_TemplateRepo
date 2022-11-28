@@ -26,4 +26,4 @@ steps:
     arguments: > # Use this to avoid newline characters in multiline string
       -input1 "Hello"
       -input2 "World"
-  displayName: 'Print Hellow World'
+  displayName: 'Print Hello World'
