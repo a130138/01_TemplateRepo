@@ -27,7 +27,12 @@ steps:
       -input1 "Hello"
       -input2 "World"
   displayName: 'Print Hello World'
-- task: CopyFiles@2
+- task: GitHubRelease@1
   inputs:
-    Contents: 'merge.bat'
-    TargetFolder: '$(Build.SourcesDirectory)\05_FileTransform'
+    gitHubConnection: a130138
+    repositoryName: '$(Build.Repository.Name)'
+    action: 'create'
+    target: '$(Build.SourceVersion)'
+    tagSource: 'gitTag'
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
