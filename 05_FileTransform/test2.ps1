@@ -1,1 +1,1 @@
-Get-Content $(System_DefaultWorkingDirectory)\05_FileTransform\test.txt
+Get-Content $env:System_DefaultWorkingDirectory\05_FileTransform\test.txt
