@@ -19,3 +19,7 @@ steps:
   inputs:
     targetType: inline
     script: Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt, $(System.DefaultWorkingDirectory)\05_FileTransform\NewFile.txt
+- task: GitHubComment@0
+  inputs:
+    gitHubConnection: 'github.com_a130138'
+    repositoryName: 'a130138/01_TemplateRepo'
