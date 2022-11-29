@@ -23,11 +23,10 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      echo push to GitHub repo
       git clone https://github.com/a130138/01_TemplateRepo.git
       git config --global user.name "a130138"
       git config --global user.email "a130138@amerisourcebergen.com"
       git checkout master
       git add .
       git commit -m "test comment"
-      git push https://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@github.com/a130138/01_TemplateRepo.git
+      git push https://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@github.com/a130138/01_TemplateRepo.git
