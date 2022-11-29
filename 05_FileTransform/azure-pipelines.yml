@@ -29,3 +29,5 @@ steps:
       git add .
       git commit -m "test comment"
       git push https://github.com/a130138/01_TemplateRepo.git
+- checkout: self
+  persistCredentials: true
