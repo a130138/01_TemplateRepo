@@ -21,9 +21,6 @@ steps:
       git init
       git remote add origin https://github.com/a130138/01_TemplateRepo
       git config gc.auto 0
-      git config http.version HTTP/1.1
-      git --config-env=http.extraheader=env_var_http.extraheader fetch --force --no-tags --prune --prune-tags --progress --no-recurse-submodules origin --depth=1 +6d2b706615b35134fb416f9781d63f59cf1aab18:refs/remotes/origin/6d2b706615b35134fb416f9781d63f59cf1aab18
-      git --config-env=http.extraheader=env_var_http.extraheader fetch --force --no-tags --prune --prune-tags --progress --no-recurse-submodules origin --depth=1 +6d2b706615b35134fb416f9781d63f59cf1aab18
       git config --global user.name "a130138tr1"
       git add $(System.DefaultWorkingDirectory)\NewFile.txt
       git commit -m "test comment"
