@@ -10,9 +10,5 @@ pool:
 steps:
 - task: PowerShell@2
   inputs:
-    targetType: 'inline'
-    script: Out-File $(System.DefaultWorkingDirectory)\NewFile.txt
-- task: PowerShell@2
-  inputs:
     targetType: inline
-    script: Get-Content $(System.DefaultWorkingDirectory)\NewFile.txt
+    script: Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt
