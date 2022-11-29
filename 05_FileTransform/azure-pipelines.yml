@@ -29,4 +29,4 @@ steps:
       git checkout master
       git add .
       git commit -m "test comment"
-      git push https://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@github.com/a130138/01_TemplateRepo.git
+      git push https://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@github.com/a130138/01_TemplateRepo.git
