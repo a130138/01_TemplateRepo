@@ -21,7 +21,6 @@ steps:
       git init
       git remote add origin https://github.com/a130138/01_TemplateRepo
       git config gc.auto 0
-      git config --global user.name "a130138tr1"
       git add $(System.DefaultWorkingDirectory)\NewFile.txt
       git commit -m "test comment"
       git push
