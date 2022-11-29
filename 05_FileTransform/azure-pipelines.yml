@@ -20,13 +20,3 @@ steps:
   inputs:
     targetType: inline
     script: Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt, $(System.DefaultWorkingDirectory)\05_FileTransform\NewFile.txt
-- task: CmdLine@2
-  inputs:
-    script: |
-      git clone https://github.com/a130138/01_TemplateRepo.git
-      git config --global user.name "a130138"
-      git config --global user.email "a130138@amerisourcebergen.com"
-      git checkout master
-      git add .
-      git commit -m "test comment"
-      git push https://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@github.com/a130138/01_TemplateRepo.git
