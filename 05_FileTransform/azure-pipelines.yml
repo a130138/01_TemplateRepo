@@ -11,13 +11,11 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: |
-      Out-File $(System.DefaultWorkingDirectory)\NewFile.txt
+    script: Out-File $(System.DefaultWorkingDirectory)\NewFile.txt
      
 - task: CmdLine@2
   inputs:
-    script: |
-      cd '$(System.DefaultWorkingDirectory)\'
+    script:
       git config --global user.name "a130138tr1"
       git add $(System.DefaultWorkingDirectory)\NewFile.txt
       git commit -m "test comment"
