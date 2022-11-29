@@ -16,6 +16,7 @@ steps:
 - task: CmdLine@2
   inputs:
     script:
+      cd $(System.DefaultWorkingDirectory)
       git version
       git lfs version
       git init
