@@ -14,8 +14,8 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: inline
-    script: (Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt) -replace 'environment', 'POC' | Set-Content $(System.DefaultWorkingDirectory)\05_FileTransform\NewFile.txt
+    script: (Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt) -replace 'environment', 'POC' | Set-Content $(System.DefaultWorkingDirectory)\05_FileTransform\NewFile(Get-Date -Format "MMddyy").txt
 - task: PowerShell@2
   inputs:
     targetType: inline
-    script: Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt, $(System.DefaultWorkingDirectory)\05_FileTransform\NewFile.txt
+    script: Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\NewFile(Get-Date -Format "MMddyy").txt
