@@ -27,7 +27,9 @@ steps:
       git config --global user.name "a130138"
       git config --global user.email "a130138@amerisourcebergen.com"
       
+      git checkout main
+
       cd $(System.DefaultWorkingDirectory)\05_FileTransform\
       git add NewFile.txt
       git commit -m "NewFile.txt"
-      git push origin master
+      git push
