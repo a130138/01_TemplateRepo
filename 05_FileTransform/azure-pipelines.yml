@@ -23,6 +23,10 @@ steps:
   inputs:
     script: |
       git init
+      
+      git config --global user.name "a130138"
+      git config --global user.email "a130138@amerisourcebergen.com"
+      
       cd $(System.DefaultWorkingDirectory)\05_FileTransform\
       git add NewFile.txt
       git commit -m "NewFile.txt"
