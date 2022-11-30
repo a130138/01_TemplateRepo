@@ -19,10 +19,6 @@ steps:
   inputs:
     targetType: inline
     script: Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\NewFile.txt
-
-- checkout: self
-  persistCredentials: true
-
 - task: CmdLine@2
   inputs:
     script: |
