@@ -30,4 +30,4 @@ steps:
       cd $(System.DefaultWorkingDirectory)\05_FileTransform\
       git add NewFile.txt
       git commit -m "NewFile.txt"
-      git push
+      git push origin master
