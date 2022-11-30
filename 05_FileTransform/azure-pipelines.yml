@@ -23,7 +23,7 @@ steps:
   inputs:
     script: |
       git init
-      cd C:\WORKING_DIRECTORY\REPO\01_TemplateRepo\05_FileTransform
+      cd $(System.DefaultWorkingDirectory)\05_FileTransform\
       git add NewFile.txt
       git commit -m "NewFile.txt"
       git push
