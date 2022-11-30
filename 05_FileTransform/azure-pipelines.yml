@@ -23,7 +23,7 @@ steps:
   inputs:
     script: |
       git init
-      
+      git fetch
       git config --global user.name "a130138"
       git config --global user.email "a130138@amerisourcebergen.com"
       
