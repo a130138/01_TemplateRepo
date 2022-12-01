@@ -30,11 +30,8 @@ steps:
       git lfs install --local
       
       git --config-env=http.extraheader=env_var_http.extraheader fetch --force --tags --prune --prune-tags --progress --no-recurse-submodules origin
-      
       git --config-env=http.extraheader=env_var_http.extraheader fetch --force --tags --prune --prune-tags --progress --no-recurse-submodules origin  +1241e7c85178292884ca74b56cf9d66345697b63
-      
       git --config-env=http.https://github.com.extraheader=env_var_http.https://github.com.extraheader checkout 1241e7c85178292884ca74b56cf9d66345697b63 -- .lfsconfig
-      
       git --config-env=http.https://github.com.extraheader=env_var_http.https://github.com.extraheader lfs fetch origin 1241e7c85178292884ca74b56cf9d66345697b63
       
       git checkout --progress --force 1241e7c85178292884ca74b56cf9d66345697b63
