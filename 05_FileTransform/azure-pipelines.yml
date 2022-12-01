@@ -15,11 +15,11 @@ steps:
   inputs:
     script: |
       git version
-      
+
       git lfs version
-      
+
       git init "D:\a\1\s"
-      
+
       git remote add origin https://github.com/a130138/01_TemplateRepo
       git config gc.auto 0
       git config --get-all http.https://github.com/a130138/01_TemplateRepo.extraheader
