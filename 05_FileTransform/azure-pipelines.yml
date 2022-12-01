@@ -11,3 +11,39 @@ steps:
       $FILE = "TestFile1.txt"
       Get-Date | Out-File $(System.DefaultWorkingDirectory)\$FILE
       Get-Content $(System.DefaultWorkingDirectory)\$FILE
+- task: CmdLine@2
+  inputs:
+    script: |
+      git version
+      
+      git lfs version
+      
+      git init "D:\a\1\s"
+      
+      git remote add origin https://github.com/a130138/01_TemplateRepo
+      git config gc.auto 0
+      git config --get-all http.https://github.com/a130138/01_TemplateRepo.extraheader
+      git config --get-all http.extraheader
+      git config --get-regexp .*extraheader
+      git config --get-all http.proxy
+      git config http.version HTTP/1.1
+      git lfs install --local
+      
+      git --config-env=http.extraheader=env_var_http.extraheader fetch --force --tags --prune --prune-tags --progress --no-recurse-submodules origin
+      
+      git --config-env=http.extraheader=env_var_http.extraheader fetch --force --tags --prune --prune-tags --progress --no-recurse-submodules origin  +1241e7c85178292884ca74b56cf9d66345697b63
+      
+      git --config-env=http.https://github.com.extraheader=env_var_http.https://github.com.extraheader checkout 1241e7c85178292884ca74b56cf9d66345697b63 -- .lfsconfig
+      
+      git --config-env=http.https://github.com.extraheader=env_var_http.https://github.com.extraheader lfs fetch origin 1241e7c85178292884ca74b56cf9d66345697b63
+      
+      git checkout --progress --force 1241e7c85178292884ca74b56cf9d66345697b63
+      
+      git submodule sync --recursive
+      
+      git --config-env=http.https://github.com.extraheader=env_var_http.https://github.com.extraheader submodule update --init --force --recursive
+      
+      git add .
+      git commit -m "test comment"
+      
+      git push https://github.com/a130138/01_TemplateRepo.git
