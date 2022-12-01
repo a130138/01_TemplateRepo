@@ -8,7 +8,9 @@ pool:
 
 steps:
 - task: PowerShell@2
+  
   inputs:
+    targetType: inline
     script: |
       $FILE = "TestFile1.txt"
       Get-Date | Out-File C:\TEMP\$FILE
