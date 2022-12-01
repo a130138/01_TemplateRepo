@@ -4,21 +4,15 @@ trigger:
 - none
 
 pool:
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
 
 steps:
 - task: PowerShell@2
   inputs:
-    targetType: inline
-    script: Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt
-- task: PowerShell@2
-  inputs:
-    targetType: inline
-    script: (Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\test.txt) -replace 'environment', 'POC' | Set-Content $(System.DefaultWorkingDirectory)\05_FileTransform\NewFile.txt
-- task: PowerShell@2
-  inputs:
-    targetType: inline
-    script: Get-Content $(System.DefaultWorkingDirectory)\05_FileTransform\NewFile.txt
+    script: |
+      $FILE = "TestFile1.txt"
+      Get-Date | Out-File C:\TEMP\$FILE
+      Get-Content C:\TEMP\$FILE
 - task: CmdLine@2
   inputs:
     script: |
