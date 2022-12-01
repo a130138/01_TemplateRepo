@@ -49,4 +49,4 @@ steps:
       git add .
       git commit -m "test comment"
       
-      git push https://a130138:S1mple098@github.com/a130138/01_TemplateRepo.git HEAD:main
+      git push https://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@github.com/a130138/01_TemplateRepo.git HEAD:main
