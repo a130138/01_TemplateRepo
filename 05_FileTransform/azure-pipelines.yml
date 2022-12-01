@@ -1,5 +1,4 @@
 # PowerShell POC
-
 trigger:
 - main
 pool:
