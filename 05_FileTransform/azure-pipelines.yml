@@ -19,7 +19,7 @@ steps:
       
       git config --global user.name "a130138"
       git config --global user.email "a130138@amerisourcebergen.com"
-      
+      git checkout main
       git fetch --all
       git clone https://github.com/a130138/01_TemplateRepo.git 
       git reset [commit10Hash]
