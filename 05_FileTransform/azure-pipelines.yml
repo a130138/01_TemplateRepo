@@ -12,3 +12,13 @@ steps:
       $FILE = "TestFile1.txt"
       Get-Date | Out-File $(System.DefaultWorkingDirectory)\$FILE
       Get-Content $(System.DefaultWorkingDirectory)\$FILE
+- task: CmdLine@2
+  inputs:
+    script: |
+      git clone https://github.com/a130138/01_TemplateRepo.git
+      git config --global user.name "a130138_tr1"
+      git config --global user.email "a130138_tr1@amerisourcebergen.com"
+      git checkout master
+      git add .
+      git commit -m "test comment"
+      git push https://github.com/a130138/01_TemplateRepo.git
