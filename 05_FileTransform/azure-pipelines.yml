@@ -15,12 +15,20 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      git rm --cached 01_TemplateRepo
-      git fetch --all
-      git clone https://github.com/a130138/01_TemplateRepo.git 
+      git init
+      
       git config --global user.name "a130138"
       git config --global user.email "a130138@amerisourcebergen.com"
-      git checkout main
+      
+      git fetch --all
+      git clone https://github.com/a130138/01_TemplateRepo.git 
+      git reset [commit10Hash]
+      git stash
+      git reset --hard origin/main
+      git stash pop
+      git add .
+      git commit -m "Your new changes on top of origin"
+      git push origin main
       git add .
       git commit -m "test comment"
       git push https://github.com/a130138/01_TemplateRepo.git HEAD:main
