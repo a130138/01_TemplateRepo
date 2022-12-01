@@ -13,5 +13,5 @@ steps:
     targetType: inline
     script: |
       $FILE = "TestFile1.txt"
-      Get-Date | Out-File C:\TEMP\$FILE
-      Get-Content C:\TEMP\$FILE
+      Get-Date | Out-File $(System.DefaultWorkingDirectory)\$FILE
+      Get-Content $(System.DefaultWorkingDirectory)\$FILE
