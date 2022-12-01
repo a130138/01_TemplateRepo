@@ -1,6 +1,6 @@
 # PowerShell POC
 trigger:
-- main
+- none
 pool:
   vmImage: windows-latest
 steps:
