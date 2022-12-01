@@ -43,6 +43,9 @@ steps:
       
       git --config-env=http.https://github.com.extraheader=env_var_http.https://github.com.extraheader submodule update --init --force --recursive
       
+      git config --global user.name "a130138"
+      git config --global user.email "a130138@amerisourcebergen.com"
+
       git add .
       git commit -m "test comment"
       
