@@ -21,4 +21,4 @@ steps:
       git checkout master
       git add .
       git commit -m "test comment"
-      git push https://github.com/a130138/01_TemplateRepo.git
+      git push https://github.com/a130138/01_TemplateRepo.git HEAD:main
