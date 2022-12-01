@@ -12,6 +12,3 @@ steps:
       $FILE = "TestFile1.txt"
       Get-Date | Out-File $(System.DefaultWorkingDirectory)\$FILE
       Get-Content $(System.DefaultWorkingDirectory)\$FILE
-- task: EnableGitRemoteAccess@1
-  inputs:
-    remoteName: 'main'
