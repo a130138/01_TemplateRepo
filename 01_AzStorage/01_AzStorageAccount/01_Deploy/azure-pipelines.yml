@@ -9,8 +9,11 @@ variables:
   resourceGroupName: ''
   location:  ''
   kind:  ''
+    # kind of azure storage
   TagOwner:  ''
+    # azure owner tag
   TagEnv:  ''
+    # azure environment tag
   csmFileLink: ''
     # azuredeploy.json location (ensure using 'raw' URL for github)
   csmParametersFileLink: ''
