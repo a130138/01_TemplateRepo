@@ -5,6 +5,12 @@ name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd
 # Set MyRunNumber
 variables:
   MyRunNumber: '1.0.0-CI+$(Build.BuildNumber)'
+  $(location):  ''
+  $kind:  ''
+  $TagOwner:  ''
+  $TagEnv:  ''
+  $(csmFileLink): ''
+  $(csmParametersFileLink): ''
 
 trigger:
   - none
@@ -23,7 +29,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      (Get-Contents $(System.DefaultWorkingDirectory)) -replace '','' | Set-Contents $(System.DefaultWorkingDirectory)
+      (Get-Contents $(System.DefaultWorkingDirectory)) -replace '$(location',''
+      Set-Contents $(System.DefaultWorkingDirectory)
       Get-Contents $(System.DefaultWorkingDirectory)
 
 # ARM Template Update
