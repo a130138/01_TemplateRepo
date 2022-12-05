@@ -1,2 +1,2 @@
 
-this is a test text file
+this is a sample text file
