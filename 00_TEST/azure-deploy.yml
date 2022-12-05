@@ -5,14 +5,19 @@ name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 variables:
   - name: azureResourceManagerConnection
     value: 
+    # Example:'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
   - name: resourceGroupName
     value: 
+    # Example:"JoePOC1"
   - name: location
     value: 
+    # Example:"East US"
   - name: csmFileLink
     value:
+    # Example:'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
   - name: csmParametersFileLink
     value:
+    # Example:'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeployparameter.json'
 
 trigger:
   - none
@@ -26,17 +31,17 @@ steps:
     deploymentScope: 'Resource Group' 
       #Options:"Resource Group","Subscription","Management Group"
     azureResourceManagerConnection: $(azureResourceManagerConnection)
-      #Example:'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+      # Example:'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
     action: 'Create Or Update Resource Group'
-      #Options:"Create Or Update Resource Group","DeleteRG"
+      # Options:"Create Or Update Resource Group","DeleteRG"
     resourceGroupName: $(resourceGroupName)
-      #Example:"JoePOC1"
+      # Example:"JoePOC1"
     location: $(location)
-      #Example:"East US"
+      # Example:"East US"
     templateLocation: 'URL of the file'
-      #Options:"URL of the file","Linked Artifacts"
+      # Options:"URL of the file","Linked Artifacts"
     csmFileLink: $(csmFileLink)
-      #Example:'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
+      # Example:'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
     csmParametersFileLink: $(csmParametersFileLink)
     deploymentMode: 'Incremental'
-      #Options:Incremental,Complete,Validation
+      # Options:Incremental,Complete,Validation
