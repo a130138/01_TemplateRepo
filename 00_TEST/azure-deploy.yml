@@ -16,7 +16,7 @@ variables:
     value:
     # Example:'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
   - name: csmParametersFileLink
-    value:
+    value: 
     # Example:'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeployparameter.json'
 
 trigger:
@@ -42,6 +42,7 @@ steps:
       # Options:"URL of the file","Linked Artifacts"
     csmFileLink: $(csmFileLink)
       # Example:'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeploy.json'
-    csmParametersFileLink: $(csmParametersFileLink)
+    # csmParametersFileLink: $(csmParametersFileLink)
+      # Example:'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/00_TEST/azuredeployparameter.json'
     deploymentMode: 'Incremental'
       # Options:Incremental,Complete,Validation
