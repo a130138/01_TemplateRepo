@@ -33,5 +33,3 @@ steps:
         Incremental
       ##  Validation
       ##  Complete
-
-    # deploymentName: 'AzStorageTask'
