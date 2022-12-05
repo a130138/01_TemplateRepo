@@ -5,6 +5,8 @@ name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd
 # Set MyRunNumber
 variables:
   MyRunNumber: '1.0.0-CI+$(Build.BuildNumber)'
+  $(azureResourceManageConnection): ''
+  $(resourceGroupName): ''
   $(location):  ''
   $kind:  ''
   $TagOwner:  ''
@@ -30,6 +32,7 @@ steps:
     targetType: 'inline'
     script: |
       (Get-Contents $(System.DefaultWorkingDirectory)) -replace '$(location',''
+
       Set-Contents $(System.DefaultWorkingDirectory)
       Get-Contents $(System.DefaultWorkingDirectory)
 
@@ -50,6 +53,7 @@ steps:
     action: Create Or Update Resource Group
       # Options: Create Or Update Resource Group, DeleteRG
     resourceGroupName: $(resourceGroupName)
+      # Azure Resource Group name
     location: ${location}
       # ex - East US 2
     templateLocation: URL of the file
