@@ -26,7 +26,7 @@ steps:
 - script: echo $(Build.BuildNumber) # display Run Number
 - script: echo '$(Build.BuildNumber)' # outputs customized build number like project_def_master_20200828.1
 
-# ARM Template Copy and Save As New File
+# ARM Template - Copy and Save As New File
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
@@ -34,7 +34,7 @@ steps:
       $timestamp = Get-Date -Format "MMddyyyhhmm"
       (Get-Contents $(System.DefaultWorkingDirectory)) | Set-Contents $(System.DefaultWorkingDirectory)\azuredeploy$timestamp.json
 
-# ARM Template Update
+# ARM Template - Update
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
@@ -42,7 +42,7 @@ steps:
       $timestamp = Get-Date -Format "MMddyyyhhmm"
       (Get-Contents $(System.DefaultWorkingDirectory)\azuredeploy$timestamp.json)
 
-# ARM Template Deployment
+# ARM Template - Deployment
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: Resource Group
