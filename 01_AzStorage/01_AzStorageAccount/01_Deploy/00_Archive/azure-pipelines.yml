@@ -36,18 +36,23 @@ steps:
 # ARM Template Deployment
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
-    deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: 'JoePOC1'
-    location: 'East US 2'
-    templateLocation: 'URL of the file'
-    csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/01_Deploy/azuredeploy.json'
-    csmParametersFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/01_Deploy/azuredeploy.parameters.json'
-    deploymentMode:
-        Incremental
-      ##  Validation
-      ##  Complete
+    deploymentScope: Resource Group
+      # Options: Resource Group, Management Group, Subscription
+    azureResourceManagerConnection: $(azureResourceManageConnection)
+      # ex - Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)
+    action: Create Or Update Resource Group
+      # Options: Create Or Update Resource Group, DeleteRG
+    resourceGroupName: $(resourceGroupName)
+    location: ${location}
+      # ex - East US 2
+    templateLocation: URL of the file
+      # Options: URL of the file, Linked Artifact
+    csmFileLink: $(csmFileLink)
+      # note - ensure using 'raw' URL for github
+    csmParametersFileLink: $(csmParametersFileLink)
+      # note - ensure using 'raw' URL for github
+    deploymentMode: Incremental
+      # Options:  Incremental, Validation, Complete
 
 # Update Git Repo
 - task: CmdLine@2  
