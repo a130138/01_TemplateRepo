@@ -2,6 +2,18 @@
 
 name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r)
 
+variables:
+  - name: azureResourceManagerConnection
+    value: 
+  - name: resourceGroupName
+    value: 
+  - name: location
+    value: 
+  - name: csmFileLink
+    value:
+  - name: csmParametersFileLink
+    value:
+
 trigger:
   - none
 
@@ -28,5 +40,3 @@ steps:
     csmParametersFileLink: $(csmParametersFileLink)
     deploymentMode: 'Incremental'
       #Options:Incremental,Complete,Validation
-    deploymentName: $(deploymentName)
-      #Example:"deploymentgui"
