@@ -10,7 +10,7 @@
     "resources":
         [
             {
-            "name": "$(AzTitle)",
+            "name": "$(AzStorName)",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-04-01",
             "tags":
@@ -19,11 +19,11 @@
                 "Env": "$(AzEnvironment)"
                 },
             "location": "$(AzLoc)",
-            "kind": "$(AzType)",
+            "kind": "$(AzKind)",
             "sku":
                 {
-                "name": "Premium_LRS",
-                "tier": "Premium"
+                "name": "$(AzSkuName)",
+                "tier": "$(AzSkuTier)"
                 }
             }
         ],
