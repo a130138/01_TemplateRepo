@@ -22,13 +22,13 @@
             Copy-Item $Repo\$TemplateFolder\$TemplateFileJSON -Destination $Repo\$AzItem$TimeStamp
         ### Update JSON
             (Get-Content $DestinationFileJSON) | Foreach-Object {
-                    $_ -replace 'AzName', 'testname' `
-                    -replace 'AzTagEnv', 'POC' `
-                    -replace 'AzTagOwn', 'jc' `
-                    -replace 'AzSkuName', 'Premium_LRS'  `
-                    -replace 'AzSkuTier','Premium' `
-                    -replace 'AzLoc','East US 2' `
-                    -replace 'AzKind','Storage' `
+                $_ -replace 'AzName', 'testname' `
+                   -replace 'AzTagEnv', 'POC' `
+                   -replace 'AzTagOwn', 'jc' `
+                   -replace 'AzSkuName', 'Premium_LRS'  `
+                   -replace 'AzSkuTier','Premium' `
+                   -replace 'AzLoc','East US 2' `
+                   -replace 'AzKind','Storage' `
                     } | Set-Content $DestinationFileJSON
         ### Read JSON
             Get-Content $DestinationFileJSON
@@ -38,12 +38,12 @@
         ## Update YAML
             (Get-Content $DestinationFileYAML) | Foreach-Object {
                 $_ -replace 'AzName', 'testname' `
-                -replace 'AzTagEnv', 'POC' `
-                -replace 'AzTagOwn', 'jc' `
-                -replace 'AzSkuName', 'Premium_LRS'  `
-                -replace 'AzSkuTier','Premium' `
-                -replace 'AzLoc','East US 2' `
-                -replace 'AzKind','Storage' `
+                   -replace 'AzTagEnv', 'POC' `
+                   -replace 'AzTagOwn', 'jc' `
+                   -replace 'AzSkuName', 'Premium_LRS'  `
+                   -replace 'AzSkuTier','Premium' `
+                   -replace 'AzLoc','East US 2' `
+                   -replace 'AzKind','Storage' `
                 } | Set-Content $DestinationFileYAML
         ### Read YAML
             Get-Content $DestinationFileYAML
