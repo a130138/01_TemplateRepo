@@ -1,4 +1,4 @@
-﻿### Azure Deploy (azuredeploy.json) ###
+﻿### Azure Setup ###
 
 # Clear-Host
     Clear-Host
@@ -7,7 +7,7 @@
     ## Variables
         ### Date/Time
 	        $TimeStamp = Get-Date -Format "MMddyyyhhmm"
-        ### Input Azure Item To Be Created (start with Az)
+        ### Input Az Item To Be Created (start with Az)
             $AzItem = "AzStorageAcct"
 	    ### Repo Info
             $Repo = "C:\TEMP"
