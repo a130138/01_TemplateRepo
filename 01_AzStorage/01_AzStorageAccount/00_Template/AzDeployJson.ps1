@@ -14,7 +14,7 @@
             $TemplateFolder = "00_Template"
 	        $TemplateFile = "azuredeploy.json"
         ### Destination
-            $DestinationFile = "$Repo\$AzItem\$TemplateFile"
+            $DestinationFile = "$Repo\$AzItem$TimeStamp\$TemplateFile"
 
 # Process
     ## Create New Directory With Template File
