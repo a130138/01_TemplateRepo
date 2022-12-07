@@ -21,8 +21,8 @@
 
 # Process
     ## Create New Directory With Template File
-        New-Item -Path $Repo -ItemType Directory -Name $AzItem
-        Copy-Item $Repo/$TemplateFolder/$TemplateFile -Destination $Repo/$AzItem
+        New-Item -Path $Repo -ItemType Directory -Name $AzItem.$TimeStamp
+        Copy-Item $Repo/$TemplateFolder/$TemplateFile -Destination $Repo/$AzItem.$TimeStamp
 
     ## Update File
 	    (Get-Content $DestinationFile) | Foreach-Object {
