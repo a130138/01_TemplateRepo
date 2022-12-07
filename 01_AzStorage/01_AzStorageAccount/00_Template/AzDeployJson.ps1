@@ -10,16 +10,16 @@
         ### Input Az Item To Be Created (start with Az)
             $AzItem = "AzStorageAcct"
 	    ### Repo Info
-            $Repo = "$(System.DefaultWorkingDirectory)/_a130138_01_TemplateRepo/01_AzStorage/01_AzStorageAccount"
+            $Repo = "$(System.DefaultWorkingDirectory)\_a130138_01_TemplateRepo\01_AzStorage\01_AzStorageAccount"
             $TemplateFolder = "00_Template"
 	        $TemplateFile = "azuredeploy.json"
         ### Destination
-            $DestinationFile = "$Repo/$AzItem/$TemplateFile"
+            $DestinationFile = "$Repo\$AzItem\$TemplateFile"
 
 # Process
     ## Create New Directory With Template File
         New-Item -Path $Repo -ItemType Directory -Name $AzItem.$TimeStamp
-        Copy-Item $Repo/$TemplateFolder/$TemplateFile -Destination $Repo/$AzItem.$TimeStamp
+        Copy-Item $Repo\$TemplateFolder\$TemplateFile -Destination $Repo\$AzItem.$TimeStamp
 
     ## Update File
 	    (Get-Content $DestinationFile) | Foreach-Object {
