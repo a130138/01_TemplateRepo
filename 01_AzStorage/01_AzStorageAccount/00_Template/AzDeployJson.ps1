@@ -13,7 +13,7 @@
             $Repo = "C:\TEMP"
             $TemplateFolder = "$Repo\01_AzTemplate"
 	        $TemplateFile = "$TemplateFolder\azuredeploy.json"
-        ### Source 
+        ### Source
             $SourceFolder = ""
             $SourceFile = ""
         ### Destination
