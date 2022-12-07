@@ -6,5 +6,10 @@ pool:
   vmImage: windows-latest
 
 steps:
-- script: echo Hello, world!
-
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    azureResourceManagerConnection: 
+    deploymentScope: 'Resource Group'
+    action: 'Create Or Update Resource Group'
+    templateLocation: 'Linked artifact'
+    deploymentMode: 'Incremental'
