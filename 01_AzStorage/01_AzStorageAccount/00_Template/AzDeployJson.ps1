@@ -10,7 +10,7 @@
         ### Input Az Item To Be Created (start with Az)
             $AzItem = "AzStorageAcct"
 	    ### Repo Info
-            $Repo = "$(System.DefaultWorkingDirectory)\_a130138_01_TemplateRepo\01_AzStorage\01_AzStorageAccount"
+            $Repo = "D:\a\r1\a\_a130138_01_TemplateRepo\01_AzStorage\01_AzStorageAccount"
             $TemplateFolder = "00_Template"
 	        $TemplateFile = "azuredeploy.json"
         ### Destination
