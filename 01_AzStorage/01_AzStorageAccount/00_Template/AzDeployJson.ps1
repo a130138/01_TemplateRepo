@@ -1,8 +1,6 @@
 ﻿### Azure Setup ###
-
 # Clear-Host
     Clear-Host
-
 # Setup
     ## Variables
         ### Date/Time
@@ -12,25 +10,40 @@
 	    ### Repo Info
             $Repo = "D:\a\r1\a\_a130138_01_TemplateRepo\01_AzStorage\01_AzStorageAccount"
             $TemplateFolder = "00_Template"
-	        $TemplateFile = "azuredeploy.json"
+	        $TemplateFileJSON = "azuredeploy.json"
+            $TemplateFileYAML = "azure-pipelines.yml"
         ### Destination
-            $DestinationFile = "$Repo\$AzItem$TimeStamp\$TemplateFile"
-
+            $DestinationFileJSON = "$Repo\$AzItem$TimeStamp\$TemplateFile"
+            $DestinationFileYAML = "$Repo\$AzItem$TimeStamp\$TemplateFile"
 # Process
-    ## Create New Directory With Template File
-        New-Item -Path $Repo -ItemType Directory -Name $AzItem$TimeStamp
-        Copy-Item $Repo\$TemplateFolder\$TemplateFile -Destination $Repo\$AzItem$TimeStamp
-
-    ## Update File
-	    (Get-Content $DestinationFile) | Foreach-Object {
-			    $_ -replace 'AzName', 'testname' `
-			       -replace 'AzTagEnv', 'POC' `
-			       -replace 'AzTagOwn', 'jc' `
-			       -replace 'AzSkuName', 'Premium_LRS'  `
-                   -replace 'AzSkuTier','Premium' `
-                   -replace 'AzLoc','East US 2' `
-                   -replace 'AzKind','Storage' `
-			    } | Set-Content $DestinationFile
-
-    ## Read Updated File
-	    Get-Content $DestinationFile
+    ## JSON
+        ### Create New Directory and Import Copy of JSON Template
+            New-Item -Path $Repo -ItemType Directory -Name $AzItem$TimeStamp
+            Copy-Item $Repo\$TemplateFolder\$TemplateFileJSON -Destination $Repo\$AzItem$TimeStamp
+        ### Update JSON
+            (Get-Content $DestinationFileJSON) | Foreach-Object {
+                    $_ -replace 'AzName', 'testname' `
+                    -replace 'AzTagEnv', 'POC' `
+                    -replace 'AzTagOwn', 'jc' `
+                    -replace 'AzSkuName', 'Premium_LRS'  `
+                    -replace 'AzSkuTier','Premium' `
+                    -replace 'AzLoc','East US 2' `
+                    -replace 'AzKind','Storage' `
+                    } | Set-Content $DestinationFileJSON
+        ### Read JSON
+            Get-Content $DestinationFileJSON
+    ## YAML
+        ## Import copy of YAML into newly created Directory
+            Copy-Item $Repo\$TemplateFolder\$TemplateFileYAML -Destination $Repo\$AzItem$TimeStamp
+        ## Update YAML
+            (Get-Content $DestinationFileYAML) | Foreach-Object {
+                $_ -replace 'AzName', 'testname' `
+                -replace 'AzTagEnv', 'POC' `
+                -replace 'AzTagOwn', 'jc' `
+                -replace 'AzSkuName', 'Premium_LRS'  `
+                -replace 'AzSkuTier','Premium' `
+                -replace 'AzLoc','East US 2' `
+                -replace 'AzKind','Storage' `
+                } | Set-Content $DestinationFileYAML
+        ### Read YAML
+            Get-Content $DestinationFileYAML
