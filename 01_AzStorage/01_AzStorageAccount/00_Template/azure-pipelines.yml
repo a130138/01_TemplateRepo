@@ -21,19 +21,19 @@ steps:
 # ARM Template - Deployment
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
-    deploymentScope: Resource Group
+    deploymentScope: 'AzScope'
       # Options: 'Resource Group', 'Management Group', 'Subscription'
-    azureResourceManagerConnection: $(azureResourceManageConnection)
-      # ex - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)''
-    action: Create Or Update Resource Group
+    azureResourceManagerConnection: 'AzArmConnection'
+      # ex - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    action: 'AzAction'
       # Options: 'Create Or Update Resource Group', 'DeleteRG'
-    resourceGroupName: $(resourceGroupName)
+    resourceGroupName: 'AzRgName'
       # Azure Resource Group name
-    location: ${location}
+    location: 'AzLoc'
       # ex - 'East US 2'
-    templateLocation: URL of the file
+    templateLocation: 'AzURL'
       # Options: 'URL of the file', 'Linked Artifact'
-    csmFileLink: $(csmFileLink)
+    csmFileLink: 'AzRepoLink'
       # azuredeploy.json location (ensure using 'raw' URL for github)
-    deploymentMode: Incremental
+    deploymentMode: 'AzDeployMode'
       # Options:  'Incremental','Validation','Complete'
