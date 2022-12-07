@@ -36,15 +36,15 @@
         ## Import copy of YAML into newly created Directory
             Copy-Item $Repo\$TemplateFolder\$TemplateFileYAML -Destination $Repo\$AzItem$TimeStamp
         ## Update YAML
-            (Get-Content $DestinationFileYAML) | Foreach-Object {
-                $_ -replace 'AzScope','Resource Group' `
-                   -replace 'AzArmConnection','Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)' `
-                   -replace 'AzAction','Create Or Update Resource Group' `
-                   -replace 'AzRgName','JoePOC1'  `
-                   -replace 'AzLoc','East US 2' `
-                   -replace 'AzURL','URL of the file' `
-                   -replace 'AzRepoLink','https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/01_Deploy/01_Deploy/azuredeploy.json' `
-                   -replace 'AzDeployMode','Incremental' `
-                } | Set-Content $DestinationFileYAML
-        ### Read YAML
-            Get-Content $DestinationFileYAML
+        #     (Get-Content $DestinationFileYAML) | Foreach-Object {
+        #         $_ -replace 'AzScope','Resource Group' `
+        #            -replace 'AzArmConnection','Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)' `
+        #            -replace 'AzAction','Create Or Update Resource Group' `
+        #            -replace 'AzRgName','JoePOC1'  `
+        #            -replace 'AzLoc','East US 2' `
+        #            -replace 'AzURL','URL of the file' `
+        #            -replace 'AzRepoLink','https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/01_Deploy/01_Deploy/azuredeploy.json' `
+        #            -replace 'AzDeployMode','Incremental' `
+        #         } | Set-Content $DestinationFileYAML
+        # ### Read YAML
+        #     Get-Content $DestinationFileYAML
