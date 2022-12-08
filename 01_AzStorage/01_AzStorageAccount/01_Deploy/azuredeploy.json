@@ -9,11 +9,11 @@
         ],
     "variables":
         {
-		},
+	},
     "resources":
         [
             {
-            "name": "",
+            "name": "azstortestname",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-04-01",
             "tags":
@@ -21,7 +21,7 @@
                 "Owner": "joseph cropper",
                 "Env": "POC"
                 },
-            "location": "",
+            "location": "East US 2",
             "kind": "StorageV2",
             "sku":
                 {
