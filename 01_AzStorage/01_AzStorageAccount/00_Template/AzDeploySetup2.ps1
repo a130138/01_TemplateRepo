@@ -6,6 +6,7 @@
         ### Env Library Check
             Get-ChildItem Variable:
             Get-ChildItem Env:
+            Get-Variable AzAction
         ### Date/Time
 	        $TimeStamp = Get-Date -Format "MMddyyyhhmm"
         ### Input Az Item To Be Created (start with Az)
@@ -25,8 +26,8 @@
             Copy-Item $Repo\$TemplateFolder\$TemplateFileJSON -Destination $Repo\$AzItem$TimeStamp
         ### Update JSON
             (Get-Content $DestinationFileJSON) | Foreach-Object {
-                $_ -replace '@@AzName@@','$env:AzName' `
-                   -replace '@@AzTagEnv@@','$env:AzTagEnv' `
+                $_ -replace '@@AzName@@','$env::AzName' `
+                   -replace '@@AzTagEnv@@','AzTagEnv' `
                    -replace '@@AzTagOwn@@','$env:AzTagOwn' `
                    -replace '@@AzSkuName@@','$env:AzSkuName'  `
                    -replace '@@AzSkuTier@@','$env:AzSkuTier' `
