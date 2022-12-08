@@ -26,12 +26,12 @@
         ### Update JSON
             (Get-Content $DestinationFileJSON) | Foreach-Object {
                 $_ -replace '@@AzName@@',$env:AzName `
-                   -replace '@@AzTagEnv@@','$env:AzTagEnv' `
-                   -replace '@@AzTagOwn@@','$env:AzTagOwn' `
-                   -replace '@@AzSkuName@@','$env:AzSkuName'  `
-                   -replace '@@AzSkuTier@@','$env:AzSkuTier' `
-                   -replace '@@AzLoc@@','$env:AzLoc' `
-                   -replace '@@AzKind@@','$env:AzKind' `
+                   -replace '@@AzTagEnv@@',$env:AzTagEnv `
+                   -replace '@@AzTagOwn@@',$env:AzTagOwn `
+                   -replace '@@AzSkuName@@',$env:AzSkuName  `
+                   -replace '@@AzSkuTier@@',$env:AzSkuTier `
+                   -replace '@@AzLoc@@',$env:AzLoc `
+                   -replace '@@AzKind@@',$env:AzKind `
                     } | Set-Content $DestinationFileJSON
         ### Read JSON
             Get-Content $DestinationFileJSON
@@ -40,14 +40,14 @@
             Copy-Item $Repo\$TemplateFolder\$TemplateFileYAML -Destination $Repo\$AzItem$TimeStamp
         ## Update YAML
             (Get-Content $DestinationFileYAML) | Foreach-Object {
-                $_ -replace '@@AzScope@@','$AzRgName' `
-                   -replace '@@AzArmConnection@@','$AzArmConnection' `
-                   -replace '@@AzAction@@','$AzAction' `
-                   -replace '@@AzRgName@@','$AzRgName'  `
-                   -replace '@@AzLoc@@','$AzLoc' `
-                   -replace '@@AzURL@@','$AzURL' `
-                   -replace '@@AzRepoLink@@','$AzRepoLink' `
-                   -replace '@@AzDeployMode@@','$AzDeployMode' `
+                $_ -replace '@@AzScope@@',$AzRgName `
+                   -replace '@@AzArmConnection@@',$AzArmConnection `
+                   -replace '@@AzAction@@',$AzAction `
+                   -replace '@@AzRgName@@',$AzRgName  `
+                   -replace '@@AzLoc@@',$AzLoc `
+                   -replace '@@AzURL@@',$AzURL `
+                   -replace '@@AzRepoLink@@',$AzRepoLink `
+                   -replace '@@AzDeployMode@@',$AzDeployMode `
                 } | Set-Content $DestinationFileYAML
         ### Read YAML
             Get-Content $DestinationFileYAML
