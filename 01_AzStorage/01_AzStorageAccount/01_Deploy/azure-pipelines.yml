@@ -19,15 +19,15 @@ steps:
       # ex - Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)
     action: Create Or Update Resource Group
       # Options: Create Or Update Resource Group, DeleteRG
-    resourceGroupName: $env:AzRgName
+    resourceGroupName: $(AzRgName)
       # Azure Resource Group name
-    location: $env:AzLoc
+    location: $(AzLoc)
       # ex - East US 2
     templateLocation: URL of the file
       # Options: URL of the file, Linked Artifact
-    csmFileLink: $env:AzURL
+    csmFileLink: $(AzURL)
       # azuredeploy.json location (ensure using 'raw' URL for github)
-    csmParametersFileLink: $env:AzRepoLink
+    csmParametersFileLink: $(AzRepoLink)
       # azuredeployparameters.json location (ensure using 'raw' URL for github)
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
