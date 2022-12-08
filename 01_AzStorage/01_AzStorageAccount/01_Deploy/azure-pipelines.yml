@@ -10,6 +10,9 @@ pool:
   vmImage: windows-latest
 
 steps:
+# Create Folder with template file copies
+# Update variables
+# Update Git (CMD)
 # ARM Template - Deployment
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
