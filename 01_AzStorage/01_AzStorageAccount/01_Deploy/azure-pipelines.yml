@@ -1,7 +1,7 @@
 # Azure Storage Acct Deploy
 
 variables:
-- group: "AzVarGroup1"
+- group: "AzVarGroupOne"
 
 trigger:
   - none
