@@ -22,13 +22,13 @@
             Copy-Item $Repo\$TemplateFolder\$TemplateFileJSON -Destination $Repo\$AzItem$TimeStamp
         ### Update JSON
             (Get-Content $DestinationFileJSON) | Foreach-Object {
-                $_ -replace 'AzName','testname' `
-                   -replace 'AzTagEnv','POC' `
-                   -replace 'AzTagOwn','jc' `
-                   -replace 'AzSkuName','Premium_LRS'  `
-                   -replace 'AzSkuTier','Premium' `
-                   -replace 'AzLoc','East US 2' `
-                   -replace 'AzKind','Storage' `
+                $_ -replace '@@AzName@@','$AzName' `
+                   -replace '@@AzTagEnv@@','$AzTagEnv' `
+                   -replace '@@AzTagOwn@@','$AzTagOwn' `
+                   -replace '@@AzSkuName@@','$AzSkuName'  `
+                   -replace '@@AzSkuTier@@','$AzSkuTier' `
+                   -replace '@@AzLoc@@','$AzLoc' `
+                   -replace '@@AzKind@@','$AzKind' `
                     } | Set-Content $DestinationFileJSON
         ### Read JSON
             Get-Content $DestinationFileJSON
@@ -37,14 +37,14 @@
             Copy-Item $Repo\$TemplateFolder\$TemplateFileYAML -Destination $Repo\$AzItem$TimeStamp
         ## Update YAML
             (Get-Content $DestinationFileYAML) | Foreach-Object {
-                $_ -replace 'AzScope','Resource Group' `
-                   -replace 'AzArmConnection','Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)' `
-                   -replace 'AzAction','Create Or Update Resource Group' `
-                   -replace 'AzRgName','JoePOC1'  `
-                   -replace 'AzLoc','East US 2' `
-                   -replace 'AzURL','URL of the file' `
-                   -replace 'AzRepoLink','https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/01_Deploy/01_Deploy/azuredeploy.json' `
-                   -replace 'AzDeployMode','Incremental' `
+                $_ -replace '@@AzScope@@','$AzRgName' `
+                   -replace '@@AzArmConnection@@','$AzArmConnection' `
+                   -replace '@@AzAction@@','$AzAction' `
+                   -replace '@@AzRgName@@','$AzRgName'  `
+                   -replace '@@AzLoc@@','$AzLoc' `
+                   -replace '@@AzURL@@','$AzURL' `
+                   -replace '@@AzRepoLink@@','$AzRepoLink' `
+                   -replace '@@AzDeployMode@@','$AzDeployMode' `
                 } | Set-Content $DestinationFileYAML
         ### Read YAML
             Get-Content $DestinationFileYAML
