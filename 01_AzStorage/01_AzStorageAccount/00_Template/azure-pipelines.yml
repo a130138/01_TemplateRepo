@@ -3,6 +3,9 @@
 trigger:
   - none
 
+variables:
+  - Group: "AzVarGroupOne"
+
 pool:
   vmImage: windows-latest
 
