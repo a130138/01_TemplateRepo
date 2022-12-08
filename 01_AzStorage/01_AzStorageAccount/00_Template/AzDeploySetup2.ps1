@@ -5,6 +5,7 @@
     ## Variables
         ### Env Library Check
             Get-ChildItem Variable:
+            Get-ChildItem Env:
         ### Date/Time
 	        $TimeStamp = Get-Date -Format "MMddyyyhhmm"
         ### Input Az Item To Be Created (start with Az)
