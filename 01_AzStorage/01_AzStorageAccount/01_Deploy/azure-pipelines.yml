@@ -1,6 +1,7 @@
 # Azure Storage Acct Deploy
 
-name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+variables:
+- group: "AzVarGroup1"
 
 trigger:
   - none
