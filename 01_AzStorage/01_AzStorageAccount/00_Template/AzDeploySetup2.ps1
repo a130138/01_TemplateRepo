@@ -40,7 +40,7 @@
             Copy-Item $Repo\$TemplateFolder\$TemplateFileYAML -Destination $Repo\$AzItem$TimeStamp
         ## Update YAML
             (Get-Content $DestinationFileYAML) | Foreach-Object {
-                $_ -replace '@@AzScope@@',$env:AzRgName `
+                $_ -replace '@@AzScope@@',$env:AzScope `
                    -replace '@@AzArmConnection@@',$env:AzArmConnection `
                    -replace '@@AzAction@@',$env:AzAction `
                    -replace '@@AzRgName@@',$env:AzRgName  `
