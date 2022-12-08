@@ -10,7 +10,7 @@ pool:
   vmImage: windows-latest
 
 steps:
-# Create Folder with template file copies
+# Create new timestamped folder with template file copies
 # Update variables
 # Update Git (CMD)
 # ARM Template - Deployment
