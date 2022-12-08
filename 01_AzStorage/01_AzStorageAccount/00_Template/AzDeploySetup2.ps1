@@ -24,13 +24,13 @@
             Copy-Item $Repo\$TemplateFolder\$TemplateFileJSON -Destination $Repo\$AzItem$TimeStamp
         ### Update JSON
             (Get-Content $DestinationFileJSON) | Foreach-Object {
-                $_ -replace '@@AzName@@','$AzName' `
-                   -replace '@@AzTagEnv@@','$AzTagEnv' `
-                   -replace '@@AzTagOwn@@','$AzTagOwn' `
-                   -replace '@@AzSkuName@@','$AzSkuName'  `
-                   -replace '@@AzSkuTier@@','$AzSkuTier' `
-                   -replace '@@AzLoc@@','$AzLoc' `
-                   -replace '@@AzKind@@','$AzKind' `
+                $_ -replace '@@AzName@@','$env:AzName' `
+                   -replace '@@AzTagEnv@@','$env:AzTagEnv' `
+                   -replace '@@AzTagOwn@@','$env:AzTagOwn' `
+                   -replace '@@AzSkuName@@','$env:AzSkuName'  `
+                   -replace '@@AzSkuTier@@','$env:AzSkuTier' `
+                   -replace '@@AzLoc@@','$env:AzLoc' `
+                   -replace '@@AzKind@@','$env:AzKind' `
                     } | Set-Content $DestinationFileJSON
         ### Read JSON
             Get-Content $DestinationFileJSON
