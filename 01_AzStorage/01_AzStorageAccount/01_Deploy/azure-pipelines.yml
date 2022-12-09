@@ -16,4 +16,4 @@ steps:
    targetType: inline
    script: |
       New-Item -Path $(System.DefaultWorkingDirectory) -ItemType Directory -Name $AzItem
-        Copy-Item $AzTemplateJson -Destination $(System.DefaultWorkingDirectory)\$AzItem
+      Copy-Item $AzTemplateJson -Destination $(System.DefaultWorkingDirectory)\$AzItem
