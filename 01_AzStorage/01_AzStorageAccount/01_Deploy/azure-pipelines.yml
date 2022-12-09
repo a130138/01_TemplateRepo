@@ -10,9 +10,20 @@ pool:
   vmImage: windows-latest
 
 steps:
-# Create new timestamped folder with template file copies
-# Update variables
-# Update Git (CMD)
+# Create folder with template file copy
+- task: PowerShell@2
+  inputs:
+
+# Insert json variables
+- task: PowerShell@2
+  inputs:
+
+# Update Repo
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo Write your commands here
+
 # ARM Template - Deployment
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
