@@ -15,22 +15,22 @@ steps:
   inputs:
    targetType: inline
    script: |
-      New-Item -Path $Repo -ItemType Directory -Name $AzItem 
-        Copy-Item $TemplateFile -Destination $Repo\$AzItem 
+      New-Item -Path $Repo -ItemType Directory -Name $AzItem
+        Copy-Item $TemplateFile -Destination $Repo\$AzItem
 
 # Insert json variables
 - task: PowerShell@2
   inputs:
     targetType: inline
     script: |
-      (Get-Content $DestinationFile) | Foreach-Object { 
-          $_ -replace 'AzName', 'testname' ` 
-              -replace 'AzTagEnv', 'POC' ` 
-              -replace 'AzTagOwn', 'jc' ` 
-              -replace 'AzSkuName', 'Premium_LRS'  ` 
-                    -replace 'AzSkuTier','Premium' ` 
-                    -replace 'AzLoc','East US 2' ` 
-                    -replace 'AzKind','Storage' ` 
+      (Get-Content $DestinationFile) | Foreach-Object {
+          $_ -replace 'AzName', 'testname' `
+              -replace 'AzTagEnv', 'POC' `
+              -replace 'AzTagOwn', 'jc' `
+              -replace 'AzSkuName', 'Premium_LRS'  `
+                    -replace 'AzSkuTier','Premium' `
+                    -replace 'AzLoc','East US 2' `
+                    -replace 'AzKind','Storage' `
           } | Set-Content $DestinationFile
 
 # Update Repo
