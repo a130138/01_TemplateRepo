@@ -10,19 +10,42 @@ pool:
   vmImage: windows-latest
 
 steps:
-# Create folder with template file copy
+# New folder with template file copy
 - task: PowerShell@2
   inputs:
+   targetType: inline
+   script: |
+      New-Item -Path $Repo -ItemType Directory -Name $AzItem 
+        Copy-Item $TemplateFile -Destination $Repo\$AzItem 
 
 # Insert json variables
 - task: PowerShell@2
   inputs:
+    targetType: inline
+    script: |
+      (Get-Content $DestinationFile) | Foreach-Object { 
+          $_ -replace 'AzName', 'testname' ` 
+              -replace 'AzTagEnv', 'POC' ` 
+              -replace 'AzTagOwn', 'jc' ` 
+              -replace 'AzSkuName', 'Premium_LRS'  ` 
+                    -replace 'AzSkuTier','Premium' ` 
+                    -replace 'AzLoc','East US 2' ` 
+                    -replace 'AzKind','Storage' ` 
+          } | Set-Content $DestinationFile
 
 # Update Repo
 - task: CmdLine@2
   inputs:
     script: |
-      echo Write your commands here
+      cd $(System.DefaultWorkingDirectory)\_a130138_01_TemplateRepo
+      git init
+      git config --global user.email "a130138_tr1@amerisourcebergen.com"
+      git config --global user.name "a130138_tr1"
+      git fetch
+      git checkout -b main
+      git add .
+      git commit -m "My commit message"
+      git push origin HEAD:main
 
 # ARM Template - Deployment
 - task: AzureResourceManagerTemplateDeployment@3
