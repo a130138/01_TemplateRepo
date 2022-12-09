@@ -15,5 +15,5 @@ steps:
   inputs:
    targetType: inline
    script: |
-      New-Item -Path $Repo -ItemType Directory -Name $AzItem
-        Copy-Item $TemplateFile -Destination $Repo\$AzItem
+      New-Item -Path $(System.DefaultWorkingDirectory) -ItemType Directory -Name $AzItem
+        Copy-Item $AzTemplateJson -Destination $(System.DefaultWorkingDirectory)\$AzItem
