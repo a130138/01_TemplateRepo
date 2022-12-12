@@ -58,7 +58,7 @@ steps:
       # Azure Resource Group name
     location: $(AzLoc)
       # ex - East US 2
-    templateLocation: Linked Artifact
+    templateLocation: Linked artifact
       # Options: URL of the file, Linked Artifact
     csmFileLink: $(AzDestinationFileJSON)
       # azuredeploy.json location (ensure using 'raw' URL for github)
