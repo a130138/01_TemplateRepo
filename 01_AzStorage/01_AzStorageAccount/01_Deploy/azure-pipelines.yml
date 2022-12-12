@@ -3,7 +3,7 @@
 variables:
 - group: "AzVarGroupOne"
 
-- name: timestamp
+- name: Timestamp
   value: $(Get-Date -Format yyyyMMddhhmmss)
 
 trigger:
@@ -18,9 +18,9 @@ steps:
   inputs:
    targetType: inline
    script: |
-      New-Item -Path $(System.DefaultWorkingDirectory)\$(AzItem) -ItemType Directory -Name $(AzItem).$(timestamp)
-      Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\$(AzTemplateFileJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem).$(timestamp)
-      Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem).$(timestamp) -Recurse
+      New-Item -Path $(System.DefaultWorkingDirectory)\$(AzItem) -ItemType Directory -Name $(AzItem).$(Timestamp)
+      Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\$(AzTemplateFileJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem).$(Timestamp)
+      Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem).$(Timestamp) -Recurse
 
 # Insert variables into json
 - task: PowerShell@2
