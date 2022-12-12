@@ -19,9 +19,9 @@ steps:
    targetType: inline
    script: |
       New-Item -Path $(AzRepoFolder) -ItemType Directory -Name $(AzItem).$(Timestamp)
-      Get-Content $(AzRepoFolder)\$(AzItem).$(Timestamp)
+      Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Timestamp)
       Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\azuredeploy.json -Destination $(AzRepoFolder)\$(AzItem).$(Timestamp)
-      Get-Content $(AzRepoFolder)\$(AzItem).$(Timestamp)
+      Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Timestamp)
       (Get-Content $(AzDestinationFileJSON)) | Foreach-Object { 
           $_ -replace '@@AzName@@', 'testname' ` 
              -replace '@@AzTagEnv@@', 'POC' ` 
