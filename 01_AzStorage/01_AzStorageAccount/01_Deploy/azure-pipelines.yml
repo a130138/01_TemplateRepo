@@ -3,7 +3,8 @@
 variables:
 - group: "AzVarGroupOne"
 
-- name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r) 
+- name: mydate
+  value: $(Get-Date -Format yyyyMMddhhmmss)
 
 trigger:
   - none
@@ -12,11 +13,18 @@ pool:
   vmImage: windows-latest
 
 steps:
+# Timestamp 
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: |
+      Write-Host $(mydate)
+
 # New folder with template file copy
 - task: PowerShell@2
   inputs:
    targetType: inline
    script: |
-      New-Item -Path $(System.DefaultWorkingDirectory) -ItemType Directory -Name $(AzItem)_$(date:yyyyMMdd)
-      Copy-Item $(AzTemplateJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem)_$(date:yyyyMMdd)
-      Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem)_$(date:yyyyMMdd)
+      New-Item -Path $(System.DefaultWorkingDirectory) -ItemType Directory -Name $(AzItem).$(mydate)
+      Copy-Item $(AzTemplateJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem).$(mydate)
+      Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem).$(mydate)
