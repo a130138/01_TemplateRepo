@@ -30,11 +30,12 @@ steps:
              -replace '@@AzKind@@','Storage' `
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
+
 # Update Repo
 - task: CmdLine@2
   inputs:
     script: |
-      cd $(System.DefaultWorkingDirectory)/_a130138_01_TemplateRepo
+      cd $(System.DefaultWorkingDirectory)\_a130138_01_TemplateRepo
       git init
       git config --global user.email "a130138_tr1@amerisourcebergen.com"
       git config --global user.name "a130138_tr1"
