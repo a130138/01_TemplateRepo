@@ -22,7 +22,7 @@ steps:
       Copy-Item $(AzTemplateFileJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem).$(timestamp)
       Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem).$(timestamp) -Recurse
 
-# Insert json variables
+# Insert variables into json
 - task: PowerShell@2
   inputs:
     targetType: inline
