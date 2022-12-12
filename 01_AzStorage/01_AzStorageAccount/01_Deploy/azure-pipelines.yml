@@ -49,7 +49,7 @@ steps:
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: $(System.DefaultWorkingDirectory)
-    artifactName: AzTest
+    artifactName: AzArtifact.$(AzItem)
 # ARM Template - Deployment
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
@@ -63,10 +63,9 @@ steps:
       # Azure Resource Group name
     location: $(AzLoc)
       # ex - East US 2
-    templateLocation: Linked artifact
+    templateLocation: URL of the file
       # Options: URL of the file, Linked Artifact
-    csmFileLink: '$(System.DefaultWorkingDirectory)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.$Timestamp\azuredeploy.json'
-    # https://artprodcus3.artifacts.visualstudio.com/A48517179-7da3-444c-8d93-0376087cfebd/e15a61c9-c4e6-4ef5-b07e-9e935950cfb3/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2ExMzAxMzh0cjEvcHJvamVjdElkL2UxNWE2MWM5LWM0ZTYtNGVmNS1iMDdlLTllOTM1OTUwY2ZiMy9idWlsZElkLzc3OS9hcnRpZmFjdE5hbWUvZHJvcA2/content?format=file&subPath=%2Fs%2F01_AzStorage%2F01_AzStorageAccount%2FAzStorageAcct.20221212%2Fazuredeploy.json
-    # azuredeploy.json location (ensure using 'raw' URL for github)
+    csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/AzStorageAcct.20221212/azuredeploy.json'
+      # azuredeploy.json location (ensure using 'raw' URL for github)
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
