@@ -22,17 +22,3 @@ steps:
       Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\$(AzTemplateFileJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem).$(timestamp)
       Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem).$(timestamp) -Recurse
 
-# Insert variables into json
-- task: PowerShell@2
-  inputs:
-    targetType: inline
-    script: |
-      (Get-Content $(AzDestinationFileJSON)) | Foreach-Object { 
-          $_ -replace '@@AzName@@', 'testname' ` 
-              -replace '@@AzTagEnv@@', 'POC' ` 
-              -replace '@@AzTagOwn@@', 'jc' ` 
-              -replace '@@AzSkuName@@', 'Premium_LRS'  ` 
-                    -replace '@@AzSkuTier@@','Premium' ` 
-                    -replace '@@AzLoc@@','East US 2' ` 
-                    -replace '@@AzKind@@','Storage' ` 
-          } | Set-Content $(AzDestinationFileJSON)
