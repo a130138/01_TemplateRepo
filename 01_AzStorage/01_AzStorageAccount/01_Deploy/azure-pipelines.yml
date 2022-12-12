@@ -31,3 +31,4 @@ steps:
              -replace '@@AzLoc@@','East US 2' `
              -replace '@@AzKind@@','Storage' `
           } | Set-Content $(AzDestinationFileJSON)
+      Get-Content $(AzDestinationFileJSON)
