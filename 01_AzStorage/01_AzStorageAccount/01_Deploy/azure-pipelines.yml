@@ -1,7 +1,7 @@
 # Azure Storage Acct Deploy
 
 variables:
-- group: "AzVarGroupOne"
+#- group: "AzVarGroupOne"
 - name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r) 
 
 trigger:
@@ -16,6 +16,6 @@ steps:
   inputs:
    targetType: inline
    script: |
-      New-Item -Path $(System.DefaultWorkingDirectory) -ItemType Directory -Name $(AzItem).$(date:yyyyMMdd)
-      Copy-Item $(AzTemplateJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem).$(date:yyyyMMdd)
-      Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem).$(date:yyyyMMdd)
+      New-Item -Path $(System.DefaultWorkingDirectory) -ItemType Directory -Name $(AzItem)_$(date:yyyyMMdd)
+      Copy-Item $(AzTemplateJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem)_$(date:yyyyMMdd)
+      Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem)_$(date:yyyyMMdd)
