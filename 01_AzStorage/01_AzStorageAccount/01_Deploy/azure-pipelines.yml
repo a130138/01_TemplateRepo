@@ -20,4 +20,4 @@ steps:
    script: |
       New-Item -Path $(System.DefaultWorkingDirectory)\$(AzItem) -ItemType Directory -Name $(AzItem).$(mydate)
       Copy-Item $(AzTemplateJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem)\$(AzItem).$(mydate)
-      Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem)\$(AzItem).$(mydate)
+      Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem) -recurse
