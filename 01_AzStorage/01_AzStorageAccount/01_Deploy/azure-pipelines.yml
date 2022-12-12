@@ -2,8 +2,7 @@
 
 variables:
 - group: "AzVarGroupOne"
-- name: timstamp
-  value: (Get-Date -Format MMddyyyy)
+- name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r) 
 
 trigger:
   - none
@@ -17,6 +16,6 @@ steps:
   inputs:
    targetType: inline
    script: |
-      New-Item -Path $(System.DefaultWorkingDirectory) -ItemType Directory -Name $(AzItem).$(timestamp)
-      Copy-Item $(AzTemplateJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem).$(timestamp)
-      Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem).$(timestamp)
+      New-Item -Path $(System.DefaultWorkingDirectory) -ItemType Directory -Name $(AzItem).$(date:yyyyMMdd)
+      Copy-Item $(AzTemplateJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem).$(date:yyyyMMdd)
+      Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem).$(date:yyyyMMdd)
