@@ -1,7 +1,8 @@
 # Azure Storage Acct Deploy
 
 variables:
-#- group: "AzVarGroupOne"
+- group: "AzVarGroupOne"
+
 - name: $(BuildDefinitionName)_$(date:yyyyMMdd)$(rev:.r) 
 
 trigger:
