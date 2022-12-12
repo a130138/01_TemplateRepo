@@ -33,7 +33,6 @@ steps:
              -replace '@@AzKind@@','Storage' `
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
-
 # Update Repo
 - task: CmdLine@2
   inputs:
@@ -46,3 +45,22 @@ steps:
       git add .
       git commit -m "My commit message"
       git push origin HEAD:main
+# ARM Template - Deployment
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: Resource Group
+      # Options: Resource Group, Management Group, Subscription
+    azureResourceManagerConnection: $(AzArmConnection)
+      # ex - Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)
+    action: Create Or Update Resource Group
+      # Options: Create Or Update Resource Group, DeleteRG
+    resourceGroupName: $(AzRgName)
+      # Azure Resource Group name
+    location: $(AzLoc)
+      # ex - East US 2
+    templateLocation: Linked Artifact
+      # Options: URL of the file, Linked Artifact
+    csmFileLink: $(AzDestinationFileJSON)
+      # azuredeploy.json location (ensure using 'raw' URL for github)
+    deploymentMode: Incremental
+      # Options:  Incremental, Validation, Complete
