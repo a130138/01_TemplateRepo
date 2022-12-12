@@ -13,18 +13,11 @@ pool:
   vmImage: windows-latest
 
 steps:
-# Timestamp 
-- task: PowerShell@2
-  inputs:
-    targetType: inline
-    script: |
-      Write-Host $(mydate)
-
 # New folder with template file copy
 - task: PowerShell@2
   inputs:
    targetType: inline
    script: |
-      New-Item -Path $(System.DefaultWorkingDirectory) -ItemType Directory -Name $(AzItem).$(mydate)
-      Copy-Item $(AzTemplateJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem).$(mydate)
-      Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem).$(mydate)
+      New-Item -Path $(System.DefaultWorkingDirectory)\$(AzItem) -ItemType Directory -Name $(AzItem).$(mydate)
+      Copy-Item $(AzTemplateJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem)\$(AzItem).$(mydate)
+      Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem)\$(AzItem).$(mydate)
