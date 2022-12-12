@@ -3,7 +3,7 @@
 variables:
 - group: "AzVarGroupOne"
 
-- name: mydate
+- name: timestamp
   value: $(Get-Date -Format yyyyMMddhhmmss)
 
 trigger:
@@ -18,6 +18,21 @@ steps:
   inputs:
    targetType: inline
    script: |
-      New-Item -Path $(System.DefaultWorkingDirectory)\$(AzItem) -ItemType Directory -Name $(AzItem).$(mydate)
-      Copy-Item $(AzTemplateJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem)\$(AzItem).$(mydate)
+      New-Item -Path $(System.DefaultWorkingDirectory)\$(AzItem) -ItemType Directory -Name $(AzItem).$(timestamp)
+      Copy-Item $(AzTemplateJson) -Destination $(System.DefaultWorkingDirectory)\$(AzItem)\$(AzItem).$(timestamp)
       Get-ChildItem $(System.DefaultWorkingDirectory)\$(AzItem) -Recurse
+
+# Insert json variables
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: |
+      (Get-Content $DestinationFile) | Foreach-Object { 
+          $_ -replace '@@AzName@@', 'testname' ` 
+              -replace '@@AzTagEnv@@', 'POC' ` 
+              -replace '@@AzTagOwn@@', 'jc' ` 
+              -replace '@@AzSkuName@@', 'Premium_LRS'  ` 
+                    -replace '@@AzSkuTier@@','Premium' ` 
+                    -replace '@@AzLoc@@','East US 2' ` 
+                    -replace '@@AzKind@@','Storage' ` 
+          } | Set-Content $DestinationFile
