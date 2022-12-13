@@ -42,12 +42,12 @@ steps:
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: $(Build.ArtifactStagingDirectory)
-    artifactName: 'AzPipelineArtifactPublish'
+    artifactName: 'AzPipelineArtifact'
 - task: DownloadPipelineArtifact@2
   inputs:
     buildType: 'current'
     targetPath: $(Build.ArtifactStagingDirectory)
-    artifactName: 'AzPipelineArtifactDownload'
+    artifactName: 'AzPipelineArtifact'
 
 - task: PowerShell@2
   inputs:
