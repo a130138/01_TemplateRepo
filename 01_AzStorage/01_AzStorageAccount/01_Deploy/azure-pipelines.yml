@@ -34,15 +34,20 @@ steps:
              -replace '@@AzKind@@','Storage' `
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
+
+- task: CopyFiles@2
+  inputs:
+    Contents: $(Pipeline.Workspace)\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)\azuredeploy.json
+    targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Pipeline.Workspace)'
-    artifactName: 'AzPipelineArtifact'
+    targetPath: $(Build.ArtifactStagingDirectory)
+    artifactName: 'AzPipelineArtifactPublish'
 - task: DownloadPipelineArtifact@2
   inputs:
     buildType: 'current'
-    targetPath: '$(Pipeline.Workspace)'
-    artifactName: 'AzPipelineArtifact'
+    targetPath: $(Build.ArtifactStagingDirectory)
+    artifactName: 'AzPipelineArtifactDownload'
 
 - task: PowerShell@2
   inputs:
@@ -55,6 +60,8 @@ steps:
       Write-Host "Get-ChildItem '$(Pipeline.Workspace)'\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)"
       Get-ChildItem $(Pipeline.Workspace)\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)
       Write-Host "################################"
+      Write-Host "Get-ChildItem '$(Build.ArtifactStagingDirectory)' -recurse"
+      Get-ChildItem $(Build.ArtifactStagingDirectory) -recurse
 
 # ARM Template - Deployment
 - task: AzureResourceManagerTemplateDeployment@3
@@ -71,7 +78,7 @@ steps:
       # ex - East US 2
     templateLocation: Linked artifact
       # Options: URL of the file, Linked Artifact
-    csmFileLink: $(Pipeline.Workspace)\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)\**.json
+    csmFileLink: $(Build.ArtifactStagingDirectory)\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)\azuredeploy.json
       # azuredeploy.json location (ensure using 'raw' URL for github)
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
