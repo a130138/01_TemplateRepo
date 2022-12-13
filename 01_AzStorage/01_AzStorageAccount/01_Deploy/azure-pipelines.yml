@@ -40,10 +40,6 @@ steps:
   inputs:
     Contents:  $(Build.SourcesDirectory)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221213\**\*.json
     targetFolder: $(Build.ArtifactStagingDirectory)
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: $(Build.ArtifactStagingDirectory)
-    artifactName: 'drop'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
