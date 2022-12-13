@@ -63,9 +63,9 @@ steps:
       # Azure Resource Group name
     location: $(AzLoc)
       # ex - East US 2
-    templateLocation: URL of the file
+    templateLocation: Linked artifact
       # Options: URL of the file, Linked Artifact
-    csmFileLink: 'https://raw.githubusercontent.com/a130138/01_TemplateRepo/main/01_AzStorage/01_AzStorageAccount/AzStorageAcct.20221212/azuredeploy.json'
+    csmFileLink: 
       # azuredeploy.json location (ensure using 'raw' URL for github)
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
