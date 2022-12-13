@@ -50,10 +50,12 @@ steps:
    script: |
       Write-Host "################################"
       Write-Host "Pipeline Workspace Directory"
+      Write-Host "Get-ChildItem $(Pipeline.Workspace) -recurse"
       Get-ChildItem $(Pipeline.Workspace) -recurse
       Write-Host "################################"
       Write-Host "Pipeline Workspace New Folder"
-      Get-ChildItem $(Pipeline.Workspace)/AzPipelineArtifact/s/01_AzStorage/01_AzStorageAccount/$(AzItem).$Timestamp
+      Write-Host "Get-ChildItem $(Pipeline.Workspace)/AzPipelineArtifact/s/01_AzStorage/01_AzStorageAccount/$(AzItem).$Timestamp"
+      Get-ChildItem $(Pipeline.Workspace)/AzPipelineArtifact/s/01_AzStorage/01_AzStorageAccount/$(AzItem).$(Timestamp)
       Write-Host "################################"
 
 # ARM Template - Deployment
