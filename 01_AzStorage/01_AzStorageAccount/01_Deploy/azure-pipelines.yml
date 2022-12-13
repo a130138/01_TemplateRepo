@@ -36,7 +36,7 @@ steps:
       Get-Content $(AzDestinationFileJSON)
 - task: CopyFiles@2
   inputs:
-    Contents:  $(Build.SourcesDirectory)/**/*.json
+    Contents:  $(Build.SourcesDirectory)/01_AzStorage/**/*.json
     targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishPipelineArtifact@1
   inputs:
@@ -76,7 +76,7 @@ steps:
       # ex - East US 2
     templateLocation: Linked artifact
       # Options: URL of the file, Linked Artifact
-    csmFileLink: $(Build.ArtifactStagingDirectory)\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)\azuredeploy.json
+    csmFileLink: $(Build.ArtifactStagingDirectory)\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)\*.json
       # azuredeploy.json location (ensure using 'raw' URL for github)
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
