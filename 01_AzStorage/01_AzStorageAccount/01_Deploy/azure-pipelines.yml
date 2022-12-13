@@ -34,10 +34,7 @@ steps:
              -replace '@@AzKind@@','Storage' `
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Pipeline.Workspace)'
-    artifactName: AzPipelineArtifact
+
 - task: DownloadPipelineArtifact@2
   inputs:
     buildType: 'current'
@@ -59,7 +56,7 @@ steps:
       # ex - East US 2
     templateLocation: Linked artifact
       # Options: URL of the file, Linked Artifact
-    csmFileLink: '$(Pipeline.Workspace)/AzPipelineArtifact/s/01_AzStorage/01_AzStorageAccount/$(AzItem).$(Timestamp)/azuredeploy.json'
+    csmFileLink: '$(Pipeline.Workspace)\AzPipelineArtifact\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)\azuredeploy.json'
       # azuredeploy.json location (ensure using 'raw' URL for github)
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
