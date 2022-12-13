@@ -36,12 +36,12 @@ steps:
       Get-Content $(AzDestinationFileJSON)
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(System.ArtifactsDirectory)'
+    targetPath: '$(Pipeline.Workspace)'
     artifactName: 'AzPipelineArtifact'
 - task: DownloadPipelineArtifact@2
   inputs:
     buildType: 'current'
-    targetPath: '$(System.ArtifactsDirectory)'
+    targetPath: '$(Pipeline.Workspace)'
     artifactName: 'AzPipelineArtifact'
 
 - task: PowerShell@2
@@ -50,7 +50,7 @@ steps:
    script: |
       Write-Host "################################"
       Write-Host "Systems Artifact Directory"
-      Get-ChildItem $(System.ArtifactsDirectory)
+      Get-ChildItem $(Pipeline.Workspace)
       Write-Host "################################"
 
 # ARM Template - Deployment
@@ -68,7 +68,7 @@ steps:
       # ex - East US 2
     templateLocation: Linked artifact
       # Options: URL of the file, Linked Artifact
-    csmFileLink: '$(System.ArtifactsDirectory)/**/azuredeploy.json'
+    csmFileLink: '$(Pipeline.Workspace)/**/azuredeploy.json'
       # azuredeploy.json location (ensure using 'raw' URL for github)
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
