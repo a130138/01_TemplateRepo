@@ -55,31 +55,17 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Write-Host $(Build.SourcesDirectory) 
-      Get-ChildItem $(Build.SourcesDirectory) -Recurse
-
-      Write-Host $(System.DefaultWorkingDirectory)
+      Write-Host "################################"
+      Write-Host Build.SourcesDirectory 
+        Get-ChildItem $(Build.SourcesDirectory) -Recurse
+      Write-Host "################################"
+      
+      Write-Host "################################"
+      Write-Host System.DefaultWorkingDirectory
       Get-ChildItem $(System.DefaultWorkingDirectory) -Recurse
 
-      Write-Host $(Pipeline.Workspace)
+      Write-Host "################################"
+      Write-Host Pipeline.Workspace
       Get-ChildItem $(Pipeline.Workspace) -Recurse
+      Write-Host "################################"
 
-# ARM Template - Deployment
-- task: AzureResourceManagerTemplateDeployment@3
-  inputs:
-    deploymentScope: Resource Group
-      # Options: Resource Group, Management Group, Subscription
-    azureResourceManagerConnection: $(AzArmConnection)
-      # ex - Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)
-    action: Create Or Update Resource Group
-      # Options: Create Or Update Resource Group, DeleteRG
-    resourceGroupName: $(AzRgName)
-      # Azure Resource Group name
-    location: $(AzLoc)
-      # ex - East US 2
-    templateLocation: Linked artifact
-      # Options: URL of the file, Linked Artifact
-    csmFileLink: 'D:\a\1\s\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221213\azuredeploy.json'
-      # azuredeploy.json location (ensure using 'raw' URL for github)
-    deploymentMode: Incremental
-      # Options:  Incremental, Validation, Complete
