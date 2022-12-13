@@ -21,6 +21,7 @@ steps:
 - task: PowerShell@2
   inputs:
    targetType: inline
+   failOnStderr: false
    script: |
       New-Item -Path $(AzRepoFolder) -ItemType Directory -Name $(AzItem).$(Timestamp)
       Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\azuredeploy.json -Destination $(AzRepoFolder)\$(AzItem).$(Timestamp)
@@ -34,9 +35,10 @@ steps:
              -replace '@@AzKind@@','Storage' `
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
+      Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Timestamp) -Recurse
 - task: CopyFiles@2
   inputs:
-    Contents:  $(Build.SourcesDirectory)\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)\**\*.json
+    Contents:  $(Build.SourcesDirectory)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221213\**\*.json
     targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishPipelineArtifact@1
   inputs:
