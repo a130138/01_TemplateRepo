@@ -43,12 +43,6 @@ steps:
   inputs:
     targetPath: $(Build.ArtifactStagingDirectory)
     artifactName: 'AzPipelineArtifact'
-- task: DownloadPipelineArtifact@2
-  inputs:
-    buildType: 'current'
-    targetPath: $(Build.ArtifactStagingDirectory)
-    artifactName: 'AzPipelineArtifact'
-
 - task: PowerShell@2
   inputs:
    targetType: inline
