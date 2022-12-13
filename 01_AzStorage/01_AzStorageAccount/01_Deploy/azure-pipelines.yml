@@ -34,7 +34,10 @@ steps:
              -replace '@@AzKind@@','Storage' `
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
-
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifactName: AzPipelineArtifact
 - task: DownloadPipelineArtifact@2
   inputs:
     buildType: 'current'
