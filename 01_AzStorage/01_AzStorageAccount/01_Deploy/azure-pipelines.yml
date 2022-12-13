@@ -49,8 +49,11 @@ steps:
    targetType: inline
    script: |
       Write-Host "################################"
-      Write-Host "Systems Artifact Directory"
-      Get-ChildItem $(Pipeline.Workspace)
+      Write-Host "Pipeline Workspace Directory"
+      Get-ChildItem $(Pipeline.Workspace) -recurse
+      Write-Host "################################"
+      Write-Host "Pipeline Workspace New Folder"
+      Get-ChildItem $(Pipeline.Workspace)/AzPipelineArtifact/s/01_AzStorage/01_AzStorageAccount/$(AzItem).$Timestamp
       Write-Host "################################"
 
 # ARM Template - Deployment
@@ -68,7 +71,7 @@ steps:
       # ex - East US 2
     templateLocation: Linked artifact
       # Options: URL of the file, Linked Artifact
-    csmFileLink: '$(Pipeline.Workspace)/**/azuredeploy.json'
+    csmFileLink: '$(Pipeline.Workspace)/01_AzStorage/01_AzStorageAccount/$(AzItem).$Timestamp/azuredeploy.json'
       # azuredeploy.json location (ensure using 'raw' URL for github)
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
