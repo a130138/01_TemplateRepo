@@ -36,7 +36,7 @@ steps:
       Get-Content $(AzDestinationFileJSON)
 - task: CopyFiles@2
   inputs:
-    Contents:  $(Build.SourcesDirectory)\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)\azuredeploy.json
+    Contents:  $(Build.SourcesDirectory)/s/**/*.json
     targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishPipelineArtifact@1
   inputs:
