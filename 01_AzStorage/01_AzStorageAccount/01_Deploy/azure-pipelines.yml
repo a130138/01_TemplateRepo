@@ -43,10 +43,12 @@ steps:
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: $(Build.ArtifactStagingDirectory)
-    artifactName: AzPipelineArtifact
-- task: DownloadPipelineArtifact@2
+    artifactName: 'drop'
+- task: PublishBuildArtifacts@1
   inputs:
-    artifact: AzPipelineArtifact
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 - task: DownloadBuildArtifacts@0
   inputs:
     buildType: 'current'
@@ -85,7 +87,7 @@ steps:
       # ex - East US 2
     templateLocation: Linked artifact
       # Options: URL of the file, Linked Artifact
-    csmFileLink: D:\a\1\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221213\**.json
+    csmFileLink: D:\a\1\a\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221213\**\*.json
       # azuredeploy.json location (ensure using 'raw' URL for github)
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
