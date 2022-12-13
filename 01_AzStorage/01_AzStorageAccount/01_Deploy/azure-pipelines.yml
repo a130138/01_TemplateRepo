@@ -41,7 +41,7 @@ steps:
     targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: $(Build.ArtifactStagingDirectory)
+    targetPath: $(Build.ArtifactStagingDirectory)\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)\azuredeploy.json
     artifactName: AzPipelineArtifact
 - task: DownloadPipelineArtifact@2
   inputs:
@@ -59,7 +59,6 @@ steps:
       Write-Host "################################"
       Write-Host "Get-ChildItem '$(Build.ArtifactStagingDirectory)' -recurse"
       Get-ChildItem $(Build.ArtifactStagingDirectory) -recurse
-
 # ARM Template - Deployment
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
