@@ -37,22 +37,25 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    Contents: $(Pipeline.Workspace)\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)\azuredeploy.json
+    Contents:  $(Build.SourcesDirectory)\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)\azuredeploy.json
     targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: $(Build.ArtifactStagingDirectory)
-    artifactName: 'AzPipelineArtifact'
+    artifactName: AzPipelineArtifact
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifact: AzPipelineArtifact
 - task: PowerShell@2
   inputs:
    targetType: inline
    script: |
       Write-Host "################################"
-      Write-Host "Get-ChildItem '$(Pipeline.Workspace)' -recurse"
-      Get-ChildItem $(Pipeline.Workspace) -recurse
+      Write-Host "Get-ChildItem ' $(Build.SourcesDirectory)' -recurse"
+      Get-ChildItem  $(Build.SourcesDirectory) -recurse
       Write-Host "################################"
-      Write-Host "Get-ChildItem '$(Pipeline.Workspace)'\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)"
-      Get-ChildItem $(Pipeline.Workspace)\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)
+      Write-Host "Get-ChildItem ' $(Build.SourcesDirectory)'\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)"
+      Get-ChildItem  $(Build.SourcesDirectory)\s\01_AzStorage\01_AzStorageAccount\$(AzItem).$(Timestamp)
       Write-Host "################################"
       Write-Host "Get-ChildItem '$(Build.ArtifactStagingDirectory)' -recurse"
       Get-ChildItem $(Build.ArtifactStagingDirectory) -recurse
