@@ -34,38 +34,32 @@ steps:
              -replace '@@AzKind@@','Storage' `
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
-# Update Repo
-- task: CmdLine@2
-  inputs:
-    script: |
-      git init
-      git config --global user.email "a130138_tr1@amerisourcebergen.com"
-      git config --global user.name "a130138_tr1"
-      git fetch
-      git checkout -b main
-      git add .
-      git commit -m "My commit message"
-      git push origin HEAD:main
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: $(System.DefaultWorkingDirectory)
-    artifactName: AzArtifact.$(AzItem)
-
-- task: PowerShell@2
+    targetPath: '$(Pipeline.Workspace)'
+    artifactName: AzPipelineArtifact
+- task: DownloadPipelineArtifact@2
   inputs:
-    targetType: 'inline'
-    script: |
-      Write-Host "################################"
-      Write-Host Build.SourcesDirectory 
-        Get-ChildItem $(Build.SourcesDirectory) -Recurse
-      Write-Host "################################"
-      
-      Write-Host "################################"
-      Write-Host System.DefaultWorkingDirectory
-      Get-ChildItem $(System.DefaultWorkingDirectory) -Recurse
+    buildType: 'current'
+    targetPath: '$(Pipeline.Workspace)'
+    artifactName: AzPipelineArtifact
 
-      Write-Host "################################"
-      Write-Host Pipeline.Workspace
-      Get-ChildItem $(Pipeline.Workspace) -Recurse
-      Write-Host "################################"
-
+# ARM Template - Deployment
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: Resource Group
+      # Options: Resource Group, Management Group, Subscription
+    azureResourceManagerConnection: $(AzArmConnection)
+      # ex - Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)
+    action: Create Or Update Resource Group
+      # Options: Create Or Update Resource Group, DeleteRG
+    resourceGroupName: $(AzRgName)
+      # Azure Resource Group name
+    location: $(AzLoc)
+      # ex - East US 2
+    templateLocation: Linked artifact
+      # Options: URL of the file, Linked Artifact
+    csmFileLink: '$(Pipeline.Workspace)/AzPipelineArtifact/s/01_AzStorage/01_AzStorageAccount/$(AzItem).$(Timestamp)/azuredeploy.json'
+      # azuredeploy.json location (ensure using 'raw' URL for github)
+    deploymentMode: Incremental
+      # Options:  Incremental, Validation, Complete
