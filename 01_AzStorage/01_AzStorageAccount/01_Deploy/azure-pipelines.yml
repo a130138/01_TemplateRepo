@@ -36,7 +36,7 @@ steps:
       Get-Content $(AzDestinationFileJSON)
 - task: CopyFiles@2
   inputs:
-    Contents:  $(Build.SourcesDirectory)/01_AzStorage/01_AzStorageAccount/**/*.json
+    Contents:  $(Build.SourcesDirectory)/01_AzStorage/01_AzStorageAccount/$(AzItem).$(Timestamp)/*.json
     targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishPipelineArtifact@1
   inputs:
@@ -58,6 +58,9 @@ steps:
       Write-Host "##############"Build Artifact Staging Dir"##################"
       Write-Host "Get-ChildItem '$(Build.ArtifactStagingDirectory)' -recurse"
       Get-ChildItem $(Build.ArtifactStagingDirectory) -recurse
+      Write-Host "###############"Build Artifact Staging Dir"#################"
+      Write-Host "$(Build.SourcesDirectory)/01_AzStorage/01_AzStorageAccount/$(AzItem).$(Timestamp) -recurse"
+      Get-ChildItem $(Build.SourcesDirectory)/01_AzStorage/01_AzStorageAccount/$(AzItem).$(Timestamp)
       Write-Host "###############"Pipeline Workspace Dir"#################"
       Write-Host "Get-ChildItem $(Pipeline.Workspace) -recurse"
       Get-ChildItem $(Pipeline.Workspace) -recurse
