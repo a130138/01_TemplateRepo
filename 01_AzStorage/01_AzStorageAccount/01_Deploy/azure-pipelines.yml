@@ -68,6 +68,9 @@ steps:
       Write-Host "###############"Pipeline Workspace"#################"
       Write-Host "Get-ChildItem $(Pipeline.Workspace) -Recurse"
       Get-ChildItem $(Pipeline.Workspace) -Recurse
+      Write-Host "###############"Build Sources Dir"#################"
+      Write-Host "Get-ChildItem $(Build.SourcesDirectory) -Recurse"
+      Get-ChildItem $(Build.SourcesDirectory) -Recurse
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: Resource Group
@@ -82,7 +85,7 @@ steps:
       # ex - East US 2
     templateLocation: Linked artifact
       # Options: URL of the file, Linked Artifact
-    csmFileLink: D:\a\1\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221213\azuredeploy.json
+    csmFileLink: D:\a\1\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221213\**.json
       # azuredeploy.json location (ensure using 'raw' URL for github)
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
