@@ -1,4 +1,5 @@
 # Azure Storage Acct Deploy_V2
+# About:  Create new folder with template file copy, update vars and deploy to Az Portal
 
 variables:
 - group: "AzVarGroupOne"
