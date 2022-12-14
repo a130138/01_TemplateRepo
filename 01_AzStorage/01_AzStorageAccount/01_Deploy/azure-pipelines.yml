@@ -75,7 +75,7 @@ steps:
       # ex - East US 2
     templateLocation: Linked artifact
       # Options: URL of the file, Linked Artifact
-    csmFileLink: '$(Pipeline.Workspace)\drop\01_AzStorage\01_AzStorageAccount\$(AzItem).$Timestamp\azuredeploy.json'
+    csmFileLink: '$(Build.ArtifactStagingDirectory)'\drop\**\azuredeploy.json'
       # azuredeploy.json location (ensure using 'raw' URL for github)
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
