@@ -41,7 +41,7 @@ steps:
     targetType: inline
     failOnStderr: false
     script: |
-      Write-Host ######### Build.Repository.LocalPath ##############
+      Write-Host ######### Build Repository Local Path ##############
       Get-ChildItem $(Build.Repository.LocalPath) -Recurse
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
