@@ -69,5 +69,5 @@ steps:
     resourceGroupName: $(AzRgName)
     location: $(AzLoc)
     templateLocation: Linked artifact
-    csmFileLink: '$(Pipeline.Workspace)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
+    csmFileLink: '$(Pipeline.Workspace)\s\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
     deploymentMode: 'Incremental'
