@@ -36,24 +36,25 @@ steps:
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
       Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Timestamp) -Recurse
+- task: CopyFiles@2
+  inputs:
+    Contents:  $(Build.SourcesDirectory)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\**\*.json
+    targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Pipeline.Workspace)'
+    targetPath: '$(Build.ArtifactStagingDirectory)'
     artifact: 'drop'
-    publishLocation: 'pipeline'
 - task: DownloadPipelineArtifact@2
   inputs:
-    buildType: 'current'
-    artifactName: 'drop'
-    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'drop'
 - task: PowerShell@2
   inputs:
    targetType: inline
    failOnStderr: false
    script: |
-      Write-Host "###############"Pipeline Workspace"#################"
-      Write-Host "Get-ChildItem $(Pipeline.Workspace)"
-      Get-ChildItem $(Pipeline.Workspace) -recurse
+      Write-Host "############### Build Artifact Staging Directory #################"
+      Write-Host "Get-ChildItem $(Build.ArtifactStagingDirectory)"
+      Get-ChildItem $(Build.ArtifactStagingDirectory) -recurse
 # ARM Template - Deployment
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
@@ -63,5 +64,5 @@ steps:
     resourceGroupName: $(AzRgName)
     location: $(AzLoc)
     templateLocation: Linked artifact
-    csmFileLink: $(Pipeline.Workspace)\**\*.json
+    csmFileLink: $(Pipeline.Workspace)\drop\**\azuredeploy.json
     deploymentMode: Incremental
