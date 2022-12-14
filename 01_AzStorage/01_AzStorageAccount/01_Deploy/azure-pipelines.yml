@@ -42,7 +42,10 @@ steps:
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)'
-    artifact: 'drop'
+- task: DownloadPipelineArtifact@2
+  inputs:
+    buildType: 'current'
+    artifactName: 'drop'
 - task: PowerShell@2
   inputs:
    targetType: inline
@@ -64,5 +67,5 @@ steps:
     resourceGroupName: $(AzRgName)
     location: $(AzLoc)
     templateLocation: Linked artifact
-    csmFileLink: 'D:\a\1\a\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
+    csmFileLink: '$(Pipeline.Workspace)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
     deploymentMode: 'Incremental'
