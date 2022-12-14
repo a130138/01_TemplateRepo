@@ -35,14 +35,14 @@ steps:
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
       Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Timestamp) -Recurse
-
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
-    deploymentScope: Resource Group
-    azureResourceManagerConnection: $(AzArmConnection)
-    action: Create Or Update Resource Group
-    resourceGroupName: $(AzRgName)
-    location: $(AzLoc)
-    templateLocation: Linked artifact
-    csmFileLink: '$(AzDestinationFileJSON)'
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    subscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'JoePOC1'
+    location: 'East US 2'
+    templateLocation: 'Linked artifact'
+    csmFile: '$(AzDestinationFileJSON)'
     deploymentMode: 'Incremental'
