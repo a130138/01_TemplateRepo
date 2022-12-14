@@ -47,6 +47,7 @@ steps:
   inputs:
     buildType: 'current'
     artifactName: 'drop'
+    targetPath: $(Pipeline.Workspace)
 - task: PowerShell@2
   inputs:
    targetType: inline
@@ -58,8 +59,8 @@ steps:
       Write-Host "############### Pipeline Workspace #################"
       Write-Host "Get-ChildItem Pipeline Workspace"
       Get-ChildItem $(Pipeline.Workspace) -Recurse
-      Write-Host "############### Mapped D Drive #################"
-      Get-ChildItem D:\a\1\a -Recurse
+      Write-Host "############### D:\a\1 #################"
+      Get-ChildItem D:\a\1\ -Recurse
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: Resource Group
@@ -68,5 +69,5 @@ steps:
     resourceGroupName: $(AzRgName)
     location: $(AzLoc)
     templateLocation: Linked artifact
-    csmFileLink: '$(Pipeline.Workspace)\drop\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
+    csmFileLink: '$(Pipeline.Workspace)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
     deploymentMode: 'Incremental'
