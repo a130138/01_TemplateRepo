@@ -55,8 +55,8 @@ steps:
       Get-ChildItem $(Build.SourcesDirectory) -Recurse
       Write-Host "###############"System Default Working Dir"#################"
       Get-ChildItem $(System.DefaultWorkingDirectory) -Recurse
-- task: PublishBuildArtifacts@1
+- task: PublishPipelineArtifact@1
   inputs:
-    PathtoPublish: '$(System.ArtifactsDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'drop'
+    publishLocation: 'pipeline'
