@@ -53,5 +53,6 @@ steps:
     location: 'East US 2'
     templateLocation: 'Linked artifact'
     csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.$(Timestamp).$(Build.BuildId)\azuredeploy.json'
+    # csmFile: 'D:\a\1\s\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214.871'
     deploymentMode: Validation
       # Options:  Incremental, Validation, Complete
