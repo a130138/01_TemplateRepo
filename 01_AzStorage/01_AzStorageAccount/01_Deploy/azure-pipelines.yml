@@ -53,8 +53,11 @@ steps:
    failOnStderr: false
    script: |
       Write-Host "############### Build Artifact Staging Directory #################"
-      Write-Host "Get-ChildItem $(Build.ArtifactStagingDirectory)"
+      Write-Host "Get-ChildItem Build Artifact Staging Directory"
       Get-ChildItem $(Build.ArtifactStagingDirectory) -recurse
+      Write-Host "############### Pipeline Workspace #################"
+      Write-Host "Get-ChildItem Pipeline Workspace"
+      Get-ChildItem $(Pipeline.Workspace) -recurse
 # ARM Template - Deployment
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
