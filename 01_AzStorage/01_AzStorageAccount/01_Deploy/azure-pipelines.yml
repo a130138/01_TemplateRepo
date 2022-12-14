@@ -57,6 +57,6 @@ steps:
       Get-ChildItem $(System.DefaultWorkingDirectory) -Recurse
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(System.ArtifactsDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
