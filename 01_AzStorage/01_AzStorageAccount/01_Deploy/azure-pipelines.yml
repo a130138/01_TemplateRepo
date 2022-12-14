@@ -36,20 +36,19 @@ steps:
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
       Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Timestamp) -Recurse
-- task: DownloadBuildArtifacts@0
+- task: PublishPipelineArtifact@1
   inputs:
-    buildType: 'current'
-    downloadType: 'specific'
-    downloadPath: '$(Build.ArtifactStagingDirectory)'
-    cleanDestinationFolder: true
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'drop'
+    publishLocation: 'pipeline'
 - task: PowerShell@2
   inputs:
    targetType: inline
    failOnStderr: false
    script: |
       Write-Host "###############"System Artifact Dir"#################"
-      Write-Host "Get-ChildItem '$(Build.ArtifactStagingDirectory)'"
-      Get-ChildItem $(Build.ArtifactStagingDirectory) -recurse
+      Write-Host "Get-ChildItem '$(Pipeline.Workspace)'"
+      Get-ChildItem $(Pipeline.Workspace) -recurse
 # ARM Template - Deployment
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
@@ -59,5 +58,5 @@ steps:
     resourceGroupName: $(AzRgName)
     location: $(AzLoc)
     templateLocation: Linked artifact
-    csmFileLink: $(Build.ArtifactStagingDirectory)\drop\**\azuredeploy.json
+    csmFileLink: $(Pipeline.Workspace)\drop\**\azuredeploy.json
     deploymentMode: Incremental
