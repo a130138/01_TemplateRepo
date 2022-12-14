@@ -44,9 +44,6 @@ steps:
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)'
     artifact: 'drop'
-- task: DownloadPipelineArtifact@2
-  inputs:
-    artifact: 'drop'
 - task: PowerShell@2
   inputs:
    targetType: inline
@@ -59,6 +56,7 @@ steps:
       Write-Host "Get-ChildItem Pipeline Workspace"
       Get-ChildItem $(Pipeline.Workspace) -recurse
 # ARM Template - Deployment
+- checkout: self
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: Resource Group
@@ -67,5 +65,5 @@ steps:
     resourceGroupName: $(AzRgName)
     location: $(AzLoc)
     templateLocation: Linked artifact
-    csmFileLink: 'D:\a\1\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
+    csmFileLink: '$(Pipeline.Workspace)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
     deploymentMode: 'Incremental'
