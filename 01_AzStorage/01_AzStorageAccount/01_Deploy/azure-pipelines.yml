@@ -35,17 +35,6 @@ steps:
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
       Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Timestamp) -Recurse
-- task: CopyFiles@2
-  inputs:
-    Contents:  $(Build.SourcesDirectory)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\**\*.json
-    targetFolder: $(Build.ArtifactStagingDirectory)
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)'
-    artifact: 'drop'
-- task: DownloadPipelineArtifact@2
-  inputs:
-    artifactName: 'drop'
 
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
@@ -55,5 +44,5 @@ steps:
     resourceGroupName: $(AzRgName)
     location: $(AzLoc)
     templateLocation: Linked artifact
-    csmFileLink: '$(Pipeline.Workspace)\drop\azuredeploy.json'
+    csmFileLink: '$(AzDestinationFileJSON)'
     deploymentMode: 'Incremental'
