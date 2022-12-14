@@ -50,10 +50,12 @@ steps:
    script: |
       Write-Host "############### Build Artifact Staging Directory #################"
       Write-Host "Get-ChildItem Build Artifact Staging Directory"
-      Get-ChildItem $(Build.ArtifactStagingDirectory) -recurse
+      Get-ChildItem $(Build.ArtifactStagingDirectory) -Recurse
       Write-Host "############### Pipeline Workspace #################"
       Write-Host "Get-ChildItem Pipeline Workspace"
-      Get-ChildItem $(Pipeline.Workspace) -recurse
+      Get-ChildItem $(Pipeline.Workspace) -Recurse
+      Write-Host "############### Mapped D Drive #################"
+      Get-ChildItem D:\a\1\a -Recurse
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: Resource Group
@@ -62,5 +64,5 @@ steps:
     resourceGroupName: $(AzRgName)
     location: $(AzLoc)
     templateLocation: Linked artifact
-    csmFileLink: '$(Pipeline.Workspace)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
+    csmFileLink: 'D:\a\1\a\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
     deploymentMode: 'Incremental'
