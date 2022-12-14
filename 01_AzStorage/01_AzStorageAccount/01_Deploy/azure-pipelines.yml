@@ -41,6 +41,11 @@ steps:
     targetPath: '$(Pipeline.Workspace)'
     artifact: 'drop'
     publishLocation: 'pipeline'
+- task: DownloadPipelineArtifact@2
+  inputs:
+    buildType: 'current'
+    artifactName: 'drop'
+    targetPath: '$(Pipeline.Workspace)'
 - task: PowerShell@2
   inputs:
    targetType: inline
