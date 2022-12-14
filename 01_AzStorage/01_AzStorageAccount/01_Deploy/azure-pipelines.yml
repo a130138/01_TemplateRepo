@@ -1,4 +1,4 @@
-# Azure Storage Acct Deploy_V2
+# Title:  Azure Storage Acct Deploy_V2
 # About:  Create new folder with template file copy, update vars and deploy to Az Portal
 
 variables:
@@ -36,6 +36,13 @@ steps:
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
       Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Timestamp) -Recurse
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    failOnStderr: false
+    script: |
+      Write-Host ######### Build.Repository.LocalPath ##############
+      Get-ChildItem $(Build.Repository.LocalPath) -Recurse
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
@@ -45,5 +52,7 @@ steps:
     resourceGroupName: 'JoePOC1'
     location: 'East US 2'
     templateLocation: 'Linked artifact'
-    csmFile: 'D:\a\1\s\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
-    deploymentMode: 'Incremental'
+    csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
+      # csmFile: 'D:\a\1\s\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
+    deploymentMode: Validation
+      # Options:  Incremental, Validation, Complete
