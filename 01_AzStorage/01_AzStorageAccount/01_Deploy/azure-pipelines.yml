@@ -36,11 +36,11 @@ steps:
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
       Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Timestamp) -Recurse
-- task: DownloadPipelineArtifact@2
+- task: PublishBuildArtifacts@1
   inputs:
-    buildType: 'current'
-    artifactName: 'drop'
-    targetPath: '$(Pipeline.Workspace)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 - task: PowerShell@2
   inputs:
    targetType: inline
