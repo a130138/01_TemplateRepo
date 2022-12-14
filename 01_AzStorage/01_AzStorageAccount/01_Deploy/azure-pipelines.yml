@@ -23,8 +23,8 @@ steps:
    targetType: inline
    failOnStderr: false
    script: |
-      New-Item -Path $(AzRepoFolder) -ItemType Directory -Name $(AzItem).$(Timestamp).$(rev:.r)
-      Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\azuredeploy.json -Destination $(AzRepoFolder)\$(AzItem).$(Timestamp).$(rev:.r)
+      New-Item -Path $(AzRepoFolder) -ItemType Directory -Name $(AzItem).$(Timestamp).$(Build.BuildId)
+      Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\azuredeploy.json -Destination $(AzRepoFolder)\$(AzItem).$(Timestamp).$(Build.BuildId)
       (Get-Content $(AzDestinationFileJSON)) | Foreach-Object { 
           $_ -replace '@@AzName@@', '$(AzName)' `
              -replace '@@AzTagEnv@@', 'POC' `
@@ -35,7 +35,7 @@ steps:
              -replace '@@AzKind@@','Storage' `
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
-      Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Timestamp).$(rev:.r) -Recurse
+      Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Timestamp).$(Build.BuildId) -Recurse
 - task: PowerShell@2
   inputs:
     targetType: inline
@@ -52,6 +52,6 @@ steps:
     resourceGroupName: 'JoePOC1'
     location: 'East US 2'
     templateLocation: 'Linked artifact'
-    csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.$(Timestamp).$(rev:.r)\azuredeploy.json'
+    csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.$(Timestamp).$(Build.BuildId)\azuredeploy.json'
     deploymentMode: Validation
       # Options:  Incremental, Validation, Complete
