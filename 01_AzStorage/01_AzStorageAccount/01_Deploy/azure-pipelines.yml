@@ -46,6 +46,7 @@ steps:
 - task: DownloadPipelineArtifact@2
   inputs:
     artifactName: 'drop'
+
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: Resource Group
@@ -54,5 +55,5 @@ steps:
     resourceGroupName: $(AzRgName)
     location: $(AzLoc)
     templateLocation: Linked artifact
-    csmFileLink: '$(Pipeline.Workspace)\**\azuredeploy.json'
+    csmFileLink: '$(Pipeline.Workspace)\drop\azuredeploy.json'
     deploymentMode: 'Incremental'
