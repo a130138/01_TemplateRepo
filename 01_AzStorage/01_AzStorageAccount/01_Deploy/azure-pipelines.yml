@@ -54,5 +54,5 @@ steps:
     resourceGroupName: $(AzRgName)
     location: $(AzLoc)
     templateLocation: Linked artifact
-    csmFileLink: '$(Pipeline.Workspace)\drop\**\azuredeploy.json'
+    csmFileLink: '$(Pipeline.Workspace)\**\azuredeploy.json'
     deploymentMode: 'Incremental'
