@@ -45,22 +45,7 @@ steps:
     artifact: 'drop'
 - task: DownloadPipelineArtifact@2
   inputs:
-    buildType: 'current'
     artifactName: 'drop'
-    targetPath: $(Pipeline.Workspace)
-- task: PowerShell@2
-  inputs:
-   targetType: inline
-   failOnStderr: false
-   script: |
-      Write-Host "############### Build Artifact Staging Directory #################"
-      Write-Host "Get-ChildItem Build Artifact Staging Directory"
-      Get-ChildItem $(Build.ArtifactStagingDirectory) -Recurse
-      Write-Host "############### Pipeline Workspace #################"
-      Write-Host "Get-ChildItem Pipeline Workspace"
-      Get-ChildItem $(Pipeline.Workspace) -Recurse
-      Write-Host "############### D:\a\1 #################"
-      Get-ChildItem D:\a\1\ -Recurse
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: Resource Group
@@ -69,5 +54,5 @@ steps:
     resourceGroupName: $(AzRgName)
     location: $(AzLoc)
     templateLocation: Linked artifact
-    csmFileLink: '$(Pipeline.Workspace)\s\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
+    csmFileLink: '$(Pipeline.Workspace)\drop\**\azuredeploy.json'
     deploymentMode: 'Incremental'
