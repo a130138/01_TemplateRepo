@@ -23,8 +23,8 @@ steps:
    targetType: inline
    failOnStderr: false
    script: |
-      New-Item -Path $(AzRepoFolder) -ItemType Directory -Name $(AzItem).$(Timestamp).$(Build.BuildNumber)
-      Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\azuredeploy.json -Destination $(AzRepoFolder)\$(AzItem).$(Timestamp).$(Build.BuildNumber)
+      New-Item -Path $(AzRepoFolder) -ItemType Directory -Name $(AzItem).$(Build.BuildNumber)
+      Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\azuredeploy.json -Destination $(AzRepoFolder)\$(AzItem).$(Build.BuildNumber)
       (Get-Content $(AzDestinationFileJSON)) | Foreach-Object { 
           $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
              -replace '@@AzTagEnv@@', 'POC' `
@@ -35,17 +35,15 @@ steps:
              -replace '@@AzKind@@','Storage' `
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
-      Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Timestamp).$(Build.BuildNumber) -Recurse
+      Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Build.BuildNumber) -Recurse
 - task: PowerShell@2
   inputs:
     targetType: inline
     failOnStderr: false
     script: |
-      Write-Host ######### Build Number #############################
+      Write-Host "######### Build Number #############################"
       echo $(Build.BuildNumber)
-      Write-Host ######### Timestamp ################################
-      echo $(Timestamp)
-      Write-Host ######### Build Repository Local Path ##############
+      Write-Host "######### Build Repository Local Path ##############"
       Get-ChildItem $(Build.Repository.LocalPath) -Recurse
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
@@ -56,7 +54,7 @@ steps:
     location: 'East US 2'
     templateLocation: 'Linked artifact'
       # options:  Linked artifact, URL of the file
-    csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.$(Timestamp).$(Build.BuildNumber)\azuredeploy.json'
+    csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.$(Build.BuildNumber)\azuredeploy.json'
       # Location of azuredeploy.json; use 'raw' http for github repo
     deploymentMode: Validation
       # Options:  Incremental, Validation, Complete
