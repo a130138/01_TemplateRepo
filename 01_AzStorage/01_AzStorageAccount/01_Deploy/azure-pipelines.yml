@@ -19,7 +19,7 @@ steps:
    failOnStderr: false
    script: |
       New-Item -Path $(AzRepoFolder) -ItemType Directory -Name $(AzItem).$(Build.BuildNumber)
-      Copy-Item $(System.DefaultWorkingDirectory)\01_AzStorage\01_AzStorageAccount\00_Template\azuredeploy.json -Destination $(System.DefaultWorkingDirectory)\01_AzStorage\01_AzStorageAccount\01_Deploy\$(AzItem).$(Build.BuildNumber)
+      Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(Build.BuildNumber)
       (Get-Content $(AzDestinationFileJSON)) | Foreach-Object { 
           $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
              -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
