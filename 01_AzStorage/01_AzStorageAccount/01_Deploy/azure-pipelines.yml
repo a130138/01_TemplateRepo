@@ -50,7 +50,7 @@ steps:
   inputs:
     deploymentScope: 'Resource Group'
       # Options:  Resource Group, Management Group, Subscription; cannot set variable(s)
-    azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    azureResourceManagerConnection: '$(AzArmConnection)'
       # Format example:  'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
     action: 'Create Or Update Resource Group'
       # Options:  DeleteRG, Create or Update Resource Group; cannot set variable(s)
@@ -61,7 +61,7 @@ steps:
     templateLocation: 'Linked artifact'
       # options:  Linked artifact, URL of the file; cannot set variable(s)
     csmFile: '$(Build.Repository.LocalPath)\01_$(AzCategory)\01_$(AzItem)\01_Deploy\$(AzItem).$(Build.BuildNumber)\azuredeploy.json'
-      # Location of azuredeploy.json; use 'raw' http for github repo
+      # Location of azuredeploy.json; use 'raw' link for github repo & URL of the file
     deploymentMode: Validation
       # Options:  Incremental, Validation, Complete; cannot set variable(s)
 
@@ -69,10 +69,10 @@ steps:
 - task: CmdLine@2 
   inputs: 
     script: | 
-      cd $(System.DefaultWorkingDirectory)\_a130138_01_TemplateRepo 
+      cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
       git init 
-      git config --global user.email "a130138_tr1@amerisourcebergen.com" 
-      git config --global user.name "a130138_tr1" 
+      git config --global user.email "$(GitUserEmail)" 
+      git config --global user.name "$(GitUserName)" 
       git fetch 
       git checkout -b main 
       git add . 
