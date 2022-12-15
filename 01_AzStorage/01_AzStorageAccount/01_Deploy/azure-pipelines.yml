@@ -13,14 +13,13 @@ pool:
 steps:
 - checkout: self
   persistCredentials: true
-# New folder with template file copy
 - task: PowerShell@2
   inputs:
    targetType: inline
    failOnStderr: false
    script: |
       New-Item -Path $(AzRepoFolder) -ItemType Directory -Name $(AzItem).$(Build.BuildNumber)
-      Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(Build.BuildNumber)
+      Copy-Item $(System.DefaultWorkingDirectory)\01_AzStorage\01_AzStorageAccount\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(Build.BuildNumber)
       (Get-Content $(AzDestinationFileJSON)) | Foreach-Object { 
           $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
              -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
