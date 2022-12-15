@@ -7,8 +7,6 @@ variables:
 trigger:
   - none
 
-name: $(AzItem).$(Build.BuildNumber)
-
 pool:
   vmImage: windows-latest
 
