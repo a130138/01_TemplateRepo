@@ -4,9 +4,6 @@
 variables:
 - group: "AzVarGroupOne"
 
-- name: Timestamp
-  value: $(Get-Date -Format yyyyMMdd)
-
 trigger:
   - none
 
