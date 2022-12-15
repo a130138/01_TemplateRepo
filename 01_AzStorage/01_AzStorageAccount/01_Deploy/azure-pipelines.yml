@@ -36,7 +36,7 @@ steps:
       Get-Content $(AzDestinationFileJSON)
       Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Build.BuildNumber) -Recurse
 
-# Display/Confirm local build repository
+# Display local build directory
 - task: PowerShell@2
   inputs:
     targetType: inline
@@ -49,21 +49,21 @@ steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
-      # Options:  Resource Group, Management Group, Subscription; cannot use variable(s)
+      # Options:  Resource Group, Management Group, Subscription; cannot set variable(s)
     azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
       # Format example:  'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
     action: 'Create Or Update Resource Group'
-      # Options:  DeleteRG, Create or Update Resource Group; cannot use variable(s)
+      # Options:  DeleteRG, Create or Update Resource Group; cannot set variable(s)
     resourceGroupName: '$(AzRgName)'
       # Azure Resource Group name
     location: '$(AzLoc)'
       # Azure location
     templateLocation: 'Linked artifact'
-      # options:  Linked artifact, URL of the file; cannot use variable(s)
+      # options:  Linked artifact, URL of the file; cannot set variable(s)
     csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.$(Build.BuildNumber)\azuredeploy.json'
       # Location of azuredeploy.json; use 'raw' http for github repo
     deploymentMode: Validation
-      # Options:  Incremental, Validation, Complete; cannot use variable(s)
+      # Options:  Incremental, Validation, Complete; cannot set variable(s)
 
 # Update Repo
 # TBD
