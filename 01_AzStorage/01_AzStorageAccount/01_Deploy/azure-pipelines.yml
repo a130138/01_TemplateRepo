@@ -1,4 +1,4 @@
-# Title:  Azure Storage Account Deploy_V2
+# Title:  Azure Storage Account Deploy
 # About:  Create new folder with template file copy, update vars, deploy to Az Portal and update repo
 
 variables:
