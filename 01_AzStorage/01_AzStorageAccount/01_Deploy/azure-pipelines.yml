@@ -11,8 +11,11 @@ pool:
   vmImage: windows-latest
 
 steps:
+# Set credentials to persist thru all steps below
 - checkout: self
   persistCredentials: true
+
+# Create new folder with template file copy
 - task: PowerShell@2
   inputs:
    targetType: inline
@@ -29,7 +32,8 @@ steps:
              -replace '@@AzLoc@@','$(AzLoc)' `
              -replace '@@AzKind@@','$(AzKind)' `
           } | Set-Content $(AzDestinationFileJSON)
-# Display local build directory
+
+# List local build directory
 - task: PowerShell@2
   inputs:
     targetType: inline
@@ -38,7 +42,9 @@ steps:
       Write-Host "####################################################"
       Write-Host "######### Build Repository Local Path ##############"
       Get-ChildItem $(Build.Repository.LocalPath) -Recurse
+      Write-Host "#"
       Write-Host "####################################################"
+
 # Deploy ARM Template to Azure
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
@@ -58,6 +64,7 @@ steps:
       # Location of azuredeploy.json; use 'raw' http for github repo
     deploymentMode: Validation
       # Options:  Incremental, Validation, Complete; cannot set variable(s)
+
 # Update Repo 
 - task: CmdLine@2 
   inputs: 
