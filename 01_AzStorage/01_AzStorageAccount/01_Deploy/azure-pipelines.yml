@@ -58,7 +58,7 @@ steps:
       # Azure location
     templateLocation: 'Linked artifact'
       # options:  Linked artifact, URL of the file; cannot set variable(s)
-    csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.$(Build.BuildNumber)\azuredeploy.json'
+    csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_$(AzItem)\$(AzActionFolder)\$(AzItem).$(Build.BuildNumber)\azuredeploy.json'
       # Location of azuredeploy.json; use 'raw' http for github repo
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete; cannot set variable(s)
