@@ -15,6 +15,8 @@ pool:
 steps:
 - checkout: self
   persistCredentials: true
+
+# Setup new folder with template file copy
 - task: PowerShell@2
   inputs:
    targetType: inline
@@ -33,6 +35,8 @@ steps:
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
       Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Build.BuildNumber) -Recurse
+
+# Display/Confirm local build repository
 - task: PowerShell@2
   inputs:
     targetType: inline
@@ -40,6 +44,8 @@ steps:
     script: |
       Write-Host "######### Build Repository Local Path ##############"
       Get-ChildItem $(Build.Repository.LocalPath) -Recurse
+
+# Deploy ARM Template to Azure
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
@@ -58,3 +64,6 @@ steps:
       # Location of azuredeploy.json; use 'raw' http for github repo
     deploymentMode: Validation
       # Options:  Incremental, Validation, Complete; cannot use variable(s)
+
+# Update Repo
+# TBD
