@@ -60,7 +60,7 @@ steps:
       # options:  Linked artifact, URL of the file; cannot set variable(s)
     csmFile: '$(Build.Repository.LocalPath)\01_$(AzCategory)\01_$(AzItem)\01_Deploy\$(AzItem).$(Build.BuildNumber)\azuredeploy.json'
       # Location of azuredeploy.json; use 'raw' http for github repo
-    deploymentMode: Incremental
+    deploymentMode: Validation
       # Options:  Incremental, Validation, Complete; cannot set variable(s)
 # Update Repo 
 - task: CmdLine@2 
