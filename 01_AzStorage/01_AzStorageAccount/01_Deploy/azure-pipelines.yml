@@ -22,7 +22,7 @@ steps:
    failOnStderr: false
    script: |
       New-Item -Path $(AzRepoFolder) -ItemType Directory -Name $(AzItem).$(Build.BuildNumber)
-      Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\azuredeploy.json -Destination $(AzRepoFolder)\$(AzActionFolder)\$(AzItem).$(Build.BuildNumber)
+      Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy)\$(AzItem).$(Build.BuildNumber)
       (Get-Content $(AzDestinationFileJSON)) | Foreach-Object { 
           $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
              -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
@@ -58,7 +58,7 @@ steps:
       # Azure location
     templateLocation: 'Linked artifact'
       # options:  Linked artifact, URL of the file; cannot set variable(s)
-    csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_$(AzItem)\$(AzActionFolder)\$(AzItem).$(Build.BuildNumber)\azuredeploy.json'
+    csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_$(AzItem)\01_Deploy\$(AzItem).$(Build.BuildNumber)\azuredeploy.json'
       # Location of azuredeploy.json; use 'raw' http for github repo
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete; cannot set variable(s)
