@@ -10,7 +10,7 @@
     "resources":
         [
             {
-            "name": "@@AzName@@",
+            "name": "@@AzStorageName@@",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-04-01",
             "tags":
