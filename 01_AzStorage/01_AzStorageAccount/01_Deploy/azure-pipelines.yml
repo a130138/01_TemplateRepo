@@ -1,5 +1,5 @@
 # Title:  Azure Storage Acct Deploy_V2
-# About:  Create new folder with template file copy, update vars and deploy to Az Portal
+# About:  Create new folder with template file copy, update vars, deploy to Az Portal and update repo
 
 variables:
 - group: "AzVarGroupOne"
@@ -7,7 +7,7 @@ variables:
 trigger:
   - none
 
-name: $(date:yyyyMMdd)$(rev:.r)
+name: $(AzItem).$(Build.BuildNumber)
 
 pool:
   vmImage: windows-latest
@@ -16,7 +16,7 @@ steps:
 - checkout: self
   persistCredentials: true
 
-# Setup new folder with template file copy
+# New folder with template file copy
 - task: PowerShell@2
   inputs:
    targetType: inline
@@ -34,17 +34,16 @@ steps:
              -replace '@@AzKind@@','$(AzKind)' `
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
-      Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Build.BuildNumber) -Recurse
-
 # Display local build directory
 - task: PowerShell@2
   inputs:
     targetType: inline
     failOnStderr: false
     script: |
+      Write-Host "####################################################"
       Write-Host "######### Build Repository Local Path ##############"
       Get-ChildItem $(Build.Repository.LocalPath) -Recurse
-
+      Write-Host "####################################################"
 # Deploy ARM Template to Azure
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
@@ -62,8 +61,19 @@ steps:
       # options:  Linked artifact, URL of the file; cannot set variable(s)
     csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.$(Build.BuildNumber)\azuredeploy.json'
       # Location of azuredeploy.json; use 'raw' http for github repo
-    deploymentMode: Validation
+    deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete; cannot set variable(s)
 
-# Update Repo
-# TBD
+# Update Repo 
+- task: CmdLine@2 
+  inputs: 
+    script: | 
+      cd $(System.DefaultWorkingDirectory)\_a130138_01_TemplateRepo 
+      git init 
+      git config --global user.email "a130138_tr1@amerisourcebergen.com" 
+      git config --global user.name "a130138_tr1" 
+      git fetch 
+      git checkout -b main 
+      git add . 
+      git commit -m "My commit message" 
+      git push origin HEAD:main 
