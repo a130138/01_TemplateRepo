@@ -26,7 +26,7 @@ steps:
       New-Item -Path $(AzRepoFolder) -ItemType Directory -Name $(AzItem).$(Timestamp)
       Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\azuredeploy.json -Destination $(AzRepoFolder)\$(AzItem).$(Timestamp)
       (Get-Content $(AzDestinationFileJSON)) | Foreach-Object { 
-          $_ -replace '@@AzName@@', '$(AzName)' `
+          $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
              -replace '@@AzTagEnv@@', 'POC' `
              -replace '@@AzTagOwn@@', 'jc' `
              -replace '@@AzSkuName@@', 'Premium_LRS' `
@@ -52,6 +52,6 @@ steps:
     resourceGroupName: 'JoePOC1'
     location: 'East US 2'
     templateLocation: 'Linked artifact'
-    csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221214\azuredeploy.json'
+    csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.20221215\azuredeploy.json'
     deploymentMode: Validation
       # Options:  Incremental, Validation, Complete
