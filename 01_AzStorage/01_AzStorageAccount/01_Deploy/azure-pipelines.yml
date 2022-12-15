@@ -1,4 +1,4 @@
-# Title:  Azure Storage Acct Deploy_V2
+# Title:  Azure Storage Account Deploy_V2
 # About:  Create new folder with template file copy, update vars, deploy to Az Portal and update repo
 
 variables:
@@ -18,7 +18,7 @@ steps:
    targetType: inline
    failOnStderr: false
    script: |
-      New-Item -Path $(AzRepoFolder) -ItemType Directory -Name $(AzItem).$(Build.BuildNumber)
+      New-Item -Path $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzItem).$(Build.BuildNumber)
       Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(Build.BuildNumber)
       (Get-Content $(AzDestinationFileJSON)) | Foreach-Object { 
           $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
