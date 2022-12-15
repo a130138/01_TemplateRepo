@@ -13,6 +13,7 @@ pool:
   vmImage: windows-latest
 
 steps:
+# Ensure checkout/credentials persist thru steps
 - checkout: self
   persistCredentials: true
 
@@ -63,7 +64,6 @@ steps:
       # Location of azuredeploy.json; use 'raw' http for github repo
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete; cannot set variable(s)
-
 # Update Repo 
 - task: CmdLine@2 
   inputs: 
