@@ -24,12 +24,12 @@ steps:
       Copy-Item $(AzRepoFolder)\$(AzTemplateFolder)\azuredeploy.json -Destination $(AzRepoFolder)\$(AzItem).$(Build.BuildNumber)
       (Get-Content $(AzDestinationFileJSON)) | Foreach-Object { 
           $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
-             -replace '@@AzTagEnv@@', 'POC' `
-             -replace '@@AzTagOwn@@', 'jc' `
-             -replace '@@AzSkuName@@', 'Premium_LRS' `
-             -replace '@@AzSkuTier@@','Premium' `
-             -replace '@@AzLoc@@','East US 2' `
-             -replace '@@AzKind@@','Storage' `
+             -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
+             -replace '@@AzTagOwn@@', '$(AzTagOwn)' `
+             -replace '@@AzSkuName@@', '$(AzSkuName)' `
+             -replace '@@AzSkuTier@@','$(AzSkuTier)' `
+             -replace '@@AzLoc@@','$(AzLoc)' `
+             -replace '@@AzKind@@','$(AzKind)' `
           } | Set-Content $(AzDestinationFileJSON)
       Get-Content $(AzDestinationFileJSON)
       Get-ChildItem $(AzRepoFolder)\$(AzItem).$(Build.BuildNumber) -Recurse
@@ -43,13 +43,18 @@ steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
+      # Options:  Resource Group, Management Group, Subscription; cannot use variable(s)
     azureResourceManagerConnection: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+      # Format example:  'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
     action: 'Create Or Update Resource Group'
-    resourceGroupName: 'JoePOC1'
-    location: 'East US 2'
+      # Options:  DeleteRG, Create or Update Resource Group; cannot use variable(s)
+    resourceGroupName: '$(AzRgName)'
+      # Azure Resource Group name
+    location: '$(AzLoc)'
+      # Azure location
     templateLocation: 'Linked artifact'
-      # options:  Linked artifact, URL of the file
+      # options:  Linked artifact, URL of the file; cannot use variable(s)
     csmFile: '$(Build.Repository.LocalPath)\01_AzStorage\01_AzStorageAccount\AzStorageAcct.$(Build.BuildNumber)\azuredeploy.json'
       # Location of azuredeploy.json; use 'raw' http for github repo
     deploymentMode: Validation
-      # Options:  Incremental, Validation, Complete
+      # Options:  Incremental, Validation, Complete; cannot use variable(s)
