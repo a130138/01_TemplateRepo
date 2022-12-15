@@ -11,10 +11,8 @@ pool:
   vmImage: windows-latest
 
 steps:
-# Ensure checkout/credentials persist thru steps
 - checkout: self
   persistCredentials: true
-
 # New folder with template file copy
 - task: PowerShell@2
   inputs:
