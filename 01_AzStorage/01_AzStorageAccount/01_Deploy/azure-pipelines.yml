@@ -29,7 +29,6 @@ steps:
              -replace '@@AzLoc@@','$(AzLoc)' `
              -replace '@@AzKind@@','$(AzKind)' `
           } | Set-Content $(AzDestinationFileJSON)
-      Get-Content $(AzDestinationFileJSON)
 # Display local build directory
 - task: PowerShell@2
   inputs:
