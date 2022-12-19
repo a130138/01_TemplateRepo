@@ -1,58 +1,6 @@
 # Title:  Azure Storage Account Deploy
 # About:  Creates new repo folder with json template copy with updated variables, then deploys to Az Portal
 # Required steps:  Update variables prior to deploy by replacing << required >> sections
-variables:
-############################################
-##########"Azure Info"######################
-  - name: AzCategory
-    value: << required >>
-    # Azure Cateogory; i.e. - AzStorage, AzNSG, AzFirewall, etc
-  - name: AzItem
-    value: << required >>
-    # Azure Item for category entered; i.e. - AzStorageAccount, AzStorageBlob, etc
-  - name: AzRepoFolder
-    value: << required >>
-    # Azure repo folder path based on AzCategory/AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
-############################################
-##########"Json & ARM Variables"##################
-  - name: AzStorageName
-    value: << required >>
-    # name of new Azure storage account; i.e. - 'azstorageacct' (must be lowercase/no special chars)
-  - name: AzTagEnv
-    value: << required >>
-    # Azure 'Environment' tag
-  - name: AzTagOwn
-    value: << required >>
-    # Azure 'Owner' tag
-  - name: AzSkuName
-    value: << required >>
-    # Azure storage sku name; i.e. - 'Premium_LRS'
-  - name: AzSkuTier
-    value: << required >>
-    # Azure storage tier; i.e. - 'Premium'
-  - name: AzLoc
-    value: << required >>
-    # Azure location; i.e. - 'East US 2'
-  - name: AzKind
-    value: << required >>
-    # Azure storage account type; i.e. - 'Storage'
-  - name: AzArmConnection
-    value: << required >>
-    # Azure ARM connection; i.e. - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-  - name: AzRgName
-    value: << required >>
-    # Azure resource group name
-#############################################
-##########"Repo Info"########################
-  - name: GitRepoBranch
-    value: << required >>
-    # Repo branch main/master name; i.e. - '_a130138_01_TemplateRepo'
-  - name: GitUserName
-    value: << required >>
-    # Repo user name; i.e. - 'a130138_tr1'
-  - name: GitUserEmail
-    value: << required >>
-    # Repo user email; i.e. - 'a130138_tr1@amerisourcebergen.com'
 
 trigger:
   - none
