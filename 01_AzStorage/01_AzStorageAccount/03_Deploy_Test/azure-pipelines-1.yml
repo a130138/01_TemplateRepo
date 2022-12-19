@@ -1,6 +1,9 @@
 # Title:  Azure Storage Account Deploy
 # About:  Creates new repo folder with json template copy with updated variables, then deploys to Az Portal
-# Required steps:  Update variables prior to deploy by replacing << required >> sections
+# Required step:  Update variables yml prior to deploy
+
+variables:
+  - template: template-vars.yml
 
 trigger:
   - none
@@ -12,6 +15,9 @@ steps:
 # Set credentials to persist thru all steps
 - checkout: self
   persistCredentials: true
+
+# Name of the variables template file
+# - template: template-vars.yml 
 
 # Create new folder with template json copy
 - task: PowerShell@2
