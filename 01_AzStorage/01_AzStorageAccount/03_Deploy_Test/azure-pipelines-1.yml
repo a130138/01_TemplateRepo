@@ -7,11 +7,13 @@ variables:
 ##########"Azure Info"######################
   - name: AzCategory
     value: << required >>
-    # example options:  
+    # Azure Cateogory; i.e. - AzStorage, AzNSG, AzFirewall, etc
   - name: AzItem
     value: << required >>
+    # Azure Item for category entered; i.e. - AzStorageAccount, AzStorageBlob, etc
   - name: AzRepoFolder
     value: << required >>
+    # Azure repo folder path based on AzCategory/AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
 ############################################
 ##########"Json Variables"################
   - name: AzStorageName
