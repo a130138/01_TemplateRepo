@@ -23,7 +23,7 @@ steps:
    script: |
       New-Item -Path $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzItem).$(AzStorageName).$(Build.BuildNumber)
       Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
-      (Get-Content $(AzDestinationFileJSON)) | Foreach-Object { 
+      (Get-Content $(AzDestinationFileJSON)) | Foreach-Object {
           $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
              -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
              -replace '@@AzTagOwn@@', '$(AzTagOwn)' `
@@ -65,16 +65,16 @@ steps:
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete; cannot set variable(s)
 
-# Update Repo 
-- task: CmdLine@2 
-  inputs: 
-    script: | 
+# Update Repo
+- task: CmdLine@2
+  inputs:
+    script: |
       cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
-      git init 
-      git config --global user.email "$(GitUserEmail)" 
-      git config --global user.name "$(GitUserName)" 
-      git fetch 
-      git checkout -b main 
-      git add . 
-      git commit -m "My commit message" 
-      git push origin HEAD:main 
+      git init
+      git config --global user.email "$(GitUserEmail)"
+      git config --global user.name "$(GitUserName)"
+      git fetch
+      git checkout -b main
+      git add .
+      git commit -m "My commit message"
+      git push origin HEAD:main
