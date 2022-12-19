@@ -1,5 +1,4 @@
 variables:
-############################################
 ##########"Azure Info"######################
   - name: AzCategory
     value: AzStorage
@@ -13,7 +12,6 @@ variables:
   - name:  AzDestinationFileJSON
     value: $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)\azuredeploy.json
     # Setup of new json file
-############################################
 ##########"Json & ARM Variables"##################
   - name: AzStorageName
     value: varstest
@@ -42,7 +40,6 @@ variables:
   - name: AzRgName
     value: JoePOC1
     # Azure resource group name
-#############################################
 ##########"Repo Info"########################
   - name: GitRepoBranch
     value: _a130138_01_TemplateRepo
