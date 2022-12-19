@@ -2,52 +2,52 @@ variables:
 ############################################
 ##########"Azure Info"######################
   - name: AzCategory
-    value: << required >>
+    value: AzStorage
     # Azure Cateogory; i.e. - AzStorage, AzNSG, AzFirewall, etc
   - name: AzItem
-    value: << required >>
+    value: AzStorageAccount
     # Azure Item for category entered; i.e. - AzStorageAccount, AzStorageBlob, etc
   - name: AzRepoFolder
-    value: << required >>
+    value: $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
     # Azure repo folder path based on AzCategory/AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
 ############################################
 ##########"Json & ARM Variables"##################
   - name: AzStorageName
-    value: << required >>
+    value: varstemplatetest
     # name of new Azure storage account; i.e. - 'azstorageacct' (must be lowercase/no special chars)
   - name: AzTagEnv
-    value: << required >>
+    value: POC
     # Azure 'Environment' tag
   - name: AzTagOwn
-    value: << required >>
+    value: joseph cropper
     # Azure 'Owner' tag
   - name: AzSkuName
-    value: << required >>
+    value: Premium_LRS
     # Azure storage sku name; i.e. - 'Premium_LRS'
   - name: AzSkuTier
-    value: << required >>
+    value: Premium
     # Azure storage tier; i.e. - 'Premium'
   - name: AzLoc
-    value: << required >>
+    value: East US 2
     # Azure location; i.e. - 'East US 2'
   - name: AzKind
-    value: << required >>
+    value: Storage
     # Azure storage account type; i.e. - 'Storage'
   - name: AzArmConnection
-    value: << required >>
+    value: Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)
     # Azure ARM connection; i.e. - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
   - name: AzRgName
-    value: << required >>
+    value: JoePOC1
     # Azure resource group name
 #############################################
 ##########"Repo Info"########################
   - name: GitRepoBranch
-    value: << required >>
+    value: _a130138_01_TemplateRepo
     # Repo branch main/master name; i.e. - '_a130138_01_TemplateRepo'
   - name: GitUserName
-    value: << required >>
+    value: a130138_tr1
     # Repo user name; i.e. - 'a130138_tr1'
   - name: GitUserEmail
-    value: << required >>
+    value: a130138_tr1@amerisourcebergen.com
     # Repo user email; i.e. - 'a130138_tr1@amerisourcebergen.com'
 
