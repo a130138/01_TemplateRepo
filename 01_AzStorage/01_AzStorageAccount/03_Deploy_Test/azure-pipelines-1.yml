@@ -17,7 +17,7 @@ steps:
   persistCredentials: true
 
 # Name of the variables template file
-# - template: template-vars.yml 
+# - template: template-vars.yml
 
 # Create new folder with template json copy
 - task: PowerShell@2
