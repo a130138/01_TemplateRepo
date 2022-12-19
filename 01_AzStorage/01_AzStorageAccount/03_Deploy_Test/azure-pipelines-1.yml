@@ -1,8 +1,39 @@
 # Title:  Azure Storage Account Deploy
-# About:  Create new folder with template file copy, update vars, deploy to Az Portal and update repo
+# About:  Creates new repo folder with json template copy with updated variables, then deploys to Az Portal
+# Required actions:  Must enter appropriate variables in next section
 
 variables:
-- group: "AzVarGroupOne"
+  - name: AzCategory
+    value: << required >>
+  - name: AzItem
+    value: << required >>
+  - name: AzRepoFolder
+    value: << required >>
+##########################
+  - name: AzStorageName
+    value: << required >>
+  - name: AzTagEnv
+    value: << required >>
+  - name: AzTagOwn
+    value: << required >>
+  - name: AzSkuName
+    value: << required >>
+  - name: AzSkuTier
+    value: << required >>
+  - name: AzLoc
+    value: << required >>
+  - name: AzKind
+    value: << required >>
+  - name: AzArmConnection
+    value: << required >>
+  - name: AzRgName
+    value: << required >>
+  - name: GitRepoBranch
+    value: << required >>
+  - name: GitUserName
+    value: << required >>
+  - name: GitUserEmail
+    value: << required >>
 
 trigger:
   - none
@@ -11,11 +42,11 @@ pool:
   vmImage: windows-latest
 
 steps:
-# Set credentials to persist thru all steps below
+# Sets credentials to persist thru all steps
 - checkout: self
   persistCredentials: true
 
-# Create new folder with template file copy
+# Create new folder with template json copy
 - task: PowerShell@2
   inputs:
    targetType: inline
