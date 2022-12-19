@@ -1,0 +1,80 @@
+# Title:  Azure Storage Account Deploy
+# About:  Create new folder with template file copy, update vars, deploy to Az Portal and update repo
+
+variables:
+- group: "AzVarGroupOne"
+
+trigger:
+  - none
+
+pool:
+  vmImage: windows-latest
+
+steps:
+# Set credentials to persist thru all steps below
+- checkout: self
+  persistCredentials: true
+
+# Create new folder with template file copy
+- task: PowerShell@2
+  inputs:
+   targetType: inline
+   failOnStderr: false
+   script: |
+      New-Item -Path $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzItem).$(AzStorageName).$(Build.BuildNumber)
+      Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
+      (Get-Content $(AzDestinationFileJSON)) | Foreach-Object { 
+          $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
+             -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
+             -replace '@@AzTagOwn@@', '$(AzTagOwn)' `
+             -replace '@@AzSkuName@@', '$(AzSkuName)' `
+             -replace '@@AzSkuTier@@','$(AzSkuTier)' `
+             -replace '@@AzLoc@@','$(AzLoc)' `
+             -replace '@@AzKind@@','$(AzKind)' `
+          } | Set-Content $(AzDestinationFileJSON)
+
+# List local build directory
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    failOnStderr: false
+    script: |
+      Write-Host "####################################################"
+      Write-Host "######### Build Repository Local Path ##############"
+      Get-ChildItem $(Build.Repository.LocalPath) -Recurse
+      Write-Host "#"
+      Write-Host "####################################################"
+
+# Deploy ARM Template to Azure
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+      # Options:  Resource Group, Management Group, Subscription; cannot set variable(s)
+    azureResourceManagerConnection: '$(AzArmConnection)'
+      # Format example:  'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    action: 'Create Or Update Resource Group'
+      # Options:  DeleteRG, Create or Update Resource Group; cannot set variable(s)
+    resourceGroupName: '$(AzRgName)'
+      # Azure Resource Group name
+    location: '$(AzLoc)'
+      # Azure location
+    templateLocation: 'Linked artifact'
+      # options:  Linked artifact, URL of the file; cannot set variable(s)
+    csmFile: '$(Build.Repository.LocalPath)\01_$(AzCategory)\01_$(AzItem)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)\azuredeploy.json'
+      # Location of azuredeploy.json; use 'raw' link for github repo & URL of the file
+    deploymentMode: Incremental
+      # Options:  Incremental, Validation, Complete; cannot set variable(s)
+
+# Update Repo 
+- task: CmdLine@2 
+  inputs: 
+    script: | 
+      cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
+      git init 
+      git config --global user.email "$(GitUserEmail)" 
+      git config --global user.name "$(GitUserName)" 
+      git fetch 
+      git checkout -b main 
+      git add . 
+      git commit -m "My commit message" 
+      git push origin HEAD:main 
