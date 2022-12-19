@@ -10,6 +10,9 @@ variables:
   - name: AzRepoFolder
     value: $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
     # Azure repo folder path based on AzCategory/AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
+  - name:  AzDestinationFileJSON
+    value: $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)\azuredeploy.json
+    # Setup of new json file
 ############################################
 ##########"Json & ARM Variables"##################
   - name: AzStorageName
