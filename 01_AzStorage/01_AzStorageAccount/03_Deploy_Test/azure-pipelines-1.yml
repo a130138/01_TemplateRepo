@@ -1,6 +1,6 @@
 # Title:  Azure Storage Account Deploy
 # About:  Creates new repo folder with json template copy with updated variables, then deploys to Az Portal
-# Required steps:  Update variables prior to deploy
+# Required steps:  Update variables prior to deploy by replacing << required >> sections
 variables:
 ############################################
 ##########"Azure Info"######################
