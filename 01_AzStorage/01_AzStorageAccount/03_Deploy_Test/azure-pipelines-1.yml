@@ -83,7 +83,7 @@ steps:
              -replace '@@AzKind@@','$(AzKind)' `
           } | Set-Content $(AzDestinationFileJSON)
 
-# List local build directory
+# List local build directory (for troubleshooting purposes, if/when applicable)
 - task: PowerShell@2
   inputs:
     targetType: inline
