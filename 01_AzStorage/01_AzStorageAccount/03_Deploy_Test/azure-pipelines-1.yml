@@ -1,18 +1,19 @@
 # Title:  Azure Storage Account Deploy
 # About:  Creates new repo folder with json template copy with updated variables, then deploys to Az Portal
-# Required actions:  Must enter appropriate variables in next section
 
+# Required actions:  Must enter appropriate variables in next section
 variables:
 ############################################
 ##########"Azure Info"######################
   - name: AzCategory
     value: << required >>
+    # example options:  
   - name: AzItem
     value: << required >>
   - name: AzRepoFolder
     value: << required >>
 ############################################
-##########"Az Storage Setup"################
+##########"Json Variables"################
   - name: AzStorageName
     value: << required >>
   - name: AzTagEnv
@@ -32,7 +33,7 @@ variables:
   - name: AzRgName
     value: << required >>
 ############################################
-##########"REPO"############################
+##########"Repo Info"############################
   - name: GitRepoBranch
     value: << required >>
   - name: GitUserName
@@ -47,7 +48,7 @@ pool:
   vmImage: windows-latest
 
 steps:
-# Sets credentials to persist thru all steps
+# Sets credentials to persist thru next steps
 - checkout: self
   persistCredentials: true
 
