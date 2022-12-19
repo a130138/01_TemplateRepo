@@ -3,13 +3,16 @@
 # Required actions:  Must enter appropriate variables in next section
 
 variables:
+############################################
+##########"Azure Info"######################
   - name: AzCategory
     value: << required >>
   - name: AzItem
     value: << required >>
   - name: AzRepoFolder
     value: << required >>
-##########################
+############################################
+##########"Az Storage Setup"################
   - name: AzStorageName
     value: << required >>
   - name: AzTagEnv
@@ -28,6 +31,8 @@ variables:
     value: << required >>
   - name: AzRgName
     value: << required >>
+############################################
+##########"REPO"############################
   - name: GitRepoBranch
     value: << required >>
   - name: GitUserName
