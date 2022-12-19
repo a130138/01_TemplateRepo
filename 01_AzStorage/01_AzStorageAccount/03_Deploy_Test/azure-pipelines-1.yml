@@ -15,27 +15,35 @@ variables:
     value: << required >>
     # Azure repo folder path based on AzCategory/AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
 ############################################
-##########"Json Variables"################
+##########"Json Variables"##################
   - name: AzStorageName
     value: << required >>
+    # name of new Azure storage account
   - name: AzTagEnv
     value: << required >>
+    # Azure 'Environment' tag
   - name: AzTagOwn
     value: << required >>
+    # Azure 'Owner' tag
   - name: AzSkuName
     value: << required >>
+    # Azure storage sku name; i.e. - Premium_LRS
   - name: AzSkuTier
     value: << required >>
+    # Azure storage tier; i.e. - Premium
   - name: AzLoc
     value: << required >>
+    # Azure location; i.e. - East US 2
   - name: AzKind
     value: << required >>
+    # Azure storage account type; i.e. - Storage
   - name: AzArmConnection
     value: << required >>
+    # Azure ARM connection; i.e. - Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)
   - name: AzRgName
     value: << required >>
-############################################
-##########"Repo Info"############################
+#############################################
+##########"Repo Info"########################
   - name: GitRepoBranch
     value: << required >>
   - name: GitUserName
