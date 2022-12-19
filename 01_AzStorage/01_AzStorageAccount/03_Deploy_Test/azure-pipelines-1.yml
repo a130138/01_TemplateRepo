@@ -61,7 +61,7 @@ pool:
   vmImage: windows-latest
 
 steps:
-# Sets credentials to persist thru next steps
+# Set credentials to persist thru all steps
 - checkout: self
   persistCredentials: true
 
