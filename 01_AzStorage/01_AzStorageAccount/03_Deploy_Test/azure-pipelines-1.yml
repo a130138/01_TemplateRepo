@@ -18,7 +18,7 @@ stages:
   - job: setup
     steps:
     - checkout: self
-      persistCredentials: true  
+      persistCredentials: true
     - task: PowerShell@2
       inputs:
         targetType: inline
@@ -70,15 +70,13 @@ stages:
             # Location of azuredeploy.json; use 'raw' link for github repo & URL of the file
           deploymentMode: Incremental
             # Options:  Incremental, Validation, Complete; cannot set variable(s)
-      
-
 - stage: sync
   displayName: git push
   jobs:
     - job: push
       steps:
         - checkout: self
-          persistCredentials: true 
+          persistCredentials: true
         - task: CmdLine@2
           inputs:
             script: |
