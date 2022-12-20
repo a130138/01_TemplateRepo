@@ -9,7 +9,7 @@ trigger:
   - none
 
 pool:
-  name:  default
+  vmIMage: windows-latest
 
 stages:
 - stage: prep
@@ -17,7 +17,7 @@ stages:
   jobs:
   - job: setup
     pool:
-      vmImage: windows-latest
+      name: default
     steps:
     - checkout: self
       persistCredentials: true  
@@ -43,7 +43,8 @@ stages:
   displayName: execute ARM template
   jobs:
     - job: deploy
-      pool: windows-latest
+      pool:
+        name: default
       steps:
       - checkout: self
         persistCredentials: true  
@@ -70,7 +71,8 @@ stages:
   displayName: git push
   jobs:
     - job: push
-      pool: windows-latest
+      pool:
+        name: default
       steps:
         - checkout: self
           persistCredentials: true 
