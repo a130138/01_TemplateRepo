@@ -1,6 +1,6 @@
 # Title:  Azure Storage Account Deploy
-# About:  Creates new repo folder with json template copy with updated variables, then deploys to Az Portal
-# Required step:  Update variables yml prior to deploy
+# About:  Creates new repo folder with updated json variables, deploys to Az Portal
+# Required:  Update 'azure-variables.yml' prior to deploy
 
 variables:
   - template: template-vars.yml
