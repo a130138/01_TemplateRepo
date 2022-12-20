@@ -47,6 +47,15 @@ jobs:
         buildType: 'current'
         artifactName: 'drop'
         targetPath: '$(Pipeline.Workspace)'
+    - task: PowerShell@2
+      inputs:
+        targetType: inline
+        failOnStderr: false
+        script: |
+          Write-Host "####################################################"
+          Write-Host "######### Pipeline workspace ##############"
+          Get-ChildItem $(Pipeline.Workspace) -Recurse
+          Write-Host "####################################################"
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
