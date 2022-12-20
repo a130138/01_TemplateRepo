@@ -32,31 +32,6 @@ jobs:
                 -replace '@@AzLoc@@','$(AzLoc)' `
                 -replace '@@AzKind@@','$(AzKind)' `
               } | Set-Content $(AzDestinationFileJSON)
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: '$(Pipeline.Workspace)'
-        artifact: 'drop'
-  - job: deploy
-    steps:
-    - checkout: self
-      persistCredentials: true
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'drop'
-        targetPath: '$(Build.Repository.LocalPath)'
-        allowFailedBuilds: true
-    - task: PowerShell@2
-      inputs:
-        targetType: inline
-        failOnStderr: false
-        script: |
-          Write-Host "####################################################"
-          Write-Host "######### Pipeline workspace ##############"
-          Get-ChildItem $(Pipeline.Workspace) -Recurse
-          Write-Host "######### Build Repository ##############"
-          Get-ChildItem $(Build.Repository.LocalPath) -Recurse
-          Write-Host "####################################################"
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
@@ -75,10 +50,6 @@ jobs:
           # Location of azuredeploy.json; use 'raw' link for github repo & URL of the file
         deploymentMode: Incremental
           # Options:  Incremental, Validation, Complete; cannot set variable(s)
-  - job: sync
-    steps:
-    - checkout: self
-      persistCredentials: true
     - task: CmdLine@2
       inputs:
         script: |
