@@ -11,18 +11,20 @@ trigger:
 pool:
   vmIMage: windows-latest
 
-jobs:
-  - job: setup
-    steps:
+steps:
     - checkout: self
       persistCredentials: true
     - task: PowerShell@2
       inputs:
         targetType: inline
-        failOnStderr: false
         script: |
           New-Item -Path $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzItem).$(AzStorageName).$(Build.BuildNumber)
           Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
+          Copy-Item azure-variables.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
+    - task: PowerShell@2
+      inputs:
+        targetType: inline
+        script: |
           (Get-Content $(AzDestinationFileJSON)) | Foreach-Object {
               $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
                 -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
