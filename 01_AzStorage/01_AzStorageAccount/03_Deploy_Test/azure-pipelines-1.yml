@@ -40,17 +40,6 @@ stages:
   jobs:
     - job: deploy
       steps:
-      - checkout: self
-        persistCredentials: true
-      - task: PowerShell@2
-        inputs:
-          targetType: inline
-          failOnStderr: false
-          script: |
-            Write-Host "####################################################"
-            Write-Host "######### Build Repository Local Path ##############"
-            Get-ChildItem $(Build.Repository.LocalPath) -Recurse
-            Write-Host "####################################################"
       - task: AzureResourceManagerTemplateDeployment@3
         inputs:
           deploymentScope: 'Resource Group'
