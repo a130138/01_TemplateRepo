@@ -40,6 +40,8 @@ stages:
   jobs:
     - job: deploy
       steps:
+      - checkout: self
+        persistCredentials: true
       - task: AzureResourceManagerTemplateDeployment@3
         inputs:
           deploymentScope: 'Resource Group'
@@ -54,7 +56,7 @@ stages:
             # Azure location
           templateLocation: 'Linked artifact'
             # options:  Linked artifact, URL of the file; cannot set variable(s)
-          csmFile: D:\a\1\s\01_AzStorage\01_AzStorageAccount\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)\azuredeploy.json
+          csmFile: D:\a\1\s\01_AzStorage\01_AzStorageAccount\01_Deploy\AzStorageAccount.$(AzStorageName).$(Build.BuildNumber)\azuredeploy.json
             # csmFile: 'D:\a\1\s\01_$(AzCategory)\01_$(AzItem)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)\azuredeploy.json'
             # Location of azuredeploy.json; use 'raw' link for github repo & URL of the file
           deploymentMode: Incremental
