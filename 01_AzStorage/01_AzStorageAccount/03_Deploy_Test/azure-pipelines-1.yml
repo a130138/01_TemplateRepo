@@ -32,8 +32,17 @@ jobs:
                 -replace '@@AzLoc@@','$(AzLoc)' `
                 -replace '@@AzKind@@','$(AzKind)' `
               } | Set-Content $(AzDestinationFileJSON)
+    - task: PublishPipelineArtifact@1
+      inputs:
+        ArtifactName: drop
+
   - job: deploy
     steps:
+    - checkout: self
+      persistCredentials: true
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        artifactName: drop
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
@@ -48,7 +57,7 @@ jobs:
           # Azure location
         templateLocation: 'Linked artifact'
           # options:  Linked artifact, URL of the file; cannot set variable(s)
-        csmFile: '$(Build.Repository.LocalPath)\01_$(AzCategory)\01_$(AzItem)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)\azuredeploy.json'
+        csmFile: '$(Pipeline.Workspace)\01_$(AzCategory)\01_$(AzItem)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)\azuredeploy.json'
           # Location of azuredeploy.json; use 'raw' link for github repo & URL of the file
         deploymentMode: Incremental
           # Options:  Incremental, Validation, Complete; cannot set variable(s)
