@@ -35,13 +35,10 @@ stages:
                 -replace '@@AzLoc@@','$(AzLoc)' `
                 -replace '@@AzKind@@','$(AzKind)' `
               } | Set-Content $(AzDestinationFileJSON)
-
 - stage: ARM
   displayName: deploy ARM template
   jobs:
     - job: deploy
-      pool:
-        vmImage: windows-latest
       steps:
       - checkout: self
         persistCredentials: true  
@@ -63,6 +60,15 @@ stages:
             # Location of azuredeploy.json; use 'raw' link for github repo & URL of the file
           deploymentMode: Incremental
             # Options:  Incremental, Validation, Complete; cannot set variable(s)
+      - task: PowerShell@2
+        inputs:
+          targetType: inline
+          failOnStderr: false
+          script: |
+            Write-Host "####################################################"
+            Write-Host "######### Build Repository Local Path ##############"
+            Get-ChildItem $(Build.Repository.LocalPath) -Recurse
+            Write-Host "####################################################"
 
 - stage: sync
   displayName: git push
