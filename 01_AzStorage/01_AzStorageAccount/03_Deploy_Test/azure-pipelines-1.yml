@@ -34,7 +34,9 @@ jobs:
               } | Set-Content $(AzDestinationFileJSON)
     - task: PublishPipelineArtifact@1
       inputs:
-        ArtifactName: drop
+        targetPath: '$(Pipeline.Workspace)'
+        artifact: 'drop'
+        publishLocation: 'pipeline'
 
   - job: deploy
     steps:
@@ -42,7 +44,9 @@ jobs:
       persistCredentials: true
     - task: DownloadPipelineArtifact@2
       inputs:
-        artifactName: drop
+        buildType: 'current'
+        artifactName: 'drop'
+        targetPath: '$(Pipeline.Workspace)'
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
