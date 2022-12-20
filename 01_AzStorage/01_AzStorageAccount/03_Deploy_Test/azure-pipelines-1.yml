@@ -11,10 +11,7 @@ trigger:
 pool:
   vmIMage: windows-latest
 
-stages:
-- stage: prep
-  displayName: create folders and copy template files
-  jobs:
+jobs:
   - job: setup
     steps:
     - checkout: self
@@ -35,6 +32,8 @@ stages:
                 -replace '@@AzLoc@@','$(AzLoc)' `
                 -replace '@@AzKind@@','$(AzKind)' `
               } | Set-Content $(AzDestinationFileJSON)
+  - job: deploy
+    steps:
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
@@ -53,22 +52,19 @@ stages:
           # Location of azuredeploy.json; use 'raw' link for github repo & URL of the file
         deploymentMode: Incremental
           # Options:  Incremental, Validation, Complete; cannot set variable(s)
-- stage: sync
-  displayName: git push
-  jobs:
-    - job: push
-      steps:
-        - checkout: self
-          persistCredentials: true
-        - task: CmdLine@2
-          inputs:
-            script: |
-              cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
-              git init
-              git config --global user.email "$(GitUserEmail)"
-              git config --global user.name "$(GitUserName)"
-              git fetch
-              git checkout -b main
-              git add .
-              git commit -m "My commit message"
-              git push origin HEAD:main
+  - job: sync
+    steps:
+    - checkout: self
+      persistCredentials: true
+    - task: CmdLine@2
+      inputs:
+        script: |
+          cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
+          git init
+          git config --global user.email "$(GitUserEmail)"
+          git config --global user.name "$(GitUserName)"
+          git fetch
+          git checkout -b main
+          git add .
+          git commit -m "My commit message"
+          git push origin HEAD:main
