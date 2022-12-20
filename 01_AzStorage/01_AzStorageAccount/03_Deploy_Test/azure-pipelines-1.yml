@@ -52,6 +52,12 @@ steps:
           # Location of azuredeploy.json; use 'raw' link for github repo & URL of the file
         deploymentMode: Incremental
           # Options:  Incremental, Validation, Complete; cannot set variable(s)
+    - task: PowerShell@2
+      inputs:
+        targetType: inline
+        script: |
+          Remove-Item $(AzRepoFolder)\00_Template\azure-variables.yml -Force
+          Copy-Item $(AzRepoFolder)\00_Template\azure-variables-blank.yml $(AzRepoFolder)\00_Template\azure-variables.yml
     - task: CmdLine@2
       inputs:
         script: |
