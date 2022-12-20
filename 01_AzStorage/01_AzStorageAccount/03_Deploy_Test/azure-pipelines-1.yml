@@ -3,7 +3,7 @@
 # Required:  Update 'azure-variables.yml' prior to deploy
 
 variables:
-  - template: $(System.DefaultWorkingDirectory)\00_Template\azure-variables.yml
+  - template: $(AzRepoFolder)\00_Template\azure-variables.yml
 
 trigger:
   - none
