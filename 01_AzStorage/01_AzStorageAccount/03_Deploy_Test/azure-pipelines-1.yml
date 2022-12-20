@@ -9,7 +9,7 @@ trigger:
   - none
 
 pool:
-  vmIMage: windows-latest
+  name:  default
 
 stages:
 - stage: prep
