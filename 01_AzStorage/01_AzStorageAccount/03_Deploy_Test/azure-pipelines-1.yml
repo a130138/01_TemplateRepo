@@ -16,8 +16,6 @@ stages:
   displayName: create folders and copy template files
   jobs:
   - job: setup
-    pool:
-      name: default
     steps:
     - checkout: self
       persistCredentials: true  
@@ -43,8 +41,6 @@ stages:
   displayName: execute ARM template
   jobs:
     - job: deploy
-      pool:
-        name: default
       steps:
       - checkout: self
         persistCredentials: true  
@@ -71,8 +67,6 @@ stages:
   displayName: git push
   jobs:
     - job: push
-      pool:
-        name: default
       steps:
         - checkout: self
           persistCredentials: true 
