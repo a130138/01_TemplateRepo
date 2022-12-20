@@ -3,7 +3,7 @@
 # Required:  Update 'azure-variables.yml' prior to deploy
 
 variables:
-  - template: template-vars.yml
+  - template: azure-variables.yml
 
 trigger:
   - none
@@ -24,7 +24,6 @@ steps:
    script: |
       New-Item -Path $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzItem).$(AzStorageName).$(Build.BuildNumber)
       Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
-      Copy-Item $(AzRepoFolder)\00_Template\azurevariables.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
       (Get-Content $(AzDestinationFileJSON)) | Foreach-Object {
           $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
              -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
