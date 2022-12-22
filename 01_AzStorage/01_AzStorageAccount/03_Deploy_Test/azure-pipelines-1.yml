@@ -18,8 +18,11 @@ steps:
       inputs:
         targetType: inline
         script: |
+          Write-Host "Create new timestamped folder"
           New-Item $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzItem).$(AzStorageName).$(Build.BuildNumber)
+          Write-Host "Copy json template to new timestamped folder"
           Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
+          Write-Host "Copy updated variables file to new timestamped folder"
           Copy-Item $(AzRepoFolder)\00_Template\azure-variables.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
     - task: PowerShell@2
       inputs:
@@ -56,8 +59,10 @@ steps:
       inputs:
         targetType: inline
         script: |
+          Write-Host "Remove updated variables file"
           Remove-Item $(AzRepoFolder)\00_Template\azure-variables.yml -Force
-          Copy-Item $(AzRepoFolder)\00_Template\azure-variables-blank.yml $(AzRepoFolder)\00_Template\azure-variables.yml
+          Write-Host "Put variables template in place"
+          Copy-Item -Path $(AzRepoFolder)\00_Template\azure-variables-blank.yml -Destination $(AzRepoFolder)\00_Template\azure-variables.yml
     - task: CmdLine@2
       inputs:
         script: |
