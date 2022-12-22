@@ -51,10 +51,6 @@
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2022-05-01",
             "name": "@@AzStorageName@@/default",
-            "dependsOn":
-                [
-                    "[resourceId('Microsoft.Storage/storageAccounts',('@@AzStorageName@@'))]"
-                ],
             "sku":
                 {
                     "name": "Premium_LRS",
@@ -76,12 +72,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2022-05-01",
-            "name": "@@AzStorageName@@/default/containerone",
-            "dependsOn":
-                [
-                    "[resourceId('Microsoft.Storage/storageAccounts/blobServices',('@@AzStorageName@@'), 'default')]",
-                    "[resourceId('Microsoft.Storage/storageAccounts',('@@AzStorageName@@'))]"
-                ],
+            "name": "@@AzStorageName@@/default/@@AzStorageName@@",
             "properties":
                 {
                     "immutableStorageWithVersioning":
