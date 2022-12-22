@@ -13,7 +13,7 @@ variables:
   - name: AzRepoFolder
     value: $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
     # Azure repo folder path based on AzCategory/AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
-  - name:  AzDestinationFileJSON
+  - name:  AzDeployJson
     value: $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)\azuredeploy.json
     # Setup of new json file
 ##########"Json & ARM Variables"##################
@@ -83,7 +83,7 @@ steps:
           # Inject variables from above #
           Write-Host "##########################################"
           Write-Host "Update json variables"
-          (Get-Content $(AzDestinationFileJSON)) | Foreach-Object {
+          (Get-Content $(AzDeployJson)) | Foreach-Object {
               $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
                 -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
                 -replace '@@AzTagOwn@@', '$(AzTagOwn)' `
@@ -91,7 +91,7 @@ steps:
                 -replace '@@AzSkuTier@@','$(AzSkuTier)' `
                 -replace '@@AzLoc@@','$(AzLoc)' `
                 -replace '@@AzKind@@','$(AzKind)' `
-              } | Set-Content $(AzDestinationFileJSON)
+              } | Set-Content $(AzDeployJson)
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
