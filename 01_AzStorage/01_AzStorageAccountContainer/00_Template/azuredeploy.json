@@ -80,10 +80,6 @@
             "name": "@@AzStorageName@@/default/testone",
             "properties":
             {
-                "immutableStorageWithVersioning":
-                {
-                    "enabled": false
-                },
                 "defaultEncryptionScope": "$account-encryption-key",
                 "denyEncryptionScopeOverride": false,
                 "publicAccess": "None"
