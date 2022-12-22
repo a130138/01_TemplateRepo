@@ -18,7 +18,7 @@ variables:
     # Setup of new json file
 ##########"Json & ARM Variables"##################
   - name: AzStorageName
-    value: containone
+    value: contain
     # name of new Azure storage account; i.e. - 'azstorageacct' (must be lowercase/no special chars)
   - name: AzTagEnv
     value: POC
