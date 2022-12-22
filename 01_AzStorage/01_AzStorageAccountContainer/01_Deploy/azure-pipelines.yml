@@ -20,6 +20,8 @@ variables:
   - name: AzStorageName
     value: contain2
     # name of new Azure storage account; i.e. - 'azstorageacct' (must be lowercase/no special chars)
+  - name: AzContainerName
+    value: cont1
   - name: AzTagEnv
     value: POC
     # Azure 'Environment' tag
@@ -84,13 +86,14 @@ steps:
           Write-Host "##########################################"
           Write-Host "Update json variables"
           (Get-Content $(AzDeployJson)) | Foreach-Object {
-              $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
-                -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
-                -replace '@@AzTagOwn@@', '$(AzTagOwn)' `
-                -replace '@@AzSkuName@@', '$(AzSkuName)' `
+              $_ -replace '@@AzStorageName@@','$(AzStorageName)' `
+                -replace '@@AzTagEnv@@','$(AzTagEnv)' `
+                -replace '@@AzTagOwn@@','$(AzTagOwn)' `
+                -replace '@@AzSkuName@@','$(AzSkuName)' `
                 -replace '@@AzSkuTier@@','$(AzSkuTier)' `
                 -replace '@@AzLoc@@','$(AzLoc)' `
                 -replace '@@AzKind@@','$(AzKind)' `
+                -replace '@@AzContainerName@@','$(AzContainerName)' `
               } | Set-Content $(AzDeployJson)
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
