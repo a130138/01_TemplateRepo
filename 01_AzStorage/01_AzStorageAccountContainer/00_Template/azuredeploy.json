@@ -1,7 +1,7 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters":{},
+    "parameters": {},
     "variables": {},
     "resources":
     [
@@ -11,78 +11,83 @@
             "name": "@@AzStorageName@@",
             "location": "@@AzLoc@@",
             "tags":
-                {
-                    "Owner": "@@AzTagOwn@@",
-                    "Env": "@@AzTagEnv@@"
-                },
+            {
+                "Owner": "@@AzTagOwn@@",
+                "Env": "@@AzTagEnv@@"
+            },
             "sku":
-                {
-                    "name": "@@AzSkuName@@",
-                    "tier": "@@AzSkuTier@@"
-                },
+            {
+                "name": "@@AzSkuName@@",
+                "tier": "@@AzSkuTier@@"
+            },
             "kind": "@@AzKind@@",
             "properties":
+            {
+                "minimumTlsVersion": "TLS1_0",
+                "allowBlobPublicAccess": true,
+                "networkAcls":
                 {
-                    "minimumTlsVersion": "TLS1_0",
-                    "allowBlobPublicAccess": true,
-                    "networkAcls": {
-                        "bypass": "AzureServices",
-                        "virtualNetworkRules": [],
-                        "ipRules": [],
-                        "defaultAction": "Allow"
-                    },
-                    "supportsHttpsTrafficOnly": true,
-                    "encryption": {
-                        "services": {
-                            "file": {
-                                "keyType": "Account",
-                                "enabled": true
-                            },
-                            "blob": {
-                                "keyType": "Account",
-                                "enabled": true
-                            }
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": true,
+                "encryption":
+                {
+                    "services":
+                    {
+                        "file":
+                        {
+                            "keyType": "Account",
+                            "enabled": true
                         },
-                        "keySource": "Microsoft.Storage"
-                    }
+                        "blob":
+                        {
+                            "keyType": "Account",
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
                 }
+            }
         },
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2022-05-01",
             "name": "@@AzStorageName@@/default",
             "sku":
-                {
-                    "name": "Premium_LRS",
-                    "tier": "Premium"
-                },
+            {
+                "name": "@@AzSkuName@@",
+                "tier": "@@AzSkuTier@@"
+            },
             "properties":
+            {
+                "cors":
                 {
-                    "cors":
-                        {
-                            "corsRules": []
-                        },
-                    "deleteRetentionPolicy":
-                        {
-                            "allowPermanentDelete": false,
-                            "enabled": false
-                        }
+                    "corsRules": []
+                },
+                "deleteRetentionPolicy":
+                {
+                    "allowPermanentDelete": false,
+                    "enabled": false
                 }
+            }
         },
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2022-05-01",
-            "name": "@@AzStorageName@@/default/@@AzStorageName@@",
+            "name": "@@AzStorageName@@/default/testone",
             "properties":
+            {
+                "immutableStorageWithVersioning":
                 {
-                    "immutableStorageWithVersioning":
-                        {
-                            "enabled": false
-                        },
-                    "defaultEncryptionScope": "$account-encryption-key",
-                    "denyEncryptionScopeOverride": false,
-                    "publicAccess": "None"
-                }
+                    "enabled": false
+                },
+                "defaultEncryptionScope": "$account-encryption-key",
+                "denyEncryptionScopeOverride": false,
+                "publicAccess": "None"
+            }
         }
     ]
 }
