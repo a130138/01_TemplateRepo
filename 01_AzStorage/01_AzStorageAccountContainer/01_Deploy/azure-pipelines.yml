@@ -1,4 +1,4 @@
-# Title:  Azure Storage Blob Deploy
+# Title:  Azure Storage Account With Container Deploy
 # About:  Creates new repo folder with updated json variables, deploys to Az Portal
 # Required:  Update variables section prior to deploy
 
