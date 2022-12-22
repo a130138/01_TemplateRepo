@@ -54,11 +54,7 @@ variables:
   - name: GitUserEmail
     value: a130138_tr1@amerisourcebergen.com
     # Repo user email; i.e. - 'a130138_tr1@amerisourcebergen.com'
-##########"Pipeline Info"########################
-  - name: 
-    value:
-  - name: 
-    value:
+
 trigger:
   - none
 pool:
