@@ -1,90 +1,97 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {
-        "storageAccounts_varstest2_name": {
-            "defaultValue": "varstest2",
-            "type": "String"
-        }
-    },
+    "parameters":{},
     "variables": {},
-    "resources": [
+    "resources":
+    [
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2022-05-01",
-            "name": "[('storageAccounts_varstest2_name')]",
-            "location": "eastus2",
-            "tags": {
-                "Owner": "joseph cropper",
-                "Env": "POC"
-            },
-            "sku": {
-                "name": "Premium_LRS",
-                "tier": "Premium"
-            },
-            "kind": "Storage",
-            "properties": {
-                "minimumTlsVersion": "TLS1_0",
-                "allowBlobPublicAccess": true,
-                "networkAcls": {
-                    "bypass": "AzureServices",
-                    "virtualNetworkRules": [],
-                    "ipRules": [],
-                    "defaultAction": "Allow"
+            "name": "@@AzStorageName@@",
+            "location": "@@AzLoc@@",
+            "tags":
+                {
+                    "Owner": "@@AzTagOwn@@",
+                    "Env": "@@AzTagEnv@@"
                 },
-                "supportsHttpsTrafficOnly": true,
-                "encryption": {
-                    "services": {
-                        "file": {
-                            "keyType": "Account",
-                            "enabled": true
-                        },
-                        "blob": {
-                            "keyType": "Account",
-                            "enabled": true
-                        }
+            "sku":
+                {
+                    "name": "@@AzSkuName@@",
+                    "tier": "@@AzSkuTier@@"
+                },
+            "kind": "@@AzKind@@",
+            "properties":
+                {
+                    "minimumTlsVersion": "TLS1_0",
+                    "allowBlobPublicAccess": true,
+                    "networkAcls": {
+                        "bypass": "AzureServices",
+                        "virtualNetworkRules": [],
+                        "ipRules": [],
+                        "defaultAction": "Allow"
                     },
-                    "keySource": "Microsoft.Storage"
+                    "supportsHttpsTrafficOnly": true,
+                    "encryption": {
+                        "services": {
+                            "file": {
+                                "keyType": "Account",
+                                "enabled": true
+                            },
+                            "blob": {
+                                "keyType": "Account",
+                                "enabled": true
+                            }
+                        },
+                        "keySource": "Microsoft.Storage"
+                    }
                 }
-            }
         },
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2022-05-01",
-            "name": "[concat(('storageAccounts_varstest2_name'), '/default')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts',('storageAccounts_varstest2_name'))]"
-            ],
-            "sku": {
-                "name": "Premium_LRS",
-                "tier": "Premium"
-            },
-            "properties": {
-                "cors": {
-                    "corsRules": []
+            "name": "@@AzStorageName@@/default",
+            "dependsOn":
+                [
+                    "[resourceId('Microsoft.Storage/storageAccounts',('@@AzStorageName@@'))]"
+                ],
+            "sku":
+                {
+                    "name": "Premium_LRS",
+                    "tier": "Premium"
                 },
-                "deleteRetentionPolicy": {
-                    "allowPermanentDelete": false,
-                    "enabled": false
+            "properties":
+                {
+                    "cors":
+                        {
+                            "corsRules": []
+                        },
+                    "deleteRetentionPolicy":
+                        {
+                            "allowPermanentDelete": false,
+                            "enabled": false
+                        }
                 }
-            }
         },
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2022-05-01",
-            "name": "[concat(('storageAccounts_varstest2_name'), '/default/containerone')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', ('storageAccounts_varstest2_name'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', ('storageAccounts_varstest2_name'))]"
-            ],
-            "properties": {
-                "immutableStorageWithVersioning": {
-                    "enabled": false
-                },
-                "defaultEncryptionScope": "$account-encryption-key",
-                "denyEncryptionScopeOverride": false,
-                "publicAccess": "None"
-            }
+            "name": "@@AzStorageName@@/default/containerone",
+            "dependsOn":
+                [
+                    "[resourceId('Microsoft.Storage/storageAccounts/blobServices',('@@AzStorageName@@'), 'default')]",
+                    "[resourceId('Microsoft.Storage/storageAccounts',('@@AzStorageName@@'))]"
+                ],
+            "properties":
+                {
+                    "immutableStorageWithVersioning":
+                        {
+                            "enabled": false
+                        },
+                    "defaultEncryptionScope": "$account-encryption-key",
+                    "denyEncryptionScopeOverride": false,
+                    "publicAccess": "None"
+                }
         }
     ]
 }
