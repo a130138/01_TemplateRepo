@@ -72,7 +72,11 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2022-05-01",
+<<<<<<< HEAD
+            "name": "@@AzStorageName@@/default/containerone",
+=======
             "name": "@@AzStorageName@@/default/@@AzStorageName@@",
+>>>>>>> 77638a3e86e490807327bcfcdb7d75990f531e2a
             "properties":
                 {
                     "immutableStorageWithVersioning":
