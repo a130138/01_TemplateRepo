@@ -1,31 +1,90 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters":
-        {},
-    "functions":
-        [],
-    "variables":
-        {},
-    "resources":
-        [
-            {
-            "name": "@@AzStorageName@@",
+    "parameters": {
+        "storageAccounts_varstest2_name": {
+            "defaultValue": "varstest2",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
             "type": "Microsoft.Storage/storageAccounts",
-            "apiVersion": "2021-04-01",
-            "tags":
-                {
-                "Owner": "@@AzTagOwn@@",
-                "Env": "@@AzTagEnv@@"
+            "apiVersion": "2022-05-01",
+            "name": "[('storageAccounts_varstest2_name')]",
+            "location": "eastus2",
+            "tags": {
+                "Owner": "joseph cropper",
+                "Env": "POC"
+            },
+            "sku": {
+                "name": "Premium_LRS",
+                "tier": "Premium"
+            },
+            "kind": "Storage",
+            "properties": {
+                "minimumTlsVersion": "TLS1_0",
+                "allowBlobPublicAccess": true,
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
                 },
-            "location": "@@AzLoc@@",
-            "kind": "@@AzKind@@",
-            "sku":
-                {
-                "name": "@@AzSkuName@@",
-                "tier": "@@AzSkuTier@@"
+                "supportsHttpsTrafficOnly": true,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "keyType": "Account",
+                            "enabled": true
+                        },
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
                 }
             }
-        ],
-    "outputs": {}
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices",
+            "apiVersion": "2022-05-01",
+            "name": "[concat(('storageAccounts_varstest2_name'), '/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts',('storageAccounts_varstest2_name'))]"
+            ],
+            "sku": {
+                "name": "Premium_LRS",
+                "tier": "Premium"
+            },
+            "properties": {
+                "cors": {
+                    "corsRules": []
+                },
+                "deleteRetentionPolicy": {
+                    "allowPermanentDelete": false,
+                    "enabled": false
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+            "apiVersion": "2022-05-01",
+            "name": "[concat(('storageAccounts_varstest2_name'), '/default/containerone')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', ('storageAccounts_varstest2_name'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', ('storageAccounts_varstest2_name'))]"
+            ],
+            "properties": {
+                "immutableStorageWithVersioning": {
+                    "enabled": false
+                },
+                "defaultEncryptionScope": "$account-encryption-key",
+                "denyEncryptionScopeOverride": false,
+                "publicAccess": "None"
+            }
+        }
+    ]
 }
