@@ -54,7 +54,11 @@ variables:
   - name: GitUserEmail
     value: a130138_tr1@amerisourcebergen.com
     # Repo user email; i.e. - 'a130138_tr1@amerisourcebergen.com'
-
+##########"Pipeline Info"########################
+  - name: 
+    value:
+  - name: 
+    value:
 trigger:
   - none
 pool:
@@ -71,6 +75,8 @@ steps:
           New-Item $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzItem).$(AzStorageName).$(Build.BuildNumber)
           Write-Host "Copy json template to new timestamped folder"
           Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
+          Write-Host "Save copy of azure-pipelines.yml"
+          Copy-Item -Path $(AzRepoFolder)\03_Deploy_Test\azure-pipelines-1.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
     - task: PowerShell@2
       inputs:
         targetType: inline
