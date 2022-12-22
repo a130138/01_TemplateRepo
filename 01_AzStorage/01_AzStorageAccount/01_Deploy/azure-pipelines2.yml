@@ -6,13 +6,13 @@ variables:
 ##########"Azure Info"######################
   - name: AzCategory
     value: AzStorage
-    # Azure Cateogory; i.e. - AzStorage, AzNSG, AzFirewall, etc
+    # Azure Cateogory; i.e. - AzStorage, AzNSG, AzFirewall, etc; for repo folder setup
   - name: AzItem
     value: AzStorageAccount
-    # Azure Item for category entered; i.e. - AzStorageAccount, AzStorageBlob, etc
+    # Azure Item for category entered; i.e. - AzStorageAccount, AzStorageBlob, etc; for repo folder setup
   - name: AzRepoFolder
     value: $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
-    # Azure repo folder path based on AzCategory/AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
+    # Azure repo folder path based on AzCategory\AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
   - name:  AzDestinationFileJSON
     value: $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)\azuredeploy.json
     # Setup of new json file
@@ -67,10 +67,13 @@ steps:
         targetType: inline
         script: |
           # Folder and files setup #
+          Write-Host "#############################"
           Write-Host "Create new timestamped folder"
           New-Item $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzItem).$(AzStorageName).$(Build.BuildNumber)
+          Write-Host "#############################"
           Write-Host "Copy json template to new timestamped folder"
           Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
+          Write-Host "#############################"
           Write-Host "Save copy of azure-pipelines.yml"
           Copy-Item -Path $(AzRepoFolder)\03_Deploy_Test\azure-pipelines-1.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
     - task: PowerShell@2
@@ -78,6 +81,7 @@ steps:
         targetType: inline
         script: |
           # Inject variables from above #
+          Write-Host "#############################"
           Write-Host "Update json variables"
           (Get-Content $(AzDestinationFileJSON)) | Foreach-Object {
               $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
@@ -109,7 +113,9 @@ steps:
     - task: CmdLine@2
       inputs:
         script: |
+          echo "####################"
           echo "Git push"
+          echo "####################"
           cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
           git init
           git config --global user.email "$(GitUserEmail)"
