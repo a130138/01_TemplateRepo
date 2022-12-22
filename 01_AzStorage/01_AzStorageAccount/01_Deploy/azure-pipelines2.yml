@@ -45,6 +45,8 @@ variables:
     value: JoePOC1
     # Azure resource group name
 ##########"Repo Info"########################
+  - name: GitJsonTemplate
+    value:  'https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.storage/storage-account-create/azuredeploy.json'
   - name: GitRepoBranch
     value: _a130138_01_TemplateRepo
     # Repo branch main/master name; i.e. - '_a130138_01_TemplateRepo'
@@ -72,7 +74,7 @@ steps:
           New-Item $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzItem).$(AzStorageName).$(Build.BuildNumber)
           Write-Host "#############################"
           Write-Host "Copy json template to new timestamped folder"
-          Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
+          Copy-Item -Path $(GitJsonTemplate) -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
           Write-Host "#############################"
           Write-Host "Save copy of azure-pipelines.yml"
           Copy-Item -Path $(AzRepoFolder)\03_Deploy_Test\azure-pipelines-1.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
