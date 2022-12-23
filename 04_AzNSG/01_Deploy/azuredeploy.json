@@ -9,12 +9,12 @@
       {
         "type": "Microsoft.Network/networkSecurityGroups",
         "apiVersion": "2020-11-01",
-        "name": "AzureBastionSubnet_nsg",
-        "location": "East US 2",
+        "name": "@@AzNsgName@@",
+        "location": "@@AzLoc@@",
         "tags":
           {
-            "Owner": "joseph cropper",
-            "Environment": "POC"
+            "Owner": "@@AzTagOwner@@",
+            "Environment": "@@AzTagEnv@@"
           },
         "properties":
           {
@@ -61,29 +61,6 @@
                     }
                 },
                 {
-                  "name": "AllowBastionHostCommunication",
-                  "id": "AllowBastionHostCommunication",
-                  "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-                  "properties":
-                    {
-                      "protocol": "*",
-                      "sourcePortRange": "*",
-                      "sourceAddressPrefix": "VirtualNetwork",
-                      "destinationAddressPrefix": "VirtualNetwork",
-                      "access": "Allow",
-                      "priority": 150,
-                      "direction": "Inbound",
-                      "sourcePortRanges": [],
-                      "destinationPortRanges":
-                        [
-                          "8080",
-                          "5701"
-                        ],
-                      "sourceAddressPrefixes": [],
-                      "destinationAddressPrefixes": []
-                    }
-                },
-                {
                   "name": "AllowSshRdpOutbound",
                   "id": "AllowSshRdpOutbound",
                   "type": "Microsoft.Network/networkSecurityGroups/securityRules",
@@ -121,29 +98,6 @@
                       "direction": "Outbound",
                       "sourcePortRanges": [],
                       "destinationPortRanges": [],
-                      "sourceAddressPrefixes": [],
-                      "destinationAddressPrefixes": []
-                    }
-                },
-                {
-                  "name": "AllowBastionCommunication",
-                  "id": "AllowBastionCommunication",
-                  "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-                  "properties":
-                    {
-                      "protocol": "*",
-                      "sourcePortRange": "*",
-                      "sourceAddressPrefix": "VirtualNetwork",
-                      "destinationAddressPrefix": "VirtualNetwork",
-                      "access": "Allow",
-                      "priority": 120,
-                      "direction": "Outbound",
-                      "sourcePortRanges": [],
-                      "destinationPortRanges":
-                        [
-                          "8080",
-                          "5701"
-                        ],
                       "sourceAddressPrefixes": [],
                       "destinationAddressPrefixes": []
                     }
