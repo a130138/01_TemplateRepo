@@ -1,0 +1,12 @@
+# Update Repo
+- task: CmdLine@2
+  inputs:
+    script: |
+      git init
+      git config --global user.email "a130138_tr1@amerisourcebergen.com"
+      git config --global user.name "a130138_tr1"
+      git fetch
+      git checkout -b main
+      git add .
+      git commit -m "My commit message"
+      git push origin HEAD:main
