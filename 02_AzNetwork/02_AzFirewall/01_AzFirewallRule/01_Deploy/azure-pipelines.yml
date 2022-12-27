@@ -1,0 +1,130 @@
+# Title: Azure Firewall Rule Deploy
+# About:  Creates new repo folder with updated json variables, deploys to Az Portal
+# Required:  Update variables section prior to deploy
+
+pool:
+    vmIMage: windows-latest
+trigger:
+    - none
+variables:
+##########"Azure Info"######################
+  - name: AzCategory
+    value: 
+    # Azure Cateogory; i.e. - AzStorage, AzNSG, AzFirewall, etc
+  - name: AzItem
+    value: 
+    # Azure Item for category entered; i.e. - AzStorageAccount, AzStorageBlob, etc
+  - name: AzRepoFolder
+    value: $(System.DefaultWorkingDirectory)\$(AzCategory)\$(AzItem)
+    # Azure repo folder path based on AzCategory/AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
+  - name:  AzDestinationFileJSON
+    value: $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)\azuredeploy.json
+    # Json folder setup
+##########"Json & ARM Variables"##################
+  - name: AzStorageName
+    value: 
+    # name of new Azure storage account; i.e. - 'azstorageacct' (must be lowercase/no special chars)
+  - name: AzTagEnv
+    value: 
+    # Azure 'Environment' tag
+  - name: AzTagOwn
+    value: 
+    # Azure 'Owner' tag
+  - name: AzSkuName
+    value: 
+    # Azure storage sku name; i.e. - 'Premium_LRS'
+  - name: AzSkuTier
+    value: 
+    # Azure storage tier; i.e. - 'Premium'
+  - name: AzLoc
+    value: 
+    # Azure location; i.e. - 'East US 2'
+  - name: AzKind
+    value: 
+    # Azure storage account type; i.e. - 'Storage'
+  - name: AzArmConnection
+    value: 
+    # Azure ARM connection; i.e. - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+  - name: AzRgName
+    value: 
+    # Azure resource group name
+##########"Repo Info"########################
+  - name: GitRepoBranch
+    value: 
+    # Repo branch main/master name; i.e. - '_a130138_01_TemplateRepo'
+  - name: GitUserName
+    value: 
+    # Repo user name; i.e. - 'a130138_tr1'
+  - name: GitUserEmail
+    value: 
+    # Repo user email; i.e. - 'a130138_tr1@amerisourcebergen.com'
+
+
+steps:
+- checkout: self
+  persistCredentials: true
+
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: |
+        # Folder and files setup #
+        Write-Host "##########################################"
+        Write-Host "Create new timestamped folder"
+        New-Item $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzItem).$(AzStorageName).$(Build.BuildNumber)
+        Write-Host "##########################################"
+        Write-Host "Copy json template to new timestamped folder"
+        Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
+        Write-Host "##########################################"
+        Write-Host "Save copy of azure-pipelines.yml"
+        Copy-Item -Path $(AzRepoFolder)\01_Deploy\azure-pipelines.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
+
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: |
+        # Inject variables from above #
+        Write-Host "##########################################"
+        Write-Host "Update json variables"
+        (Get-Content $(AzDestinationFileJSON)) | Foreach-Object {
+            $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
+            -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
+            -replace '@@AzTagOwn@@', '$(AzTagOwn)' `
+            -replace '@@AzSkuName@@', '$(AzSkuName)' `
+            -replace '@@AzSkuTier@@','$(AzSkuTier)' `
+            -replace '@@AzLoc@@','$(AzLoc)' `
+            -replace '@@AzKind@@','$(AzKind)' `
+            } | Set-Content $(AzDestinationFileJSON)
+
+# ARM Template - Deployment
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: Resource Group
+      # Options: Resource Group, Management Group, Subscription
+    azureResourceManagerConnection: $(AzArmConnection)
+      # ex - Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)
+    action: Create Or Update Resource Group
+      # Options: Create Or Update Resource Group, DeleteRG
+    resourceGroupName: $(AzRgName)
+      # Azure Resource Group name
+    location: $(AzLoc)
+      # ex - East US 2
+    templateLocation: Linked artifact
+      # Options: URL of the file, Linked Artifact
+    csmFileLink: '$(Pipeline.Workspace)\01_(AzCategory)\01_(AzItem)\$(AzItem).$Timestamp\azuredeploy.json'
+      # azuredeploy.json location (ensure using 'raw' URL for github)
+    deploymentMode: Incremental
+      # Options:  Incremental, Validation, Complete
+- task: CmdLine@2
+  inputs:
+    script: |
+        echo "Git push"
+        cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
+        git init
+        git config --global user.email "$(GitUserEmail)"
+        git config --global user.name "$(GitUserName)"
+        git fetch
+        git checkout -b main
+        git add .
+        git commit -m "My commit message"
+        git push origin HEAD:main
