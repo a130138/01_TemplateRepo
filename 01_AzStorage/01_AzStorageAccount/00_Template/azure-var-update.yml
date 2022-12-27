@@ -1,0 +1,17 @@
+steps:
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: |
+      # Inject variables from above #
+      Write-Host "##########################################"
+      Write-Host "Update json variables"
+      (Get-Content $(AzDestinationFileJSON)) | Foreach-Object {
+          $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
+            -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
+            -replace '@@AzTagOwn@@', '$(AzTagOwn)' `
+            -replace '@@AzSkuName@@', '$(AzSkuName)' `
+            -replace '@@AzSkuTier@@','$(AzSkuTier)' `
+            -replace '@@AzLoc@@','$(AzLoc)' `
+            -replace '@@AzKind@@','$(AzKind)' `
+          } | Set-Content $(AzDestinationFileJSON)

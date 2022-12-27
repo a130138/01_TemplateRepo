@@ -1,0 +1,14 @@
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: |
+        # Folder and files setup #
+        Write-Host "##########################################"
+        Write-Host "Create new timestamped folder"
+        New-Item $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzItem).$(AzStorageName).$(Build.BuildNumber)
+        Write-Host "##########################################"
+        Write-Host "Copy json template to new timestamped folder"
+        Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
+        Write-Host "##########################################"
+        Write-Host "Save copy of azure-pipelines.yml"
+        Copy-Item -Path $(AzRepoFolder)\01_Deploy\azure-pipelines.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
