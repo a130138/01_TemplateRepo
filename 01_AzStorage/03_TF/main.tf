@@ -1,3 +1,6 @@
+provider "azurerm" {
+  features {}
+}
 resource "azurerm_resource_group" "example"  {
     name     = "JoePOC1"
     location = "East US 2"
