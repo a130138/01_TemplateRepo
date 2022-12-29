@@ -10,4 +10,3 @@ steps:
 - task: TerraformCLI@0
   inputs:
     command: 'init'
-    allowTelemetryCollection: true
