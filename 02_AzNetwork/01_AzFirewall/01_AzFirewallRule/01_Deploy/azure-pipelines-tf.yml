@@ -7,7 +7,6 @@ pool:
   vmImage: windows-latest
 
 steps:
-- task: 
 - task: TerraformCLI@0
   inputs:
     command: 'init'
