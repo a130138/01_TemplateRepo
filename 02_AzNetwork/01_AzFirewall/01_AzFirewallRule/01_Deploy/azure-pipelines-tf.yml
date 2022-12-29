@@ -8,3 +8,7 @@ pool:
 
 steps:
 - task: 
+- task: TerraformCLI@0
+  inputs:
+    command: 'init'
+    allowTelemetryCollection: true
