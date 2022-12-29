@@ -1,3 +1,4 @@
+# Azure Firewall Network Rule Deploy via TF
 
 trigger:
     - none
@@ -5,6 +6,9 @@ pool:
     name: windows-latest
 
 steps:
+- task: TerraformInstaller@0
+  inputs:
+    terraformVersion: 'latest'
 - task: TerraformCLI@0
   inputs:
     command: 'init'
