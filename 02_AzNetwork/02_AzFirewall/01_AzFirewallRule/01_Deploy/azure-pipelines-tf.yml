@@ -1,10 +1,9 @@
 # Azure Firewall Network Rule Deploy via TF
 
+pool:
+    vmImage: windows-latest
 trigger:
     - none
-pool:
-    name: windows-latest
-
 steps:
 - task: TerraformInstaller@0
   inputs:
