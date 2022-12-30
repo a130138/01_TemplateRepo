@@ -19,5 +19,5 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
 - task: TerraformCLI@0
   inputs:
-    command: 'validate'
+    command: 'plan'
     allowTelemetryCollection: false
