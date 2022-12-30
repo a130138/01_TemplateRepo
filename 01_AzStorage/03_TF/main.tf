@@ -23,6 +23,6 @@ resource "azurerm_storage_account" "jc_storage_acct" {
 
   tags = {
     environment = "POC"
-    owner = "jc"
+    owner       = "jc"
   }
 }
