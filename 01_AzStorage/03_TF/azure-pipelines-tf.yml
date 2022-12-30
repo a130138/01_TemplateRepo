@@ -9,7 +9,7 @@ steps:
   inputs:
     TemplatePath: '$(System.DefaultWorkingDirectory)\01_AzStorage\03_TF'
     Arguments: 'plan'
-    InstallTerraform: false
+    InstallTerraform: true
     UseAzureSub: true
     ConnectedServiceNameSelector: 'ConnectedServiceNameARM'
     ConnectedServiceNameARM: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
