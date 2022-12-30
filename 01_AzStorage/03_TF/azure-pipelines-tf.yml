@@ -17,3 +17,7 @@ steps:
     backendAzureRmResourceGroupName: 'JoePOC1'
     allowTelemetryCollection: false
     workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
+- task: TerraformCLI@0
+  inputs:
+    command: 'validate'
+    allowTelemetryCollection: false
