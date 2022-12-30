@@ -5,9 +5,11 @@ pool:
 trigger:
     - none
 steps:
+# install latest tf version locally
 - task: TerraformInstaller@0
   inputs:
     terraformVersion: 'latest'
+# terraform initialize
 - task: TerraformCLI@0
   inputs:
     command: 'init'
