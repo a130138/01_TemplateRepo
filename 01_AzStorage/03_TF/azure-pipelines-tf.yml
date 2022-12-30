@@ -5,11 +5,15 @@ pool:
 trigger:
     - none
 steps:
-
+- checkout: self
+  persistCredentials: true 
 - task: TerraformTaskV3@3
   inputs:
     provider: 'azurerm'
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)\01_AzStorage\03_TF'
     environmentServiceNameAzureRM: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    backendServiceArm: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    backendAzureRmResourceGroupName: 'JoePOC1'
+    fileName: main.tf
 
