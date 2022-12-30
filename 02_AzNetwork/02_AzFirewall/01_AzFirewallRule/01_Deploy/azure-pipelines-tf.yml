@@ -5,12 +5,13 @@ pool:
 trigger:
     - none
 steps:
-# install latest tf version locally
-- task: TerraformInstaller@0
+- task: Terraform@2
   inputs:
-    terraformVersion: 'latest'
-# terraform initialize
-- task: TerraformCLI@0
-  inputs:
-    command: 'init'
-    allowTelemetryCollection: false
+    TemplatePath: '$(System.DefaultWorkingDirectory)\01_AzStorage\03_TF'
+    Arguments: 'plan'
+    InstallTerraform: false
+    UseAzureSub: true
+    ConnectedServiceNameSelector: 'ConnectedServiceNameARM'
+    ConnectedServiceNameARM: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    ManageState: true
+    SpecifyStorageAccount: false
