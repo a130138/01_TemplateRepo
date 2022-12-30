@@ -10,8 +10,8 @@ steps:
 
 - task: TerraformInstaller@0
   inputs:
-    terraformVersion: 'latest'
-
+    terraformVersion: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller
+    
 
 
 
