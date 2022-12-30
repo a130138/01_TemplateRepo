@@ -1,7 +1,3 @@
-# resource "azure_resource_group" "JoePOC1" {
-#   name = "JoePOC1"
-#   location = "East US 2"
-# }
 resource "azurerm_storage_account" "jc_storage_acct" {
   name                     = "jcstoracctname1"
   resource_group_name      = "JoePOC1"
