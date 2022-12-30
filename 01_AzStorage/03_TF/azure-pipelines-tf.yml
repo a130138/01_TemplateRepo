@@ -1,4 +1,4 @@
-# Azure Firewall Network Rule Deploy via TF
+# Azure Storage Acct Deploy via TF
 
 pool:
     vmImage: windows-latest
