@@ -14,7 +14,7 @@ provider "azurerm" {
   features {}
 }
 
-resource "azure_resource_group" "JoePOC1" {
+resource "azurerm_resource_group" "JoePOC1" {
    name = "JoePOC1"
    location = "East US 2"
  }
