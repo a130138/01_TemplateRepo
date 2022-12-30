@@ -7,11 +7,17 @@ trigger:
 steps:
 - checkout: self
   persistCredentials: true
-- task: PowerShell@2
+
+- task: TerraformInstaller@0
   inputs:
-    targetType: inline
-    script: |
-      Get-ChildItem -Path $(System.DefaultWorkingDirectory) -Recurse
+    terraformVersion: 'latest'
+
+- task: TerraformTaskV3@3
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    backendAzureRmResourceGroupName: 'JoePOC1'
 
 - task: TerraformCLI@0
   inputs:
