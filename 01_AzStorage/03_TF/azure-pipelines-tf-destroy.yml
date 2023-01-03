@@ -43,6 +43,7 @@ steps:
     allowTelemetryCollection: false
     workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
     commandOptions: '-destroy'
+    runAzLogin: true
 - task: TerraformCLI@0
   inputs:
     command: 'destroy'
