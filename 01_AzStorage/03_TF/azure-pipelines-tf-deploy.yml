@@ -1,6 +1,5 @@
 # Azure Storage Acct Deploy via TF
 variables:
-  ##########"Json & ARM Variables"################## 
   - name: AzLoc 
     value: East US 2 
     # Azure location; i.e. - 'East US 2' 
@@ -12,8 +11,10 @@ variables:
     # Azure resource group name
   - name: AzDir
     value: $(System.DefaultWorkingDirectory)/01_AzStorage/03_TF
+    # Azure terraform directory
   - name: AzSub
     value: 239c71f8-a24e-41d1-96f6-b4f834a1f615
+    # Azure subscription
 pool:
     vmImage: ubuntu-latest
 trigger:
