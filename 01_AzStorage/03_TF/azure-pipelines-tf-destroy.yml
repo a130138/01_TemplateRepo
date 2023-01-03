@@ -34,14 +34,17 @@ steps:
     backendAzureRmResourceGroupName: 'JoePOC1'
     allowTelemetryCollection: false
     workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
-
-- task: Terraform@1
+- task: TerraformCLI@0
   inputs:
-    Arguments: 'destroy'
-    InstallTerraform: false
-    ManageState: false
-    TemplatePath: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
-    ConnectedServiceNameARM: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    command: 'plan'
+    backendType: 'azurerm'
+    backendServiceArm: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    backendAzureRmSubscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
+    backendAzureRmResourceGroupName: 'JoePOC1'
+    allowTelemetryCollection: false
+    workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
+    commandOptions: '-destroy'
+
 #- task: TerraformCLI@0
 #  inputs:
 #    command: 'destroy'
