@@ -44,6 +44,7 @@ steps:
     allowTelemetryCollection: false
     workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
     stateSubCommand: rm
+    stateAddresses: 'azurerm_storage_account.jc_storage_acct'
 - task: TerraformCLI@0
   inputs:
     command: 'plan'
