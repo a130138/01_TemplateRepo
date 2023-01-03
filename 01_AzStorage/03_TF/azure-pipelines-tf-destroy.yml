@@ -43,7 +43,7 @@ steps:
     backendAzureRmResourceGroupName: 'JoePOC1'
     allowTelemetryCollection: false
     workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
-    commandOptions: 'rm'
+    stateSubCommand: rm
 - task: TerraformCLI@0
   inputs:
     command: 'plan'
@@ -54,13 +54,3 @@ steps:
     allowTelemetryCollection: false
     workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
     commandOptions: '-destroy'
-
-#- task: TerraformCLI@0
-#  inputs:
-#    command: 'destroy'
-#    backendType: 'azurerm'
-#    backendServiceArm: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-#    backendAzureRmSubscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
-#    backendAzureRmResourceGroupName: 'JoePOC1'
-#    allowTelemetryCollection: false
-#    workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
