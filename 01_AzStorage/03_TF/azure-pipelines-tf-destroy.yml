@@ -43,7 +43,6 @@ steps:
     backendAzureRmResourceGroupName: 'JoePOC1'
     allowTelemetryCollection: false
     workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
-    commandOptions: 'show list'
 - task: TerraformCLI@0
   inputs:
     command: 'plan'
