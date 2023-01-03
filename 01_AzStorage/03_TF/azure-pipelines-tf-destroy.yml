@@ -13,7 +13,7 @@ variables:
     value: $(System.DefaultWorkingDirectory)/01_AzStorage/03_TF
     # Azure terraform directory
   - name: AzSub
-    value: $(AzSub)
+    value: 239c71f8-a24e-41d1-96f6-b4f834a1f615
     # Azure subscription
 trigger:
 - none
