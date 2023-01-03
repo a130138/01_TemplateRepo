@@ -2,14 +2,11 @@
 
 trigger:
 - none
-
 pool:
   vmImage: ubuntu-latest
-
 steps:
 - checkout: self
   persistCredentials: true
-
 - task: TerraformCLI@0
   inputs:
     command: 'init'
@@ -47,7 +44,6 @@ steps:
     allowTelemetryCollection: false
     workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
     commandOptions: '-destroy'
-
 - task: Terraform@1
   inputs:
     Arguments: 'destroy'
@@ -55,7 +51,6 @@ steps:
     ManageState: false
     TemplatePath: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
     ConnectedServiceNameARM: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-
 #- task: TerraformCLI@0
 #  inputs:
 #    command: 'destroy'
