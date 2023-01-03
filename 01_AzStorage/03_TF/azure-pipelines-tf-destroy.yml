@@ -1,13 +1,13 @@
 # Azure Storage Acct Destroy via TF
 variables:
-  - name: AzLoc 
-    value: East US 2 
-    # Azure location; i.e. - 'East US 2' 
-  - name: AzArmConnection 
-    value: Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615) 
-    # Azure ARM connection; i.e. - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)' 
-  - name: AzRgName 
-    value: JoePOC1 
+  - name: AzLoc
+    value: East US 2
+    # Azure location; i.e. - 'East US 2'
+  - name: AzArmConnection
+    value: Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)
+    # Azure ARM connection; i.e. - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+  - name: AzRgName
+    value: JoePOC1
     # Azure resource group name
   - name: AzDir
     value: $(System.DefaultWorkingDirectory)/01_AzStorage/03_TF
@@ -62,9 +62,7 @@ steps:
     runAzLogin: true
     commandOptions: '-destroy'
     allowTelemetryCollection: false
-    publishPlanResults: 'mytfplan.tf'
     workingDirectory: '$(AzDir)'
-    
 - task: TerraformCLI@0
   inputs:
     command: 'destroy'
@@ -77,6 +75,4 @@ steps:
     providerAzureRmSubscriptionId: '$(AzSub)'
     runAzLogin: true
     allowTelemetryCollection: false
-    publishPlanResults: 'mytfplan.tf'
     workingDirectory: '$(AzDir)'
-    
