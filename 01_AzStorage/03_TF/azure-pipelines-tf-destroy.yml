@@ -36,14 +36,18 @@ steps:
 - task: TerraformCLI@0
   inputs:
     command: 'plan'
-    backendType: 'azurerm'
-    backendServiceArm: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-    backendAzureRmSubscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
-    backendAzureRmResourceGroupName: 'JoePOC1'
-    allowTelemetryCollection: false
     workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
-    commandOptions: '-destroy'
+    environmentServiceName: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    providerAzureRmSubscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
     runAzLogin: true
+    commandOptions: '-destroy'
+    allowTelemetryCollection: false
+    publishPlanResults: 'mytfplan'
+    backendAzureRmResourceGroupName: 'JoePOC1'
+    backendAzureRmResourceGroupLocation: 'East US 2'
+    backendType: azurerm
+    backendAzureRmSubscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
+    backendServiceArm: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
 - task: TerraformCLI@0
   inputs:
     command: 'destroy'
