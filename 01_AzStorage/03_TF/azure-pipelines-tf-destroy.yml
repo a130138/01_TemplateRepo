@@ -1,4 +1,20 @@
 # Azure Storage Acct Destroy via TF
+variables:
+  - name: AzLoc 
+    value: East US 2 
+    # Azure location; i.e. - 'East US 2' 
+  - name: AzArmConnection 
+    value: Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615) 
+    # Azure ARM connection; i.e. - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)' 
+  - name: AzRgName 
+    value: JoePOC1 
+    # Azure resource group name
+  - name: AzDir
+    value: $(System.DefaultWorkingDirectory)/01_AzStorage/03_TF
+    # Azure terraform directory
+  - name: AzSub
+    value: $(AzSub)
+    # Azure subscription
 trigger:
 - none
 pool:
@@ -10,55 +26,57 @@ steps:
   inputs:
     command: 'init'
     backendType: 'azurerm'
-    backendServiceArm: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-    backendAzureRmSubscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
-    backendAzureRmResourceGroupName: 'JoePOC1'
+    backendServiceArm: '$(AzArmConnection)'
+    backendAzureRmSubscriptionId: '$(AzSub)'
+    backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
+    workingDirectory: '$(AzDir)'
 - task: TerraformCLI@0
   inputs:
     command: 'fmt'
     backendType: 'azurerm'
-    backendServiceArm: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-    backendAzureRmSubscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
-    backendAzureRmResourceGroupName: 'JoePOC1'
+    backendServiceArm: '$(AzArmConnection)'
+    backendAzureRmSubscriptionId: '$(AzSub)'
+    backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
+    workingDirectory: '$(AzDir)'
 - task: TerraformCLI@0
   inputs:
     command: 'validate'
     backendType: 'azurerm'
-    backendServiceArm: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-    backendAzureRmSubscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
-    backendAzureRmResourceGroupName: 'JoePOC1'
+    backendServiceArm: '$(AzArmConnection)'
+    backendAzureRmSubscriptionId: '$(AzSub)'
+    backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
+    workingDirectory: '$(AzDir)'
 - task: TerraformCLI@0
   inputs:
     command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
-    environmentServiceName: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-    providerAzureRmSubscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
+    backendType: azurerm
+    backendAzureRmResourceGroupName: '$(AzRgName)'
+    backendAzureRmResourceGroupLocation: '$(AzLoc)'
+    backendAzureRmSubscriptionId: '$(AzSub)'
+    backendServiceArm: '$(AzArmConnection)'
+    environmentServiceName: '$(AzArmConnection)'
+    providerAzureRmSubscriptionId: '$(AzSub)'
     runAzLogin: true
     commandOptions: '-destroy'
     allowTelemetryCollection: false
-    publishPlanResults: 'mytfplan'
-    backendAzureRmResourceGroupName: 'JoePOC1'
-    backendAzureRmResourceGroupLocation: 'East US 2'
-    backendType: azurerm
-    backendAzureRmSubscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
-    backendServiceArm: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    publishPlanResults: 'mytfplan.tf'
+    workingDirectory: '$(AzDir)'
+    
 - task: TerraformCLI@0
   inputs:
     command: 'destroy'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/01_AzStorage/03_TF'
-    environmentServiceName: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
-    providerAzureRmSubscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
+    backendType: azurerm
+    backendAzureRmResourceGroupName: '$(AzRgName)'
+    backendAzureRmResourceGroupLocation: '$(AzLoc)'
+    backendAzureRmSubscriptionId: '$(AzSub)'
+    backendServiceArm: '$(AzArmConnection)'
+    environmentServiceName: '$(AzArmConnection)'
+    providerAzureRmSubscriptionId: '$(AzSub)'
     runAzLogin: true
     allowTelemetryCollection: false
-    publishPlanResults: 'mytfplan'
-    backendAzureRmResourceGroupName: 'JoePOC1'
-    backendAzureRmResourceGroupLocation: 'East US 2'
-    backendType: azurerm
-    backendAzureRmSubscriptionId: '239c71f8-a24e-41d1-96f6-b4f834a1f615'
-    backendServiceArm: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    publishPlanResults: 'mytfplan.tf'
+    workingDirectory: '$(AzDir)'
+    
