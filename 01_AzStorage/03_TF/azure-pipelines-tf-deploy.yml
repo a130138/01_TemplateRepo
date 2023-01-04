@@ -1,5 +1,18 @@
 # Azure Storage Acct Deploy via TF
+################### Variables ###################
 variables:
+  - name: AzCategory
+    value: AzStorage
+    # Azure Cateogory; i.e. - AzStorage, AzNSG, AzFirewall, etc
+  - name: AzItem
+    value: AzStorageAccount
+    # Azure Item for category entered; i.e. - AzStorageAccount, AzStorageBlob, etc
+  - name: AzRepoFolder
+    value: $(System.DefaultWorkingDirectory)\$(AzCategory)\$(AzItem)
+    # Azure repo folder path based on AzCategory/AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
+  - name:  AzDestinationFile
+    value: $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)\azuredeploy.json
+    # Setup of new json file
   - name: AzLoc
     value: East US 2
     # Azure location; i.e. - 'East US 2'
@@ -22,6 +35,22 @@ trigger:
 steps:
 - checkout: self
   persistCredentials: true
+################### Folder Structure Setup ###################
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: |
+      # Folder and files setup #
+      Write-Host "##########################################"
+      Write-Host "Create new timestamped folder"
+      New-Item $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzCategory).$(AzItem).$(Build.BuildNumber)
+      Write-Host "##########################################"
+      Write-Host "Copy json template to new timestamped folder"
+      Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)
+      Write-Host "##########################################"
+      Write-Host "Save copy of azure-pipelines.yml"
+      Copy-Item -Path $(AzRepoFolder)\01_Deploy\azure-pipelines.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)
+################### Terraform ###################
 - task: TerraformCLI@0
   inputs:
     command: 'init'
