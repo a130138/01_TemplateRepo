@@ -9,13 +9,31 @@ variables:
     # Azure Item for category entered; i.e. - AzStorageAccount, AzStorageBlob, etc
   - name: AzRepoFolder
     value: $(System.DefaultWorkingDirectory)\$(AzCategory)\$(AzItem)
-    # Azure repo folder path based on AzCategory/AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
+    # Azure repo folder path based on AzCategory & AzItem
   - name:  AzDestinationFile
-    value: $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)\azuredeploy.json
-    # Setup of new json file
+    value: $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)\main.tf
+    # Setup of new config file (json, tf, etc)
+  - name: AzStorageName
+    value: tftest2
+    # name of new Azure storage account; i.e. - 'azstorageacct' (must be lowercase/no special chars)
+  - name: AzTagEnv
+    value: POC
+    # Azure 'Environment' tag
+  - name: AzTagOwn
+    value: joseph cropper
+    # Azure 'Owner' tag
+  - name: AzSkuName
+    value: Premium_LRS
+    # Azure storage sku name; i.e. - 'Premium_LRS'
+  - name: AzSkuTier
+    value: Premium
+    # Azure storage tier; i.e. - 'Premium'
+  - name: AzKind
+    value: Storage
+    # Azure storage account type; i.e. - 'Storage'
   - name: AzLoc
     value: East US 2
-    # Azure location; i.e. - 'East US 2'
+    # Azure location
   - name: AzArmConnection
     value: Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)
     # Azure ARM connection; i.e. - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
@@ -28,14 +46,17 @@ variables:
   - name: AzSub
     value: 239c71f8-a24e-41d1-96f6-b4f834a1f615
     # Azure subscription
+################### OS ###################
 pool:
     vmImage: ubuntu-latest
+################### Trigger ###################
 trigger:
     - none
+################### Persist Credentials ###################
 steps:
 - checkout: self
   persistCredentials: true
-################### Folder Structure Setup ###################
+################### File/Folder Setup ###################
 - task: PowerShell@2
   inputs:
     targetType: inline
@@ -49,7 +70,25 @@ steps:
       Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)
       Write-Host "##########################################"
       Write-Host "Save copy of azure-pipelines.yml"
-      Copy-Item -Path $(AzRepoFolder)\01_Deploy\azure-pipelines.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)
+      Copy-Item -Path $(AzRepoFolder)\01_Deploy\*.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)
+################### Variable Setup ###################
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: |
+      # Inject variables from above #
+      Write-Host "##########################################"
+      Write-Host "Update json variables"
+      (Get-Content $(AzDestinationFile)) | Foreach-Object {
+          $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
+            -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
+            -replace '@@AzTagOwn@@', '$(AzTagOwn)' `
+            -replace '@@AzSkuName@@', '$(AzSkuName)' `
+            -replace '@@AzSkuTier@@','$(AzSkuTier)' `
+            -replace '@@AzLoc@@','$(AzLoc)' `
+            -replace '@@AzKind@@','$(AzKind)' `
+            -replace '@@AzRgName@@','$(AzRgName)' `
+          } | Set-Content $(AzDestinationFile)
 ################### Terraform ###################
 - task: TerraformCLI@0
   inputs:
