@@ -13,9 +13,9 @@ variables:
   - name: AzRepoFolder
     value: $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
     # Azure repo folder path based on AzCategory/AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
-  - name:  AzDestinationFileJSON
+  - name:  AzDestinationFile
     value: $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)\azuredeploy.json
-    # Setup of new json file
+    # Setup of new config file (json, tf, etc)
 ##########"Json & ARM Variables"##################
   - name: AzStorageName
     value: varstest2
@@ -54,7 +54,6 @@ variables:
   - name: GitUserEmail
     value: a130138_tr1@amerisourcebergen.com
     # Repo user email; i.e. - 'a130138_tr1@amerisourcebergen.com'
-
 trigger:
   - none
 pool:
@@ -83,7 +82,7 @@ steps:
           # Inject variables from above #
           Write-Host "##########################################"
           Write-Host "Update json variables"
-          (Get-Content $(AzDestinationFileJSON)) | Foreach-Object {
+          (Get-Content $(AzDestinationFile)) | Foreach-Object {
               $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
                 -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
                 -replace '@@AzTagOwn@@', '$(AzTagOwn)' `
@@ -91,7 +90,8 @@ steps:
                 -replace '@@AzSkuTier@@','$(AzSkuTier)' `
                 -replace '@@AzLoc@@','$(AzLoc)' `
                 -replace '@@AzKind@@','$(AzKind)' `
-              } | Set-Content $(AzDestinationFileJSON)
+                -replace '@@AzRgName@@','$(AzRgName)' `
+              } | Set-Content $(AzDestinationFile)
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
