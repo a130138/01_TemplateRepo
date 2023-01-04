@@ -1,4 +1,5 @@
 # Azure Storage Acct Deploy via TF
+name: $(Build.BuildNumber)
 ################### Variables ###################
 variables:
   - name: AzCategory
@@ -68,29 +69,4 @@ steps:
       Write-Host "##########################################"
       Write-Host "Create new timestamped folder"
       New-Item $(AzRepoFolder)/01_Deploy -ItemType Directory -Name $(AzCategory).$(AzItem).$(Build.BuildNumber)
-      Write-Host "##########################################"
-      Write-Host "Copy config template to new timestamped folder"
-      Copy-Item $(AzRepoFolder)/00_Template/$(AzConfig) -Destination $(AzDestinationFile)
-      Write-Host "##########################################"
-      Write-Host "Save copy of deploy yml"
-      Copy-Item -Path $(System.DefaultWorkingDirectory)/$(AzCategory)/$(AzItem)/TF/*.*.yml -Destination $(AzRepoFolder)/01_Deploy/$(AzCategory).$(AzItem).$(Build.BuildNumber)
-    failOnStderr: true
-################### Variables Setup ###################
-- task: PowerShell@2
-  inputs:
-    targetType: inline
-    script: |
-      # Inject variables #
-      Write-Host "##########################################"
-      Write-Host "Update config variables"
-      (Get-Content $(AzDestinationFile)) | Foreach-Object {
-          $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
-            -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
-            -replace '@@AzTagOwn@@', '$(AzTagOwn)' `
-            -replace '@@AzSkuName@@', '$(AzSkuName)' `
-            -replace '@@AzSkuTier@@','$(AzSkuTier)' `
-            -replace '@@AzLoc@@','$(AzLoc)' `
-            -replace '@@AzKind@@','$(AzKind)' `
-            -replace '@@AzRgName@@','$(AzRgName)' `
-          } | Set-Content $(AzDestinationFile)
     failOnStderr: true
