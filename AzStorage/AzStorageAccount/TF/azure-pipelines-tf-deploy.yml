@@ -80,9 +80,9 @@ steps:
   inputs:
     targetType: inline
     script: |
-      # Inject variables from above #
+      # Inject variables #
       Write-Host "##########################################"
-      Write-Host "Update json variables"
+      Write-Host "Update config variables"
       (Get-Content $(AzDestinationFile)) | Foreach-Object {
           $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
             -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
