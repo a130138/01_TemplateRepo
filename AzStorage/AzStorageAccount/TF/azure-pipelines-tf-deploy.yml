@@ -1,5 +1,4 @@
 # Azure Storage Acct Deploy via TF
-name: $(Build.BuildNumber)
 ################### Variables ###################
 variables:
   - name: AzCategory
