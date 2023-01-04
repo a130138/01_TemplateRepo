@@ -73,7 +73,7 @@ steps:
       Copy-Item $(AzRepoFolder)/00_Template/$(AzConfig) -Destination $(AzDestinationFile)
       Write-Host "##########################################"
       Write-Host "Save copy of deploy yml"
-      Copy-Item -Path $(System.DefaultWorkingDirectory)/01_$(AzCategory)/03_TF/*.yml -Destination $(AzRepoFolder)/01_Deploy/$(AzCategory).$(AzItem).$(Build.BuildNumber)
+      Copy-Item -Path $(System.DefaultWorkingDirectory)/$(AzCategory)/$(AzItem)/TF/*.yml -Destination $(AzRepoFolder)/01_Deploy/$(AzCategory).$(AzItem).$(Build.BuildNumber)
     failOnStderr: true
 ################### Variables Setup ###################
 - task: PowerShell@2
