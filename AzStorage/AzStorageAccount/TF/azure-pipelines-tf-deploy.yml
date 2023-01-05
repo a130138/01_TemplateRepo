@@ -77,7 +77,7 @@ steps:
       # Folder and files setup #
       Write-Host "##########################################"
       Write-Host "Create new timestamped folder"
-      New-Item $(System.DefaultWorkingDirectory) -ItemType Directory -Name $(AzCategory).$(AzItem).$(Build.BuildNumber)
+      New-Item $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber) -ItemType Directory -Name $(AzCategory).$(AzItem).$(Build.BuildNumber)
     failOnStderr: true
 - task: CmdLine@2
   inputs:
