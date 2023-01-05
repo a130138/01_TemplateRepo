@@ -157,7 +157,7 @@ steps:
     providerAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(AzDestinationFile)
+    workingDirectory: '$(AzDestinationFile)'
 ################### Repo Update ###################
 - task: CmdLine@2
   inputs:
