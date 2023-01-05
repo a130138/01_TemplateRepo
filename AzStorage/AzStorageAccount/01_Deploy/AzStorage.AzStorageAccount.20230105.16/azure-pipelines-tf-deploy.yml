@@ -1,0 +1,119 @@
+# Azure Storage Acct Deploy via TF
+################### Variables ###################
+variables:
+  - name: AzCategory
+    value: AzStorage
+    # Azure Cateogory; i.e. - AzStorage, AzNSG, AzFirewall, etc
+  - name: AzItem
+    value: AzStorageAccount
+    # Azure Item for category entered; i.e. - AzStorageAccount, AzStorageBlob, etc
+  - name: AzRepoFolder
+    value: $(System.DefaultWorkingDirectory)\$(AzCategory)\$(AzItem)
+    # Azure repo folder path based on AzCategory & AzItem
+  - name:  AzDestinationFile
+    value: $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)\main.tf
+    # Setup of new config file (json, tf, etc)
+  - name: AzStorageName
+    value: tftest2
+    # name of new Azure storage account; i.e. - 'azstorageacct' (must be lowercase\no special chars)
+  - name: AzTagEnv
+    value: POC
+    # Azure 'Environment' tag
+  - name: AzTagOwn
+    value: joseph cropper
+    # Azure 'Owner' tag
+  - name: AzSkuName
+    value: Premium_LRS
+    # Azure storage sku name; i.e. - 'Premium_LRS'
+  - name: AzSkuTier
+    value: Premium
+    # Azure storage tier; i.e. - 'Premium'
+  - name: AzKind
+    value: Storage
+    # Azure storage account type; i.e. - 'Storage'
+  - name: AzLoc
+    value: East US 2
+    # Azure location
+  - name: AzArmConnection
+    value: Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)
+    # Azure ARM connection; i.e. - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+  - name: AzRgName
+    value: JoePOC1
+    # Azure resource group name
+  - name: AzDir
+    value: $(System.DefaultWorkingDirectory)\$(AzCategory)\$(AzItem)\TF
+    # Azure config directory (i.e - json, tf, etc)
+  - name: AzSub
+    value: 239c71f8-a24e-41d1-96f6-b4f834a1f615
+    # Azure subscription
+  - name: AzConfig
+    value: main-template.tf
+    # primary configuration template file (i.e. - azuredeploy-template.json, main-template.tf, etc)
+  ##########"Repo Info"########################
+  - name: GitRepoBranch
+    value: _a130138_01_TemplateRepo
+    # Repo branch main/master name (i.e. - '_a130138_01_TemplateRepo')
+  - name: GitUserName
+    value: a130138_tr1
+    # Repo user name; i.e. - 'a130138_tr1'
+  - name: GitUserEmail
+    value: a130138_tr1@amerisourcebergen.com
+    # Repo user email; i.e. - 'a130138_tr1@amerisourcebergen.com'
+################### OS ###################
+pool:
+    vmImage: windows-latest
+################### Trigger ###################
+trigger:
+    - none
+################### Persist Credentials ###################
+steps:
+- checkout: self
+  persistCredentials: true
+################### File\Folder Setup ###################
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: |
+      # Folder and files setup #
+      Write-Host "##########################################"
+      Write-Host "Create new timestamped folder"
+      New-Item $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber) -ItemType Directory -Name $(AzCategory).$(AzItem).$(Build.BuildNumber)
+      Write-Host "##########################################"
+      Write-Host "Copy config template to new timestamped folder"
+      Copy-Item $(AzRepoFolder)\00_Template\$(AzConfig) -Destination $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)
+      Write-Host "##########################################"
+      Write-Host "Update config file name"
+      Rename-Item -Path $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)\$(AzConfig) -NewName "main.tf"
+      Write-Host "##########################################"
+      Write-Host "Save copy of deploy yml"
+      Copy-Item -Path $(AzRepoFolder)\TF\azure-pipelines-tf-deploy.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: |
+      # Inject variables from above #
+      Write-Host "##########################################"
+      Write-Host "Update config variables"
+      (Get-Content $(AzDestinationFile)) | Foreach-Object {
+          $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
+            -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
+            -replace '@@AzTagOwn@@', '$(AzTagOwn)' `
+            -replace '@@AzSkuName@@', '$(AzSkuName)' `
+            -replace '@@AzSkuTier@@','$(AzSkuTier)' `
+            -replace '@@AzLoc@@','$(AzLoc)' `
+            -replace '@@AzKind@@','$(AzKind)' `
+            -replace '@@AzRgName@@','$(AzRgName)' `
+          } | Set-Content $(AzDestinationFile)
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo "Git push"
+      cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
+      git init
+      git config --global user.email "$(GitUserEmail)"
+      git config --global user.name "$(GitUserName)"
+      git fetch
+      git checkout -b main
+      git add .
+      git commit -m "My commit message"
+      git push origin HEAD:main
