@@ -86,7 +86,7 @@ steps:
   inputs:
     script: |
       echo "Git push"
-      cd $(AzRepoFolder)\01_Deploy
+      cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
       git init
       git config --global user.email "$(GitUserEmail)"
       git config --global user.name "$(GitUserName)"
