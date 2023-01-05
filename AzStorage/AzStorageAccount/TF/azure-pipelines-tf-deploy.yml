@@ -66,7 +66,7 @@ variables:
     # Repo user email; i.e. - 'a130138_tr1@amerisourcebergen.com'
 ################### OS ###################
 pool:
-    vmImage: ubuntu-latest
+    vmImage: windows-latest
 ################### Trigger ###################
 trigger:
     - none
