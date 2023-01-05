@@ -115,6 +115,7 @@ steps:
 - task: TerraformInstaller@0
   inputs:
     terraformVersion: '0.12.20'
+    downloadUrl: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller
 - task: TerraformCLI@0
   inputs:
     command: 'init'
