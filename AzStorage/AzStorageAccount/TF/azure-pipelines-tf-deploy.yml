@@ -123,7 +123,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(AzDir)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 - task: TerraformCLI@0
   inputs:
     command: 'fmt'
@@ -132,7 +132,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(AzDir)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 - task: TerraformCLI@0
   inputs:
     command: 'validate'
@@ -141,7 +141,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(AzDir)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 - task: TerraformCLI@0
   inputs:
     command: 'plan'
@@ -149,7 +149,7 @@ steps:
     providerAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(AzDir)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 - task: TerraformCLI@0
   inputs:
     command: 'apply'
@@ -157,7 +157,7 @@ steps:
     providerAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(AzDir)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 ################### Repo Update ###################
 - task: CmdLine@2
   inputs:
