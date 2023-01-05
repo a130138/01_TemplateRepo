@@ -86,7 +86,7 @@ steps:
       Rename-Item -Path $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)\$(AzConfig) -NewName "main.tf"
       Write-Host "##########################################"
       Write-Host "Save copy of deploy yml"
-      Copy-Item -Path $(AzRepoFolder)\TF\azure-pipelines-tf-deploy.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
+      Copy-Item -Path $(AzRepoFolder)\TF\azure-pipelines-tf-deploy.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)
 - task: PowerShell@2
   inputs:
     targetType: inline
