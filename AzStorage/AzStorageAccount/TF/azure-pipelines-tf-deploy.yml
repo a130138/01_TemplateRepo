@@ -112,10 +112,9 @@ steps:
             -replace '@@TfResName@@','$(TfResName)' `
           } | Set-Content $(AzDestinationFile)
 ################### Terraform ###################
-- task: TerraformInstaller@0
+- task: TerraformTool@0
   inputs:
-    terraformVersion: '1.3.6'
-    downloadUrl: 'ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task'
+    version: '1.3.6'
 - task: TerraformCLI@0
   inputs:
     command: 'init'
