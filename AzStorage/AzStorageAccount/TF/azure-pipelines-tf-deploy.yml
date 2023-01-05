@@ -114,8 +114,8 @@ steps:
 ################### Terraform ###################
 - task: TerraformInstaller@0
   inputs:
-    terraformVersion: '0.12.20'
-    downloadUrl: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller, charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller
+    terraformVersion: '1.3.6'
+    downloadUrl: 'ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task'
 - task: TerraformCLI@0
   inputs:
     command: 'init'
