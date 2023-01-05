@@ -111,50 +111,50 @@ steps:
             -replace '@@AzRgName@@','$(AzRgName)' `
             -replace '@@TfResName@@','$(TfResName)' `
           } | Set-Content $(AzDestinationFile)
-################### Terraform ################### 
-- task: TerraformCLI@0 
-  inputs: 
-    command: 'init' 
-    backendType: 'azurerm' 
-    backendServiceArm: '$(AzArmConnection)' 
-    backendAzureRmSubscriptionId: '$(AzSub)' 
-    backendAzureRmResourceGroupName: '$(AzRgName)' 
-    allowTelemetryCollection: false 
-    workingDirectory: '$(AzDestinationFile)' 
-- task: TerraformCLI@0 
-  inputs: 
-    command: 'fmt' 
-    backendType: 'azurerm' 
-    backendServiceArm: '$(AzArmConnection)' 
-    backendAzureRmSubscriptionId: '$(AzSub)' 
-    backendAzureRmResourceGroupName: '$(AzRgName)' 
-    allowTelemetryCollection: false 
-    workingDirectory: '$(AzDestinationFile)' 
-- task: TerraformCLI@0 
-  inputs: 
-    command: 'validate' 
-    backendType: 'azurerm' 
-    backendServiceArm: '$(AzArmConnection)' 
-    backendAzureRmSubscriptionId: '$(AzSub)' 
-    backendAzureRmResourceGroupName: '$(AzRgName)' 
-    allowTelemetryCollection: false 
-    workingDirectory: '$(AzDestinationFile)' 
-- task: TerraformCLI@0 
-  inputs: 
-    command: 'plan' 
-    environmentServiceName: '$(AzArmConnection)' 
-    providerAzureRmSubscriptionId: '$(AzSub)' 
-    backendAzureRmResourceGroupName: '$(AzRgName)' 
-    allowTelemetryCollection: false 
-    workingDirectory: '$(AzDestinationFile)' 
-- task: TerraformCLI@0 
-  inputs: 
-    command: 'apply' 
-    environmentServiceName: '$(AzArmConnection)' 
-    providerAzureRmSubscriptionId: '$(AzSub)' 
-    backendAzureRmResourceGroupName: '$(AzRgName)' 
-    allowTelemetryCollection: false 
+################### Terraform ###################
+- task: TerraformCLI@0
+  inputs:
+    command: 'init'
+    backendType: 'azurerm'
+    backendServiceArm: '$(AzArmConnection)'
+    backendAzureRmSubscriptionId: '$(AzSub)'
+    backendAzureRmResourceGroupName: '$(AzRgName)'
+    allowTelemetryCollection: false
     workingDirectory: '$(AzDestinationFile)'
+- task: TerraformCLI@0
+  inputs:
+    command: 'fmt'
+    backendType: 'azurerm'
+    backendServiceArm: '$(AzArmConnection)'
+    backendAzureRmSubscriptionId: '$(AzSub)'
+    backendAzureRmResourceGroupName: '$(AzRgName)'
+    allowTelemetryCollection: false
+    workingDirectory: '$(AzDestinationFile)'
+- task: TerraformCLI@0
+  inputs:
+    command: 'validate'
+    backendType: 'azurerm'
+    backendServiceArm: '$(AzArmConnection)'
+    backendAzureRmSubscriptionId: '$(AzSub)'
+    backendAzureRmResourceGroupName: '$(AzRgName)'
+    allowTelemetryCollection: false
+    workingDirectory: '$(AzDestinationFile)'
+- task: TerraformCLI@0
+  inputs:
+    command: 'plan'
+    environmentServiceName: '$(AzArmConnection)'
+    providerAzureRmSubscriptionId: '$(AzSub)'
+    backendAzureRmResourceGroupName: '$(AzRgName)'
+    allowTelemetryCollection: false
+    workingDirectory: '$(AzDestinationFile)'
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    environmentServiceName: '$(AzArmConnection)'
+    providerAzureRmSubscriptionId: '$(AzSub)'
+    backendAzureRmResourceGroupName: '$(AzRgName)'
+    allowTelemetryCollection: false
+    workingDirectory: '$(AzDestinationFile)
 ################### Repo Update ###################
 - task: CmdLine@2
   inputs:
