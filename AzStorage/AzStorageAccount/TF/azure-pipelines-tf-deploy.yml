@@ -49,6 +49,9 @@ variables:
   - name: AzConfig
     value: main-template.tf
     # primary configuration template file (i.e. - azuredeploy-template.json, main-template.tf, etc)
+  - name: TfResName
+    value:  $(Build.BuildNumber)
+    # Main.tf resource name
   ##########"Repo Info"########################
   - name: GitRepoBranch
     value: _a130138_01_TemplateRepo
@@ -103,6 +106,7 @@ steps:
             -replace '@@AzLoc@@','$(AzLoc)' `
             -replace '@@AzKind@@','$(AzKind)' `
             -replace '@@AzRgName@@','$(AzRgName)' `
+            -replace '@@TfResName@@','$(TfResName)' `
           } | Set-Content $(AzDestinationFile)
 - task: CmdLine@2
   inputs:
