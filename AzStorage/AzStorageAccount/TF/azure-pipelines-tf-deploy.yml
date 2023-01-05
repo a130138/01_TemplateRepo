@@ -83,7 +83,7 @@ steps:
       Copy-Item $(AzRepoFolder)\00_Template\$(AzConfig) -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
       Write-Host "##########################################"
       Write-Host "Save copy of deploy yml"
-      Copy-Item -Path $(AzRepoFolder)\01_Deploy\azure-pipelines-tf-deploy.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
+      Copy-Item -Path $(AzRepoFolder)\TF\azure-pipelines-tf-deploy.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzStorageName).$(Build.BuildNumber)
     failOnStderr: true
 - task: CmdLine@2
   inputs:
