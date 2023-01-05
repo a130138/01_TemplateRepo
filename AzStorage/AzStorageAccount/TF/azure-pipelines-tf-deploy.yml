@@ -52,7 +52,7 @@ variables:
   ##########"Repo Info"########################
   - name: GitRepoBranch
     value: _a130138_01_TemplateRepo
-    # Repo branch main/master name; i.e. - '_a130138_01_TemplateRepo'
+    # Repo branch main/master name (i.e. - '_a130138_01_TemplateRepo')
   - name: GitUserName
     value: a130138_tr1
     # Repo user name; i.e. - 'a130138_tr1'
@@ -83,6 +83,7 @@ steps:
   inputs:
     script: |
       echo "Git push"
+      cd $(System.DefaultWorkingDirectory)/$(GitRepoBranch)
       git init
       git config --global user.email "$(GitUserEmail)"
       git config --global user.name "$(GitUserName)"
