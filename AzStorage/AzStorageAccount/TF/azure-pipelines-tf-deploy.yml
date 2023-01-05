@@ -84,7 +84,23 @@ steps:
       Write-Host "##########################################"
       Write-Host "Update config file name"
       Rename-Item -Path $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)\$(AzConfig) -NewName "main.tf"
-      
+- task: PowerShell@2
+  inputs:
+    targetType: inline
+    script: |
+      # Inject variables from above #
+      Write-Host "##########################################"
+      Write-Host "Update config variables"
+      (Get-Content $(AzDestinationFile)) | Foreach-Object {
+          $_ -replace '@@AzStorageName@@', '$(AzStorageName)' `
+            -replace '@@AzTagEnv@@', '$(AzTagEnv)' `
+            -replace '@@AzTagOwn@@', '$(AzTagOwn)' `
+            -replace '@@AzSkuName@@', '$(AzSkuName)' `
+            -replace '@@AzSkuTier@@','$(AzSkuTier)' `
+            -replace '@@AzLoc@@','$(AzLoc)' `
+            -replace '@@AzKind@@','$(AzKind)' `
+            -replace '@@AzRgName@@','$(AzRgName)' `
+          } | Set-Content $(AzDestinationFile)
 - task: CmdLine@2
   inputs:
     script: |
