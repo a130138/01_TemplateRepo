@@ -1,6 +1,7 @@
 # Azure Storage Acct Deploy via TF
 ################### Variables ###################
 variables:
+################### Azure ###################
   - name: AzCategory
     value: AzStorage
     # Azure Cateogory; i.e. - AzStorage, AzNSG, AzFirewall, etc
@@ -49,10 +50,11 @@ variables:
   - name: AzConfig
     value: main-template.tf
     # primary configuration template file (i.e. - azuredeploy-template.json, main-template.tf, etc)
+  ################### Terraform ###################
   - name: TfResName
     value:  $(Build.BuildNumber)
     # Main.tf resource name
-  ##########"Repo Info"########################
+  ################### Repo ###################
   - name: GitRepoBranch
     value: _a130138_01_TemplateRepo
     # Repo branch main/master name (i.e. - '_a130138_01_TemplateRepo')
@@ -118,7 +120,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)' 
     backendAzureRmResourceGroupName: '$(AzRgName)' 
     allowTelemetryCollection: false 
-    workingDirectory: '$(AzDir)' 
+    workingDirectory: '$(AzDestinationFile)' 
 - task: TerraformCLI@0 
   inputs: 
     command: 'fmt' 
@@ -127,7 +129,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)' 
     backendAzureRmResourceGroupName: '$(AzRgName)' 
     allowTelemetryCollection: false 
-    workingDirectory: '$(AzDir)' 
+    workingDirectory: '$(AzDestinationFile)' 
 - task: TerraformCLI@0 
   inputs: 
     command: 'validate' 
@@ -136,7 +138,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)' 
     backendAzureRmResourceGroupName: '$(AzRgName)' 
     allowTelemetryCollection: false 
-    workingDirectory: '$(AzDir)' 
+    workingDirectory: '$(AzDestinationFile)' 
 - task: TerraformCLI@0 
   inputs: 
     command: 'plan' 
@@ -144,7 +146,7 @@ steps:
     providerAzureRmSubscriptionId: '$(AzSub)' 
     backendAzureRmResourceGroupName: '$(AzRgName)' 
     allowTelemetryCollection: false 
-    workingDirectory: '$(AzDir)' 
+    workingDirectory: '$(AzDestinationFile)' 
 - task: TerraformCLI@0 
   inputs: 
     command: 'apply' 
@@ -152,7 +154,7 @@ steps:
     providerAzureRmSubscriptionId: '$(AzSub)' 
     backendAzureRmResourceGroupName: '$(AzRgName)' 
     allowTelemetryCollection: false 
-    workingDirectory: '$(AzDir)'
+    workingDirectory: '$(AzDestinationFile)'
 ################### Repo Update ###################
 - task: CmdLine@2
   inputs:
