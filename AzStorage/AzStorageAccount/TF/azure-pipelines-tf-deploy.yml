@@ -118,7 +118,7 @@ steps:
     Arguments: 'init'
     InstallTerraform: true
     ManageState: false
-    Version: 'latest'
+    Version: '1.3.6'
 - task: TerraformCLI@0
   inputs:
     command: 'init'
