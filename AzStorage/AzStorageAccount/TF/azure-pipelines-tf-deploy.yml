@@ -52,7 +52,7 @@ variables:
     # primary configuration template file (i.e. - azuredeploy-template.json, main-template.tf, etc)
   ################### Terraform ###################
   - name: TfResName
-    value:  $(Build.BuildNumber)
+    value:  $(AzItem)
     # Main.tf resource name
   ################### Repo ###################
   - name: GitRepoBranch
