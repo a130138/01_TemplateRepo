@@ -49,6 +49,16 @@ variables:
   - name: AzConfig
     value: main-template.tf
     # primary configuration template file (i.e. - azuredeploy-template.json, main-template.tf, etc)
+  ##########"Repo Info"########################
+  - name: GitRepoBranch
+    value: _a130138_01_TemplateRepo
+    # Repo branch main/master name; i.e. - '_a130138_01_TemplateRepo'
+  - name: GitUserName
+    value: a130138_tr1
+    # Repo user name; i.e. - 'a130138_tr1'
+  - name: GitUserEmail
+    value: a130138_tr1@amerisourcebergen.com
+    # Repo user email; i.e. - 'a130138_tr1@amerisourcebergen.com'
 ################### OS ###################
 pool:
     vmImage: ubuntu-latest
@@ -69,3 +79,16 @@ steps:
       Write-Host "Create new timestamped folder"
       New-Item $(System.DefaultWorkingDirectory) -ItemType Directory -Name $(AzCategory).$(AzItem).$(Build.BuildNumber)
     failOnStderr: true
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo "Git push"
+      cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
+      git init
+      git config --global user.email "$(GitUserEmail)"
+      git config --global user.name "$(GitUserName)"
+      git fetch
+      git checkout -b main
+      git add .
+      git commit -m "My commit message"
+      git push origin HEAD:main
