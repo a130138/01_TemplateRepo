@@ -120,7 +120,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(AzDir)'
+    workingDirectory: '$(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)'
 - task: TerraformCLI@0
   inputs:
     command: 'fmt'
