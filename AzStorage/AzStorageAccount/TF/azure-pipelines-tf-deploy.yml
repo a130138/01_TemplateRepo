@@ -80,7 +80,11 @@ steps:
       New-Item $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber) -ItemType Directory -Name $(AzCategory).$(AzItem).$(Build.BuildNumber)
       Write-Host "##########################################"
       Write-Host "Copy config template to new timestamped folder"
-      Copy-Item $(AzRepoFolder)\00_Template\$(AzConfig) -Destination $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)\main.tf
+      Copy-Item $(AzRepoFolder)\00_Template\$(AzConfig) -Destination $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)
+      Write-Host "##########################################"
+      Write-Host "Update config file name"
+      Rename-Item -Path $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)\$(AzConfig) -NewName "main.tf"
+      
 - task: CmdLine@2
   inputs:
     script: |
