@@ -61,7 +61,7 @@ variables:
     # Repo user email; i.e. - 'a130138_tr1@amerisourcebergen.com'
 ################### OS ###################
 pool:
-    vmImage: ubuntu-latest
+    vmImage: windows-latest
 ################### Trigger ###################
 trigger:
     - none
@@ -86,7 +86,7 @@ steps:
   inputs:
     script: |
       echo "Git push"
-      cd $(System.DefaultWorkingDirectory)/$(GitRepoBranch)
+      cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
       git init
       git config --global user.email "$(GitUserEmail)"
       git config --global user.name "$(GitUserName)"
