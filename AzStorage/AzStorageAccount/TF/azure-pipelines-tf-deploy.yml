@@ -123,7 +123,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(AzDir)'
 - task: TerraformCLI@0
   inputs:
     command: 'fmt'
