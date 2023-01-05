@@ -90,6 +90,7 @@ steps:
       Write-Host "##########################################"
       Write-Host "Save copy of deploy yml"
       Copy-Item -Path $(AzRepoFolder)\TF\azure-pipelines-tf-deploy.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)
+################### Variables Setup ###################
 - task: PowerShell@2
   inputs:
     targetType: inline
@@ -108,6 +109,7 @@ steps:
             -replace '@@AzRgName@@','$(AzRgName)' `
             -replace '@@TfResName@@','$(TfResName)' `
           } | Set-Content $(AzDestinationFile)
+################### Repo Update ###################
 - task: CmdLine@2
   inputs:
     script: |
