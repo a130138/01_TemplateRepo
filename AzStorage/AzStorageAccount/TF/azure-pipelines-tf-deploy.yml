@@ -112,6 +112,12 @@ steps:
             -replace '@@TfResName@@','$(TfResName)' `
           } | Set-Content $(AzDestinationFile)
 ################### Terraform ###################
+- task: Terraform@1
+  inputs:
+    TemplatePath: '$(AzDir)'
+    Arguments: 'init'
+    InstallTerraform: true
+    ManageState: false
 - task: TerraformCLI@0
   inputs:
     command: 'init'
@@ -120,7 +126,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(AzDestinationFile)'
+    workingDirectory: '$(AzDir)'
 - task: TerraformCLI@0
   inputs:
     command: 'fmt'
@@ -129,7 +135,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(AzDestinationFile)'
+    workingDirectory: '$(AzDir)'
 - task: TerraformCLI@0
   inputs:
     command: 'validate'
@@ -138,7 +144,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(AzDestinationFile)'
+    workingDirectory: '$(AzDir)'
 - task: TerraformCLI@0
   inputs:
     command: 'plan'
@@ -146,7 +152,7 @@ steps:
     providerAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(AzDestinationFile)'
+    workingDirectory: '$(AzDir)'
 - task: TerraformCLI@0
   inputs:
     command: 'apply'
@@ -154,7 +160,7 @@ steps:
     providerAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(AzDestinationFile)'
+    workingDirectory: '$(AzDir)'
 ################### Repo Update ###################
 - task: CmdLine@2
   inputs:
