@@ -42,7 +42,7 @@ variables:
     value: JoePOC1
     # Azure resource group name
   - name: AzDir
-    value: $(System.DefaultWorkingDirectory)\$(AzCategory)\$(AzItem)\TF
+    value: $(AzRepoFolder)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)
     # Azure config directory (i.e - json, tf, etc)
   - name: AzSub
     value: 239c71f8-a24e-41d1-96f6-b4f834a1f615
@@ -123,7 +123,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(AzDir)'
 - task: TerraformCLI@0
   inputs:
     command: 'fmt'
@@ -132,7 +132,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(AzDir)'
 - task: TerraformCLI@0
   inputs:
     command: 'validate'
@@ -141,7 +141,7 @@ steps:
     backendAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(AzDir)'
 - task: TerraformCLI@0
   inputs:
     command: 'plan'
@@ -149,7 +149,7 @@ steps:
     providerAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(AzDir)'
 - task: TerraformCLI@0
   inputs:
     command: 'apply'
@@ -157,7 +157,7 @@ steps:
     providerAzureRmSubscriptionId: '$(AzSub)'
     backendAzureRmResourceGroupName: '$(AzRgName)'
     allowTelemetryCollection: false
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(AzDir)'
 ################### Repo Update ###################
 - task: CmdLine@2
   inputs:
