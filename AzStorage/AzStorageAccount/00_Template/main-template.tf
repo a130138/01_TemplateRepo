@@ -3,7 +3,7 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_storage_account" "jc_storage_acct" {
+resource "azurerm_storage_account" "@@TfResName@@" {
   name                     = "@@AzStorageName@@"
   resource_group_name      = "@@AzRgName@@"
   location                 = "@@AzLoc@@"
