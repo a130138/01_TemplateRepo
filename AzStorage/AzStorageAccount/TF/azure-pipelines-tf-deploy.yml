@@ -112,9 +112,12 @@ steps:
             -replace '@@TfResName@@','$(TfResName)' `
           } | Set-Content $(AzDestinationFile)
 ################### Terraform ###################
-- task: TerraformInstaller@0
+- task: Terraform@1
   inputs:
-    terraformVersion: 'latest'
+    Arguments: 
+    InstallTerraform: true
+    ManageState: false
+    TemplatePath: '$(AzDestinationFile)'
 - task: TerraformCLI@0
   inputs:
     command: 'init'
