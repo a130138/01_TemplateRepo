@@ -24,7 +24,7 @@ variables:
     value: joseph cropper
     # Azure 'Owner' tag
   - name: AzSkuName
-    value: Premium_LRS
+    value: LRS
     # Azure storage sku name; i.e. - 'Premium_LRS'
   - name: AzSkuTier
     value: Premium
