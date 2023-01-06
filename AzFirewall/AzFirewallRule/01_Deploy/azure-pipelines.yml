@@ -1,0 +1,68 @@
+# Azure Firewall Network Rule Deploy via TF
+variables:
+##########"Azure Info"######################
+  - name: AzCategory
+    value: AzNetwork
+    # Azure Cateogory; i.e. - AzStorage, AzNSG, AzFirewall, etc
+  - name: AzItem
+    value: AzFirewall
+    # Azure Item for category entered; i.e. - AzStorageAccount, AzStorageBlob, etc
+  - name: AzRepoFolder
+    value: $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
+    # Azure repo folder path based on AzCategory/AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
+  - name:  AzDestinationFile
+    value: $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzUniqueName).$(Build.BuildNumber)\azuredeploy.json
+    # Setup of new config file (json, tf, etc)
+##########"Json & ARM Variables"##################
+  - name: AzUniqueName
+    value: fwtest1
+    # name of new Azure storage account; i.e. - 'azstorageacct' (must be lowercase/no special chars)
+  - name: AzTagEnv
+    value: POC
+    # Azure 'Environment' tag
+  - name: AzTagOwn
+    value: joseph cropper
+    # Azure 'Owner' tag
+  - name: AzSkuName
+    value: Premium_LRS
+    # Azure storage sku name; i.e. - 'Premium_LRS'
+  - name: AzSkuTier
+    value: Premium
+    # Azure storage tier; i.e. - 'Premium'
+  - name: AzLoc
+    value: East US 2
+    # Azure location; i.e. - 'East US 2'
+  - name: AzKind
+    value: Firewall
+    # Azure storage account type; i.e. - 'Storage'
+  - name: AzArmConnection
+    value: Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)
+    # Azure ARM connection; i.e. - 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+  - name: AzRgName
+    value: JoePOC1
+    # Azure resource group name
+##########"Repo Info"########################
+  - name: GitRepoBranch
+    value: _a130138_01_TemplateRepo
+    # Repo branch main/master name; i.e. - '_a130138_01_TemplateRepo'
+  - name: GitUserName
+    value: a130138_tr1
+    # Repo user name; i.e. - 'a130138_tr1'
+  - name: GitUserEmail
+    value: a130138_tr1@amerisourcebergen.com
+    # Repo user email; i.e. - 'a130138_tr1@amerisourcebergen.com'
+pool:
+    vmImage: windows-latest
+trigger:
+    - none
+steps:
+- task: Terraform@2
+  inputs:
+    TemplatePath: '$(System.DefaultWorkingDirectory)\$(AzCategory)\$(AzItem)\AzFirewallRule\01_Deploy'
+    Arguments: 'plan'
+    InstallTerraform: false
+    UseAzureSub: true
+    ConnectedServiceNameSelector: 'ConnectedServiceNameARM'
+    ConnectedServiceNameARM: 'Dev_Azure_10002_CloudSandbox3(239c71f8-a24e-41d1-96f6-b4f834a1f615)'
+    ManageState: true
+    SpecifyStorageAccount: false
