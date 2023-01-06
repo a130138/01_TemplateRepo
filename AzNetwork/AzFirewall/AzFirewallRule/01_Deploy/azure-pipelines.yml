@@ -45,7 +45,7 @@ variables:
   - name: AzRgName
     value: JoePOC1
     # Azure resource group name
-##########"Repo Info"########################
+######################## Repo Info ########################
   - name: GitRepoBranch
     value: _a130138_01_TemplateRepo
     # Repo branch main/master name; i.e. - '_a130138_01_TemplateRepo'
@@ -55,14 +55,12 @@ variables:
   - name: GitUserEmail
     value: a130138_tr1@amerisourcebergen.com
     # Repo user email; i.e. - 'a130138_tr1@amerisourcebergen.com'
-
-
+######################## Credential Persist ########################
 steps:
 - checkout: self
   persistCredentials: true
   lfs: true
-
-# ARM Template - Deployment
+######################## ARM Template - Deployment ########################
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: Resource Group
