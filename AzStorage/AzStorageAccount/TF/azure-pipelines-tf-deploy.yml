@@ -169,10 +169,10 @@ steps:
       git init
       git config --global user.email "$(GitUserEmail)"
       git config --global user.name "$(GitUserName)"
+      git lfs install
+      git lfs track "*.exe"
       git fetch
       git checkout -b main
       git add .
-      git filter-branch -f --tree-filter 'rm -f $(AzCategory)\$(AzItem)\01_Deploy\$(AzCategory).$(AzItem).$(Build.BuildNumber)\.terraform\providers\registry.terraform.io\hashicorp\azurerm\3.38.0\windows_amd64\terraform-provider-azurerm_v3.38.0_x5.exe' HEAD --all
-      git filter-branch --tree-filter 'rm -rf $(AzCategory)/$(AzItem)/01_Deploy/$(AzCategory).$(AzItem).$(Build.BuildNumber)/.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.38.0/windows_amd64/terraform-provider-azurerm_v3.38.0_x5.exe' HEAD --all
       git commit -m "My commit message"
       git push origin HEAD:main
