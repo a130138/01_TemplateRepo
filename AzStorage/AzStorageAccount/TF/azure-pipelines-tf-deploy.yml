@@ -164,7 +164,6 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      echo "Git push"
       cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
       git init
       git config --global user.email "$(GitUserEmail)"
