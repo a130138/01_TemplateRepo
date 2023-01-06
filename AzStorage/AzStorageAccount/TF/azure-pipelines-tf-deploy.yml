@@ -74,6 +74,7 @@ trigger:
 steps:
 - checkout: self
   persistCredentials: true
+  lfs: true
 ################### File\Folder Setup ###################
 - task: PowerShell@2
   inputs:
