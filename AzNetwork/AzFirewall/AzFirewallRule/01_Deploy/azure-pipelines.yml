@@ -12,7 +12,7 @@ variables:
     value: AzNetwork
     # Azure Cateogory; i.e. - AzStorage, AzNSG, AzFirewall, etc
   - name: AzItem
-    value: AzFirewallRule
+    value: AzFirewall
     # Azure Item for category entered; i.e. - AzStorageAccount, AzStorageBlob, etc
   - name: AzRepoFolder
     value: $(System.DefaultWorkingDirectory)\$(AzCategory)\$(AzItem)
@@ -60,36 +60,7 @@ variables:
 steps:
 - checkout: self
   persistCredentials: true
-
-- task: PowerShell@2
-  inputs:
-    targetType: inline
-    script: |
-        # Folder and files setup #
-        Write-Host "##########################################"
-        Write-Host "Create new timestamped folder"
-        New-Item $(AzRepoFolder)\01_Deploy -ItemType Directory -Name $(AzItem).$(AzRuleName).$(Build.BuildNumber)
-        Write-Host "##########################################"
-        Write-Host "Copy json template to new timestamped folder"
-        Copy-Item $(AzRepoFolder)\00_Template\azuredeploy.json -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzRuleName).$(Build.BuildNumber)
-        Write-Host "##########################################"
-        Write-Host "Save copy of azure-pipelines.yml"
-        Copy-Item -Path $(AzRepoFolder)\01_Deploy\azure-pipelines.yml -Destination $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzRuleName).$(Build.BuildNumber)
-
-- task: PowerShell@2
-  inputs:
-    targetType: inline
-    script: |
-        # Inject variables from above #
-        Write-Host "##########################################"
-        Write-Host "Update json variables"
-        (Get-Content $(AzDestinationFileJSON)) | Foreach-Object {
-            $_  -replace '@@AzRuleName@@', '$(AzRuleName)' `
-                -replace '@@AzTagEnv@@','$(AzTagEnv)' `
-                -replace '@@AzTagOwn@@','$(AzTagOwn)' `
-                -replace '@@AzLoc@@','$(AzLoc)' `
-                -replace '@@AzKind@@','$(AzKind)' `
-            } | Set-Content $(AzDestinationFileJSON)
+  lfs: true
 
 # ARM Template - Deployment
 - task: AzureResourceManagerTemplateDeployment@3
@@ -106,20 +77,7 @@ steps:
       # ex - East US 2
     templateLocation: Linked artifact
       # Options: URL of the file, Linked Artifact
-    csmFileLink: '$(Pipeline.Workspace)\01_(AzCategory)\01_(AzItem)\$(AzItem).$Timestamp\azuredeploy.json'
+    csmFileLink: '$(Pipeline.Workspace)\(AzCategory)\(AzItem)\AzFirewallRule\01_Deploy\azuredeploy.json'
       # azuredeploy.json location (ensure using 'raw' URL for github)
     deploymentMode: Incremental
       # Options:  Incremental, Validation, Complete
-- task: CmdLine@2
-  inputs:
-    script: |
-        echo "Git push"
-        cd $(System.DefaultWorkingDirectory)\$(GitRepoBranch)
-        git init
-        git config --global user.email "$(GitUserEmail)"
-        git config --global user.name "$(GitUserName)"
-        git fetch
-        git checkout -b main
-        git add .
-        git commit -m "My commit message"
-        git push origin HEAD:main
