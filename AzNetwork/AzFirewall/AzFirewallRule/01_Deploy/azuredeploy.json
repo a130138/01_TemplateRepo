@@ -1,0 +1,67 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/firewallPolicies",
+            "apiVersion": "2022-05-01",
+            "name": "z_firewall_poc",
+            "location": "eastus2",
+            "tags": {
+                "Environment": "POC",
+                "Owner": "Joe Cropper"
+            },
+            "properties": {
+                "sku": {
+                    "tier": "Standard"
+                },
+                "threatIntelMode": "Alert"
+            }
+        },
+        {
+            "type": "Microsoft.Network/firewallPolicies/ruleCollectionGroups",
+            "apiVersion": "2022-05-01",
+            "name": "z_firewall_poc/DefaultNetworkRuleCollectionGroup",
+            "location": "eastus2",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/firewallPolicies', 'z_firewall_poc')]"
+            ],
+            "properties": {
+                "priority": 200,
+                "ruleCollections": [
+                    {
+                        "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+                        "action": {
+                            "type": "Allow"
+                        },
+                        "rules": [
+                            {
+                                "ruleType": "NetworkRule",
+                                "name": "rule_network-1",
+                                "ipProtocols": [
+                                    "TCP"
+                                ],
+                                "sourceAddresses": [
+                                    "192.168.1.1"
+                                ],
+                                "sourceIpGroups": [],
+                                "destinationAddresses": [
+                                    "192.168.1.2"
+                                ],
+                                "destinationIpGroups": [],
+                                "destinationFqdns": [],
+                                "destinationPorts": [
+                                    "8080"
+                                ]
+                            }
+                        ],
+                        "name": "rule_network_collection_1",
+                        "priority": 100
+                    }
+                ]
+            }
+        }
+    ]
+}
