@@ -25,9 +25,6 @@
             "apiVersion": "2022-05-01",
             "name": "z_firewall_poc/DefaultNetworkRuleCollectionGroup",
             "location": "eastus2",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/firewallPolicies', 'z_firewall_poc')]"
-            ],
             "properties": {
                 "priority": 200,
                 "ruleCollections": [
