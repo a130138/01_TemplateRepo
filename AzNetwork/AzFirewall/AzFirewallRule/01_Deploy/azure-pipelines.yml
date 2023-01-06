@@ -1,5 +1,5 @@
-# Title: Azure Firewall Rule Deploy
-# About:  Creates new repo folder with updated json variables, deploys to Az Portal
+# Title: Azure Firewall Rule Deploy (ARM)
+# About:  
 # Required:  Update variables section prior to deploy
 
 pool:
