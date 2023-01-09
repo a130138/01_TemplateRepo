@@ -7,11 +7,11 @@
         {
             "type": "Microsoft.Network/firewallPolicies",
             "apiVersion": "2022-05-01",
-            "name": "z_firewall_poc",
-            "location": "eastus2",
+            "name": "@@AzFwPolicyName@@",
+            "location": "@@AzLoc@@",
             "tags": {
-                "Environment": "POC",
-                "Owner": "Joe Cropper"
+                "Environment": "@@AzTagEnv@@",
+                "Owner": "@@AzTagOwn@@"
             },
             "properties": {
                 "sku": {
@@ -23,42 +23,39 @@
         {
             "type": "Microsoft.Network/firewallPolicies/ruleCollectionGroups",
             "apiVersion": "2022-05-01",
-            "name": "z_firewall_poc/DefaultNetworkRuleCollectionGroup",
-            "location": "eastus2",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/firewallPolicies', 'z_firewall_poc')]"
-            ],
+            "name": "@@AzFwPolicyName@@/DefaultNetworkRuleCollectionGroup",
+            "location": "@@AzLoc@@",
             "properties": {
                 "priority": 200,
                 "ruleCollections": [
                     {
                         "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
                         "action": {
-                            "type": "Allow"
+                            "type": "@@AzFwRuleAction@@"
                         },
                         "rules": [
                             {
-                                "ruleType": "NetworkRule",
-                                "name": "rule_network-1",
+                                "ruleType": "@@AzFwRuleType@@",
+                                "name": "@@AzFwRuleName@@",
                                 "ipProtocols": [
-                                    "TCP"
+                                    "@@AzFwRuleIpProtocols@@"
                                 ],
                                 "sourceAddresses": [
-                                    "192.168.1.1"
+                                    "@@AzFwRuleSourceAddresses@@"
                                 ],
                                 "sourceIpGroups": [],
                                 "destinationAddresses": [
-                                    "192.168.1.2"
+                                    "@@AzFwRuleDestinationAddresses@@"
                                 ],
                                 "destinationIpGroups": [],
                                 "destinationFqdns": [],
                                 "destinationPorts": [
-                                    "8080"
+                                    "@@AzFwRuleDestinationPorts@@"
                                 ]
                             }
                         ],
-                        "name": "rule_network_collection_1",
-                        "priority": 100
+                        "name": "@@AzFwRuleCollectionName@@",
+                        "priority": @@AzFwRulePriority@@
                     }
                 ]
             }
