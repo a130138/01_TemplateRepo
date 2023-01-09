@@ -98,3 +98,4 @@ steps:
       # Options:  Incremental, Validation, Complete
     csmFile: '$(Build.Repository.LocalPath)\$(AzCategory)\$(AzItem)\AzFirewallRule\01_Deploy\azuredeploy.json'
       # azuredeploy.json location (ensure using 'raw' URL for github)
+
