@@ -7,7 +7,7 @@ pool:
 trigger:
     - none
 variables:
-##########"Azure Info"######################
+######################## Azure Info ########################
   - name: AzCategory
     value: AzNetwork
     # Azure Cateogory; i.e. - AzStorage, AzNSG, AzFirewall, etc
@@ -17,13 +17,34 @@ variables:
   - name: AzRepoFolder
     value: $(System.DefaultWorkingDirectory)\$(AzCategory)\$(AzItem)
     # Azure repo folder path based on AzItem; i.e. - $(System.DefaultWorkingDirectory)\01_$(AzCategory)\01_$(AzItem)
-  - name:  AzDestinationFileJSON
+  - name:  AzDestinationFile
     value: $(AzRepoFolder)\01_Deploy\$(AzItem).$(AzRuleName).$(Build.BuildNumber)\azuredeploy.json
     # Json folder setup
-##########"Json & ARM Variables"##################
+######################## Firewall ########################
   - name: AzFwRuleName
     value: AzFwRuleName1
     # name of new Azure item; i.e. - 'azstorageacct'
+  - name:
+    value:
+  - name:
+    value:
+  - name:
+    value:
+  - name:
+    value:
+  - name:
+    value:
+  - name:
+    value:
+  - name:
+    value:
+  - name:
+    value:
+  - name:
+    value:
+
+######################## Json & ARM Variables ########################
+
   - name: AzTagEnv
     value: POC
     # Azure 'Environment' tag
