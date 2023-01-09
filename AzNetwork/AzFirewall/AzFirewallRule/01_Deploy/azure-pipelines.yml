@@ -23,7 +23,7 @@ variables:
 ######################## Firewall ########################
   - name: AzFwRuleName
     value: AzFwRuleName1
-    # name of new Azure item; i.e. - 'azstorageacct'
+    # name of azure fw rule
   - name:
     value:
   - name:
@@ -42,9 +42,7 @@ variables:
     value:
   - name:
     value:
-
 ######################## Json & ARM Variables ########################
-
   - name: AzTagEnv
     value: POC
     # Azure 'Environment' tag
